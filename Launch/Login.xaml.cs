@@ -11,19 +11,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Launch
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class Login// : MetroWindow
     {
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Register r = new Register();
+            r.ShowDialog();
+
+        }
+
+        private void btn_login_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Se hizo un clic");
         }
     }
 }
