@@ -37,7 +37,11 @@ namespace Launch
         {
             bool LoginExitoso = Cliente.Login(txtBox_correo.Text, pwdBox_contrasegna.Password);
             if (LoginExitoso)
-                MessageBox.Show("si entramos");
+            {
+                Principal p = new Principal();
+                p.Show();
+                this.Close();
+            }
             else
                 MessageBox.Show("nope");
             
