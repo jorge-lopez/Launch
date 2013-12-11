@@ -3,7 +3,7 @@
         x:Class="Launch.Principal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Principal" Height="546" Width="650" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Principal" Height="546" Width="650" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,75 +20,23 @@
         <Label Name="lbl_asd" Content="#asd#" HorizontalAlignment="Left" Margin="414,31,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="496,32,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
-        <ScrollViewer x:Name="svc_suscripcion" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="10,88,10,264" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-            <StackPanel Orientation="Horizontal" >
-                    <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89" VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                
-            </StackPanel>
+        <ScrollViewer x:Name="sv_suscripcion" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="10,109,10,243" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <ItemsControl ItemsSource="{Binding StackAppsSuscripcion}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
         </ScrollViewer>
-        <ScrollViewer x:Name="svc_Nuevos" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="20,281,0,115" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-            <StackPanel Orientation="Horizontal" >
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89" VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="150">
-                    <Image HorizontalAlignment="Center" Height="89"  VerticalAlignment="Center" Width="74" Source="Imagenes/Launch Corp..png"/>
-                    <Label Content="Aplicacion 1" HorizontalAlignment="Center"/>
-                    <Button MaxWidth="90" BorderBrush="Black" Content="Instalar"/>
-                </StackPanel>
-
-            </StackPanel>
+        <ScrollViewer x:Name="sv_Nuevos" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="10,315,10,37" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <ItemsControl  ItemsSource="{Binding StackAppsRecientes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
         </ScrollViewer>
 
 

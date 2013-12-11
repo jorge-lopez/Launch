@@ -23,6 +23,7 @@ namespace Launch
         public Principal()
         {
             InitializeComponent();
+            this.DataContext = new ClienteControles();
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -31,5 +32,8 @@ namespace Launch
             scv.ScrollToHorizontalOffset(scv.HorizontalOffset - (e.Delta *0.125));
             e.Handled = true;            
         }
+
+        
+
     }
 }
