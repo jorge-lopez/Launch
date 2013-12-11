@@ -60,9 +60,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Aplicaciones.cs" />
-    <Compile Include="Cliente.cs" />
-    <Compile Include="Comentarios.cs" />
-    <Compile Include="IUsuario.cs" />
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
@@ -70,7 +67,6 @@
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
-    <Compile Include="Validacion.cs" />
     <Page Include="Register.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,6 +114,16 @@
     <Resource Include="Imagenes\Launch Logo.png" />
     <Resource Include="Imagenes\Launch.jpg" />
     <Resource Include="Imagenes\Launch2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Buiseness Logic\BuisenessLogic.csproj">
+      <Project>{6b111bcb-5b30-4de6-81fa-62ee7abbf0fb}</Project>
+      <Name>BuisenessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commons\Commons.csproj">
+      <Project>{e95663f4-4466-4a6c-9e33-403ed189ce05}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

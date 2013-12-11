@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{E95663F4-4466-4A6C-9E33-403ED189CE05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buiseness Logic", "Buiseness Logic\Buiseness Logic.csproj", "{6B111BCB-5B30-4DE6-81FA-62EE7ABBF0FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuisenessLogic", "Buiseness Logic\BuisenessLogic.csproj", "{6B111BCB-5B30-4DE6-81FA-62EE7ABBF0FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{BE801CE1-FD1B-4871-AB4D-F9178AFA5B91}"
 EndProject

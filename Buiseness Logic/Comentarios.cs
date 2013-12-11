@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Launch
+namespace BuisenessLogic
 {
-    class Comentarios
+    class Comentarios : IUsuario
     {
         public string Usuario { get; private set; }
         public string Correo{ get; private set; }
         public DateTime Fecha { get; private set; }
         public string Contenido { get; private set; }
 
-        public Comentarios(Usuario Usuario, string Comentario)
+        public Comentarios(IUsuario Usuario, string Comentario)
         {
-            this.Usuario = Usuario.Nombre;
-            this.Correo = Usuario.Correo;
+            //this.Usuario = Usuario.Nombre;
+            //this.Correo = Usuario.Correo;
             this.Contenido = Comentario;
             this.Fecha = DateTime.Today;
         }

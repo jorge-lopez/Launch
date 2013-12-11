@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Launch
+namespace BuisenessLogic
 {
-    class Cliente : Usuario
+    class Cliente : IUsuario
     {
         //List<Aplicaciones> appsInstaladas = new List<Aplicaciones>();
 
         public Cliente(string Nombre, string Correo)
         {
-            this.Nombre = Nombre;
-            this.Correo = Correo;
+            //this.Nombre = Nombre;
+            //this.Correo = Correo;
         }
 
         public void Instalar()

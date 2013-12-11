@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BuisenessLogic;
+
 
 namespace Launch
 {
@@ -22,7 +24,7 @@ namespace Launch
     {
         Validacion v = new Validacion();
         public Register()
-        {
+        {            
             InitializeComponent();
             rdoBtn_usuario.IsChecked = true;
         }

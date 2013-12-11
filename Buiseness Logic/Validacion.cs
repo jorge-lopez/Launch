@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Launch
+namespace BuisenessLogic
 {
-    class Validacion
+    public class Validacion
     {
         private bool _NombreValido = false;
         private bool _ApellidoValido = false;
