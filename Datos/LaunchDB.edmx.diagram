@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="88415259130f46d29322f97a384c5e99" Name="Diagram1">
+        <EntityTypeShape EntityType="LAUNCHModel.APP" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.COSTUMER" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.DEVELOPER" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.MEMBERSHIP" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.COMMENT" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="LAUNCHModel.FK_APP_DEVELOPER" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.FK_COMMENT_APP" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.FK_COMMENT_COSTUMER" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.FK_MEMBERSHIP_COSTUMER" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.APP_PURCHASED" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
