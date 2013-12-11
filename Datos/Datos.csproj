@@ -49,7 +49,6 @@
     <Compile Include="APP.cs">
       <DependentUpon>LaunchDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="COMMENT.cs">
       <DependentUpon>LaunchDB.tt</DependentUpon>
     </Compile>
@@ -73,6 +72,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LaunchDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="LaunchModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LaunchModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LaunchModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MEMBERSHIP.cs">
       <DependentUpon>LaunchDB.tt</DependentUpon>
@@ -108,6 +117,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LaunchDB.edmx</DependentUpon>
       <LastGenOutput>LaunchDB.cs</LastGenOutput>
+    </None>
+    <None Include="LaunchModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LaunchModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="LaunchModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LaunchModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
