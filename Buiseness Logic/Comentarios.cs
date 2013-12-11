@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BuisenessLogic
 {
-    class Comentarios : IUsuario
+    class Comentarios
     {
         public string Usuario { get; private set; }
         public string Correo{ get; private set; }
         public DateTime Fecha { get; private set; }
         public string Contenido { get; private set; }
 
-        public Comentarios(IUsuario Usuario, string Comentario)
+        public Comentarios(string Comentario)
         {
             //this.Usuario = Usuario.Nombre;
             //this.Correo = Usuario.Correo;

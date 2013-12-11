@@ -67,6 +67,7 @@
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
+    <Compile Include="Validacion.cs" />
     <Page Include="Register.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

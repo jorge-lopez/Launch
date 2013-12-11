@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using BuisenessLogic;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,12 @@ namespace Launch
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Se hizo un clic");
+            bool LoginExitoso = Cliente.Login(txtBox_correo.Text, pwdBox_contrasegna.Password);
+            if (LoginExitoso)
+                MessageBox.Show("si entramos");
+            else
+                MessageBox.Show("nope");
+            
         }
     }
 }

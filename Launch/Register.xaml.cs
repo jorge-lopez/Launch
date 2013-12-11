@@ -92,6 +92,24 @@ namespace Launch
         {
             if (v.TodoEsValido())
                 btn_registrar.IsEnabled = true;
+            else
+                btn_registrar.IsEnabled = false;
+        }
+
+        private void btn_registrar_Click(object sender, RoutedEventArgs e)
+        {
+            if ((bool)rdoBtn_usuario.IsChecked)
+            {
+                //Send this to the service to register a new client
+                MessageBox.Show("Cliente Agnadido");
+                this.Close();
+            }
+            else
+            {
+                //Make a Developer and send it to the service
+                MessageBox.Show("desarrollador Agnadido");
+                this.Close();
+            }
         }
     }
 }

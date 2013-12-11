@@ -19,12 +19,12 @@ namespace BuisenessLogic
         {
             if (Nombre == "")
             {
-                _NombreValido = true;
+                _NombreValido = false;
                 return false;
             }
             else
             {
-                _NombreValido = false;
+                _NombreValido = true;
                 return true;
             }
         }
@@ -32,12 +32,12 @@ namespace BuisenessLogic
         {
             if (Nombre == "")
             {
-                _ApellidoValido = true;
+                _ApellidoValido = false;
                 return false;
             }
             else
             {
-                _ApellidoValido = false;
+                _ApellidoValido = true;
                 return true;
             }
         }
@@ -69,12 +69,12 @@ namespace BuisenessLogic
         {
             if (Contrasegna.Length < 6)
             {
-                _ContrasegnaValido = true;
+                _ContrasegnaValido = false;
                 return false;
             }
             else
             {
-                _ContrasegnaValido = false;
+                _ContrasegnaValido = true;
                 return true;
             }
         }
