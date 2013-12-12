@@ -16,9 +16,9 @@ namespace Datos
     {
         public int ID_Purchase { get; set; }
         public int ID_App { get; set; }
-        public int ID_Costumer { get; set; }
+        public int ID_Customer { get; set; }
     
         public virtual APP APP { get; set; }
-        public virtual COSTUMER COSTUMER { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
     }
 }

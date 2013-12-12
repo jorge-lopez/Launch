@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuisenessLogic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,18 +13,39 @@ using System.Windows.Media.Imaging;
 namespace Launch
 {
 
-    class ClienteControles : INotifyPropertyChanged
+    class PrincipalControles : INotifyPropertyChanged
     {
-        public ClienteControles()
-        {
-
-            StackAppsSuscripcion = new List<StackPanel>();
-            StackAppsRecientes = new List<StackPanel>();
-
-            Generate(null);
-        }
-
+        private Cliente ClienteEnSesion;
+        private string _nombreCompleto;
+        private string _correo;
         private IEnumerable _StackAppsSuscripcion;
+        private IEnumerable _StackAppsRecientes;
+        
+        public string NombreCompleto
+        {
+            get
+            {
+                return _nombreCompleto;
+            }
+            private set
+            {
+                _nombreCompleto = value;
+                OnNotifyPropertyChanged("Nombre");
+            }
+        }
+        public string Correo
+        {
+            get
+            {
+                return ClienteEnSesion.Correo;
+            }
+            private set
+            {
+                _correo = value;
+                OnNotifyPropertyChanged("Nombre");
+            }
+        }
+        
         public IEnumerable StackAppsSuscripcion
         {
             get { return _StackAppsSuscripcion; }
@@ -34,7 +56,7 @@ namespace Launch
             }
         }
 
-        private IEnumerable _StackAppsRecientes;
+        
         public IEnumerable StackAppsRecientes
         {
             get { return _StackAppsRecientes; }
@@ -45,16 +67,25 @@ namespace Launch
             }
         }
 
+        public PrincipalControles(string correo)
+        {
+            ClienteEnSesion = new Cliente(correo);
+            _nombreCompleto = ClienteEnSesion.Nombre + " " + ClienteEnSesion.Apellido;
+            StackAppsSuscripcion = new List<StackPanel>();
+            StackAppsRecientes = new List<StackPanel>();
+
+            Generar();
+        }
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnNotifyPropertyChanged(string propName)
+        public void OnNotifyPropertyChanged(string propiedad)
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propiedad));
             }
         }
 
-        private void Generate(object obj)
+        private void Generar()
         {
             IList<StackPanel> AppsSuscripcion = new List<StackPanel>();
             IList<StackPanel> AppsRecientes = new List<StackPanel>();

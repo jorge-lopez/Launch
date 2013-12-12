@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuisenessLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,16 @@ namespace Launch
         public string Contrasegna { get; set; }
         public string Verifica { get; set; }
 
+        public ModeloRegistro() { }
+        public ModeloRegistro(string correo)
+        {
+            Cliente c = new Cliente(correo);
+            Nombre = c.Nombre;
+            Apellido = c.Apellido;
+            Correo = c.Correo;
+            Contrasegna = c.Contrasegna;
+            Verifica = Contrasegna;
+        }
         public string Error
         {
             get { throw new NotImplementedException(); }

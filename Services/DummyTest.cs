@@ -31,7 +31,7 @@ namespace Services
         {
             if (Existe(Cliente.Correo, Cliente.Contrasegna))
             {
-                DBManagement.AddCostumer(Cliente.Nombre, Cliente.Apellido, Cliente.Correo, Cliente.Contrasegna);
+                DBManagement.AddCustomer(Cliente.Nombre, Cliente.Apellido, Cliente.Correo, Cliente.Contrasegna);
                 return true;
                 //procede con SQL connection String
             }

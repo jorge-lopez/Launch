@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3acf2b15f4c348738ea8f0934ce6d246" Name="Diagram1">
-        <EntityTypeShape EntityType="LAUNCHModel.APP" Width="1.5" PointX="3.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LAUNCHModel.APP_PURCHASED" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LAUNCHModel.COSTUMER" Width="1.5" PointX="1.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LAUNCHModel.DEVELOPER" Width="1.5" PointX="0.625" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LAUNCHModel.MEMBERSHIP" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LAUNCHModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LAUNCHModel.COMMENT" Width="1.5" PointX="3.5" PointY="1.75" IsExpanded="true" />
+      <Diagram DiagramId="e318c97ea1564471a1f17dd3543f8441" Name="Diagram1">
+        <EntityTypeShape EntityType="LAUNCHModel.APP" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.APP_PURCHASED" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.CUSTOMER" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.DEVELOPER" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.MEMBERSHIP" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LAUNCHModel.COMMENT" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="LAUNCHModel.FK_APP_DEVELOPER" ManuallyRouted="false" />
         <AssociationConnector Association="LAUNCHModel.FK_APP_PURCHASED_APP" ManuallyRouted="false" />
         <AssociationConnector Association="LAUNCHModel.FK_COMMENT_APP" ManuallyRouted="false" />
-        <AssociationConnector Association="LAUNCHModel.FK_APP_PURCHASED_COSTUMER" ManuallyRouted="false" />
-        <AssociationConnector Association="LAUNCHModel.FK_COMMENT_COSTUMER" ManuallyRouted="false" />
-        <AssociationConnector Association="LAUNCHModel.FK_MEMBERSHIP_COSTUMER" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.FK_APP_PURCHASED_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.FK_COMMENT_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.FK_CUSTOMER_MEMBERSHIP" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -38,7 +38,7 @@ namespace Launch
             bool LoginExitoso = Cliente.Login(txtBox_correo.Text, pwdBox_contrasegna.Password);
             if (LoginExitoso)
             {
-                Principal p = new Principal();
+                Principal p = new Principal(txtBox_correo.Text);
                 p.Show();
                 this.Close();
             }

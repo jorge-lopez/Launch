@@ -20,10 +20,12 @@ namespace Launch
     /// </summary>
     public partial class Principal //: Window
     {
-        public Principal()
+        private string _correo;
+        public Principal(string Correo)
         {
             InitializeComponent();
-            this.DataContext = new ClienteControles();
+            _correo = Correo;
+            this.DataContext = new PrincipalControles(Correo);
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -32,13 +34,14 @@ namespace Launch
             scv.ScrollToHorizontalOffset(scv.HorizontalOffset - (e.Delta *0.125));
             e.Handled = true;            
         }
-        
 
-        private void ItemsControl_MouseLeave(object sender, MouseEventArgs e)
+        private void btn_Nombre_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("OLA");
-        }
+            Configuracion c = new Configuracion(_correo);
+            c.ShowDialog();
 
+        }
+        
         
 
     }

@@ -14,11 +14,15 @@ namespace Datos
     
     public partial class MEMBERSHIP
     {
-        public int ID_Costumer { get; set; }
+        public MEMBERSHIP()
+        {
+            this.CUSTOMERs = new HashSet<CUSTOMER>();
+        }
+    
         public int ID_Membership { get; set; }
         public System.DateTime LastPayment { get; set; }
         public bool Active { get; set; }
     
-        public virtual COSTUMER COSTUMER { get; set; }
+        public virtual ICollection<CUSTOMER> CUSTOMERs { get; set; }
     }
 }

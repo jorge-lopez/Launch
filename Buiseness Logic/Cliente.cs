@@ -6,23 +6,45 @@ using System.Threading.Tasks;
 using System.Runtime.Remoting.Services;
 using System.Data;
 using Services;
+using System.ComponentModel;
 
 namespace BuisenessLogic
 {
-    public class Cliente //:IUsuario
+    public class Cliente : INotifyPropertyChanged
     //public class Cliente : DummyTest
     {
-        
-        public string Nombre { get; set; }
+        private string _nombre;
+        private string _apellido;
+        private string _correo;
+        private string _contrasegna;
+        public string Nombre
+        {
+            get
+            {
+                return DummyTest.RegresarNombre(_correo);
+            }
+            private set
+            {
+                _nombre = value;
+                OnNotifyPropertyChanged("Nombre");
+            }
+        }
         public string Apellido { get; set; }
-        public string Correo { get; set; }
+        public string Correo 
+        { 
+            get{ return _correo;}            
+            private set
+            {
+                _correo = value;
+                OnNotifyPropertyChanged("Corrreo");
+            }
+        }
         public string Contrasegna { get; set; }
         //List<Aplicaciones> appsInstaladas = new List<Aplicaciones>();
 
-        public Cliente(string Nombre, string Correo)
-        {            
-            //this.Nombre = Nombre;
-            //this.Correo = Correo;
+        public Cliente(string correo)
+        {
+            _correo = correo;
         }
         
         public static bool Login (string correo, string contrasegna)
@@ -43,7 +65,14 @@ namespace BuisenessLogic
             }
         }
 
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnNotifyPropertyChanged(string propiedad)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propiedad));
+            }
+        }
         public void Instalar()
         { }
         public void ComprarMembresia()
@@ -52,11 +81,6 @@ namespace BuisenessLogic
         { }
         public void Remover()
         { }
-
-        public string RegresarNombre()
-        {
-            return null;
-        }
 
         
 

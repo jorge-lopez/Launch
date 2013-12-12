@@ -15,30 +15,31 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Label Name="lbl_Nombre" Content="#Jorge Lopez#" HorizontalAlignment="Left" Margin="41,30,0,0" VerticalAlignment="Top"/>
-        <Label Name="lbl_Correo" Content="#ge.drms@gmail.com#" HorizontalAlignment="Left" Margin="134,30,0,0" VerticalAlignment="Top"/>
+
+        <Button Name="btn_Nombre" Content="{Binding NombreCompleto}" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_Nombre_Click"/>
+        <Button Name="btn_Correo" Content="{Binding Correo}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_Nombre_Click"/>
         <Label Name="lbl_asd" Content="#asd#" HorizontalAlignment="Left" Margin="414,31,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="496,32,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
         <ScrollViewer x:Name="sv_suscripcion" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Margin="10,109,10,243" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                <ItemsControl ItemsSource="{Binding StackAppsSuscripcion}" >
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+            <ItemsControl ItemsSource="{Binding StackAppsSuscripcion}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </ScrollViewer>
         <ScrollViewer x:Name="sv_Nuevos" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Margin="10,315,10,37" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                <ItemsControl  ItemsSource="{Binding StackAppsRecientes}" >
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+            <ItemsControl  ItemsSource="{Binding StackAppsRecientes}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </ScrollViewer>
-        
+
 
     </Grid>
 </Controls:MetroWindow>

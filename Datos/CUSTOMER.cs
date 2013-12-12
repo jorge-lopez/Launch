@@ -12,16 +12,15 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class COSTUMER
+    public partial class CUSTOMER
     {
-        public COSTUMER()
+        public CUSTOMER()
         {
             this.APP_PURCHASED = new HashSet<APP_PURCHASED>();
             this.COMMENTs = new HashSet<COMMENT>();
-            this.MEMBERSHIPs = new HashSet<MEMBERSHIP>();
         }
     
-        public int ID_Costumer { get; set; }
+        public int ID_Customer { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -30,6 +29,6 @@ namespace Datos
     
         public virtual ICollection<APP_PURCHASED> APP_PURCHASED { get; set; }
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
-        public virtual ICollection<MEMBERSHIP> MEMBERSHIPs { get; set; }
+        public virtual MEMBERSHIP MEMBERSHIP { get; set; }
     }
 }

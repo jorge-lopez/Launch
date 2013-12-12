@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LAUNCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LAUNCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="APP">
           <Key>
             <PropertyRef Name="ID_App" />
@@ -24,30 +24,30 @@
           </Key>
           <Property Name="ID_Purchase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_App" Type="int" Nullable="false" />
-          <Property Name="ID_Costumer" Type="int" Nullable="false" />
+          <Property Name="ID_Customer" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="COMMENT">
           <Key>
-            <PropertyRef Name="ID_User" />
+            <PropertyRef Name="ID_Customer" />
             <PropertyRef Name="ID_App" />
             <PropertyRef Name="Date" />
             <PropertyRef Name="Content" />
           </Key>
-          <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="ID_Customer" Type="int" Nullable="false" />
           <Property Name="ID_App" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Content" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityType Name="COSTUMER">
+        <EntityType Name="CUSTOMER">
           <Key>
-            <PropertyRef Name="ID_Costumer" />
+            <PropertyRef Name="ID_Customer" />
           </Key>
-          <Property Name="ID_Costumer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="ID_Membership" Type="int" />
         </EntityType>
@@ -65,7 +65,6 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
           <Key>
             <PropertyRef Name="ID_Membership" />
           </Key>
-          <Property Name="ID_Costumer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Membership" Type="int" Nullable="false" />
           <Property Name="LastPayment" Type="datetime" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -104,15 +103,15 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APP_PURCHASED_COSTUMER">
-          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="1" />
+        <Association Name="FK_APP_PURCHASED_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
           <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="COSTUMER">
-              <PropertyRef Name="ID_Costumer" />
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_Customer" />
             </Principal>
             <Dependent Role="APP_PURCHASED">
-              <PropertyRef Name="ID_App" />
+              <PropertyRef Name="ID_Customer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -128,27 +127,27 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_COMMENT_COSTUMER">
-          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="1" />
+        <Association Name="FK_COMMENT_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
           <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="COSTUMER">
-              <PropertyRef Name="ID_Costumer" />
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_Customer" />
             </Principal>
             <Dependent Role="COMMENT">
-              <PropertyRef Name="ID_User" />
+              <PropertyRef Name="ID_Customer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEMBERSHIP_COSTUMER">
-          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="1" />
-          <End Role="MEMBERSHIP" Type="Self.MEMBERSHIP" Multiplicity="*" />
+        <Association Name="FK_CUSTOMER_MEMBERSHIP">
+          <End Role="MEMBERSHIP" Type="Self.MEMBERSHIP" Multiplicity="0..1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="COSTUMER">
-              <PropertyRef Name="ID_Costumer" />
+            <Principal Role="MEMBERSHIP">
+              <PropertyRef Name="ID_Membership" />
             </Principal>
-            <Dependent Role="MEMBERSHIP">
-              <PropertyRef Name="ID_Costumer" />
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="ID_Membership" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,13 +185,13 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
         <EntityContainer Name="LAUNCHModelStoreContainer">
           <EntitySet Name="APP" EntityType="Self.APP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APP_PURCHASED" EntityType="Self.APP_PURCHASED" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="COSTUMER" EntityType="Self.COSTUMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEVELOPER" EntityType="Self.DEVELOPER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEMBERSHIP" EntityType="Self.MEMBERSHIP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMMENT" EntityType="Self.COMMENT" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[COMMENT].[ID_User] AS [ID_User], 
+[COMMENT].[ID_Customer] AS [ID_Customer], 
 [COMMENT].[ID_App] AS [ID_App], 
 [COMMENT].[Date] AS [Date], 
 [COMMENT].[Content] AS [Content]
@@ -206,24 +205,25 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <End Role="APP" EntitySet="APP" />
             <End Role="APP_PURCHASED" EntitySet="APP_PURCHASED" />
           </AssociationSet>
-          <AssociationSet Name="FK_APP_PURCHASED_COSTUMER" Association="Self.FK_APP_PURCHASED_COSTUMER">
-            <End Role="COSTUMER" EntitySet="COSTUMER" />
+          <AssociationSet Name="FK_APP_PURCHASED_CUSTOMER" Association="Self.FK_APP_PURCHASED_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="APP_PURCHASED" EntitySet="APP_PURCHASED" />
           </AssociationSet>
           <AssociationSet Name="FK_COMMENT_APP" Association="Self.FK_COMMENT_APP">
             <End Role="APP" EntitySet="APP" />
             <End Role="COMMENT" EntitySet="COMMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_COMMENT_COSTUMER" Association="Self.FK_COMMENT_COSTUMER">
-            <End Role="COSTUMER" EntitySet="COSTUMER" />
+          <AssociationSet Name="FK_COMMENT_CUSTOMER" Association="Self.FK_COMMENT_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
             <End Role="COMMENT" EntitySet="COMMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEMBERSHIP_COSTUMER" Association="Self.FK_MEMBERSHIP_COSTUMER">
-            <End Role="COSTUMER" EntitySet="COSTUMER" />
+          <AssociationSet Name="FK_CUSTOMER_MEMBERSHIP" Association="Self.FK_CUSTOMER_MEMBERSHIP">
             <End Role="MEMBERSHIP" EntitySet="MEMBERSHIP" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LAUNCHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -231,7 +231,7 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <Key>
             <PropertyRef Name="ID_App" />
           </Key>
-          <Property Name="ID_App" Type="Int32" Nullable="false" />
+          <Property Name="ID_App" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Developer" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PublishedDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -247,31 +247,31 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <Key>
             <PropertyRef Name="ID_Purchase" />
           </Key>
-          <Property Name="ID_Purchase" Type="Int32" Nullable="false" />
+          <Property Name="ID_Purchase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_App" Type="Int32" Nullable="false" />
-          <Property Name="ID_Costumer" Type="Int32" Nullable="false" />
+          <Property Name="ID_Customer" Type="Int32" Nullable="false" />
           <NavigationProperty Name="APP" Relationship="Self.FK_APP_PURCHASED_APP" FromRole="APP_PURCHASED" ToRole="APP" />
-          <NavigationProperty Name="COSTUMER" Relationship="Self.FK_APP_PURCHASED_COSTUMER" FromRole="APP_PURCHASED" ToRole="COSTUMER" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_APP_PURCHASED_CUSTOMER" FromRole="APP_PURCHASED" ToRole="CUSTOMER" />
         </EntityType>
-        <EntityType Name="COSTUMER">
+        <EntityType Name="CUSTOMER">
           <Key>
-            <PropertyRef Name="ID_Costumer" />
+            <PropertyRef Name="ID_Customer" />
           </Key>
-          <Property Name="ID_Costumer" Type="Int32" Nullable="false" />
+          <Property Name="ID_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_Membership" Type="Int32" />
-          <NavigationProperty Name="APP_PURCHASED" Relationship="Self.FK_APP_PURCHASED_COSTUMER" FromRole="COSTUMER" ToRole="APP_PURCHASED" />
-          <NavigationProperty Name="COMMENTs" Relationship="Self.FK_COMMENT_COSTUMER" FromRole="COSTUMER" ToRole="COMMENT" />
-          <NavigationProperty Name="MEMBERSHIPs" Relationship="Self.FK_MEMBERSHIP_COSTUMER" FromRole="COSTUMER" ToRole="MEMBERSHIP" />
+          <NavigationProperty Name="APP_PURCHASED" Relationship="Self.FK_APP_PURCHASED_CUSTOMER" FromRole="CUSTOMER" ToRole="APP_PURCHASED" />
+          <NavigationProperty Name="COMMENTs" Relationship="Self.FK_COMMENT_CUSTOMER" FromRole="CUSTOMER" ToRole="COMMENT" />
+          <NavigationProperty Name="MEMBERSHIP" Relationship="Self.FK_CUSTOMER_MEMBERSHIP" FromRole="CUSTOMER" ToRole="MEMBERSHIP" />
         </EntityType>
         <EntityType Name="DEVELOPER">
           <Key>
             <PropertyRef Name="ID_Developer" />
           </Key>
-          <Property Name="ID_Developer" Type="Int32" Nullable="false" />
+          <Property Name="ID_Developer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
@@ -282,11 +282,10 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <Key>
             <PropertyRef Name="ID_Membership" />
           </Key>
-          <Property Name="ID_Costumer" Type="Int32" Nullable="false" />
           <Property Name="ID_Membership" Type="Int32" Nullable="false" />
           <Property Name="LastPayment" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="COSTUMER" Relationship="Self.FK_MEMBERSHIP_COSTUMER" FromRole="MEMBERSHIP" ToRole="COSTUMER" />
+          <NavigationProperty Name="CUSTOMERs" Relationship="Self.FK_CUSTOMER_MEMBERSHIP" FromRole="MEMBERSHIP" ToRole="CUSTOMER" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -300,17 +299,17 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
         </EntityType>
         <EntityType Name="COMMENT">
           <Key>
-            <PropertyRef Name="ID_User" />
+            <PropertyRef Name="ID_Customer" />
             <PropertyRef Name="ID_App" />
             <PropertyRef Name="Date" />
             <PropertyRef Name="Content" />
           </Key>
-          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="ID_Customer" Type="Int32" Nullable="false" />
           <Property Name="ID_App" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Content" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="APP" Relationship="Self.FK_COMMENT_APP" FromRole="COMMENT" ToRole="APP" />
-          <NavigationProperty Name="COSTUMER" Relationship="Self.FK_COMMENT_COSTUMER" FromRole="COMMENT" ToRole="COSTUMER" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_COMMENT_CUSTOMER" FromRole="COMMENT" ToRole="CUSTOMER" />
         </EntityType>
         <Association Name="FK_APP_DEVELOPER">
           <End Role="DEVELOPER" Type="Self.DEVELOPER" Multiplicity="1" />
@@ -348,46 +347,46 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APP_PURCHASED_COSTUMER">
-          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="1" />
+        <Association Name="FK_APP_PURCHASED_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
           <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="COSTUMER">
-              <PropertyRef Name="ID_Costumer" />
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_Customer" />
             </Principal>
             <Dependent Role="APP_PURCHASED">
-              <PropertyRef Name="ID_App" />
+              <PropertyRef Name="ID_Customer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_COMMENT_COSTUMER">
-          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="1" />
+        <Association Name="FK_COMMENT_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
           <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="COSTUMER">
-              <PropertyRef Name="ID_Costumer" />
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_Customer" />
             </Principal>
             <Dependent Role="COMMENT">
-              <PropertyRef Name="ID_User" />
+              <PropertyRef Name="ID_Customer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEMBERSHIP_COSTUMER">
-          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="1" />
-          <End Role="MEMBERSHIP" Type="Self.MEMBERSHIP" Multiplicity="*" />
+        <Association Name="FK_CUSTOMER_MEMBERSHIP">
+          <End Role="MEMBERSHIP" Type="Self.MEMBERSHIP" Multiplicity="0..1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="COSTUMER">
-              <PropertyRef Name="ID_Costumer" />
+            <Principal Role="MEMBERSHIP">
+              <PropertyRef Name="ID_Membership" />
             </Principal>
-            <Dependent Role="MEMBERSHIP">
-              <PropertyRef Name="ID_Costumer" />
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="ID_Membership" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="LAUNCHEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="APPs" EntityType="Self.APP" />
           <EntitySet Name="APP_PURCHASED" EntityType="Self.APP_PURCHASED" />
-          <EntitySet Name="COSTUMERs" EntityType="Self.COSTUMER" />
+          <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
           <EntitySet Name="DEVELOPERs" EntityType="Self.DEVELOPER" />
           <EntitySet Name="MEMBERSHIPs" EntityType="Self.MEMBERSHIP" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -404,17 +403,17 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <End Role="APP" EntitySet="APPs" />
             <End Role="COMMENT" EntitySet="COMMENTs" />
           </AssociationSet>
-          <AssociationSet Name="FK_APP_PURCHASED_COSTUMER" Association="Self.FK_APP_PURCHASED_COSTUMER">
-            <End Role="COSTUMER" EntitySet="COSTUMERs" />
+          <AssociationSet Name="FK_APP_PURCHASED_CUSTOMER" Association="Self.FK_APP_PURCHASED_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
             <End Role="APP_PURCHASED" EntitySet="APP_PURCHASED" />
           </AssociationSet>
-          <AssociationSet Name="FK_COMMENT_COSTUMER" Association="Self.FK_COMMENT_COSTUMER">
-            <End Role="COSTUMER" EntitySet="COSTUMERs" />
+          <AssociationSet Name="FK_COMMENT_CUSTOMER" Association="Self.FK_COMMENT_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
             <End Role="COMMENT" EntitySet="COMMENTs" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEMBERSHIP_COSTUMER" Association="Self.FK_MEMBERSHIP_COSTUMER">
-            <End Role="COSTUMER" EntitySet="COSTUMERs" />
+          <AssociationSet Name="FK_CUSTOMER_MEMBERSHIP" Association="Self.FK_CUSTOMER_MEMBERSHIP">
             <End Role="MEMBERSHIP" EntitySet="MEMBERSHIPs" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -483,14 +482,14 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
               <MappingFragment StoreEntitySet="APP_PURCHASED">
                 <ScalarProperty Name="ID_Purchase" ColumnName="ID_Purchase" />
                 <ScalarProperty Name="ID_App" ColumnName="ID_App" />
-                <ScalarProperty Name="ID_Costumer" ColumnName="ID_Costumer" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="COSTUMERs">
-            <EntityTypeMapping TypeName="LAUNCHModel.COSTUMER">
-              <MappingFragment StoreEntitySet="COSTUMER">
-                <ScalarProperty Name="ID_Costumer" ColumnName="ID_Costumer" />
+          <EntitySetMapping Name="CUSTOMERs">
+            <EntityTypeMapping TypeName="LAUNCHModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -513,7 +512,6 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <EntitySetMapping Name="MEMBERSHIPs">
             <EntityTypeMapping TypeName="LAUNCHModel.MEMBERSHIP">
               <MappingFragment StoreEntitySet="MEMBERSHIP">
-                <ScalarProperty Name="ID_Costumer" ColumnName="ID_Costumer" />
                 <ScalarProperty Name="ID_Membership" ColumnName="ID_Membership" />
                 <ScalarProperty Name="LastPayment" ColumnName="LastPayment" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
@@ -534,7 +532,7 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <EntitySetMapping Name="COMMENTs">
             <EntityTypeMapping TypeName="LAUNCHModel.COMMENT">
               <MappingFragment StoreEntitySet="COMMENT">
-                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
                 <ScalarProperty Name="ID_App" ColumnName="ID_App" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
