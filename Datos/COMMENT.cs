@@ -14,12 +14,12 @@ namespace Datos
     
     public partial class COMMENT
     {
-        public int ID_User { get; set; }
+        public int ID_Customer { get; set; }
         public int ID_App { get; set; }
         public System.DateTime Date { get; set; }
         public string Content { get; set; }
     
         public virtual APP APP { get; set; }
-        public virtual COSTUMER COSTUMER { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
     }
 }

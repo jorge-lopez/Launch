@@ -55,7 +55,7 @@
     <Compile Include="COMMENT.cs">
       <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="COSTUMER.cs">
+    <Compile Include="CUSTOMER.cs">
       <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DEVELOPER.cs">

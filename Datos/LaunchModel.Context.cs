@@ -30,7 +30,7 @@ namespace Datos
     
         public DbSet<APP> APPs { get; set; }
         public DbSet<APP_PURCHASED> APP_PURCHASED { get; set; }
-        public DbSet<COSTUMER> COSTUMERs { get; set; }
+        public DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public DbSet<DEVELOPER> DEVELOPERs { get; set; }
         public DbSet<MEMBERSHIP> MEMBERSHIPs { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
