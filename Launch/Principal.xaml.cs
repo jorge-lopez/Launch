@@ -32,6 +32,12 @@ namespace Launch
             scv.ScrollToHorizontalOffset(scv.HorizontalOffset - (e.Delta *0.125));
             e.Handled = true;            
         }
+        
+
+        private void ItemsControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("OLA");
+        }
 
         
 

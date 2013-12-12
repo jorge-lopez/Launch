@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -18,7 +19,7 @@ namespace Launch
 
             StackAppsSuscripcion = new List<StackPanel>();
             StackAppsRecientes = new List<StackPanel>();
-            
+
             Generate(null);
         }
 
@@ -61,7 +62,7 @@ namespace Launch
             GenerarAppsRecientes(AppsRecientes);
             GenerarAppsRecientes(AppsSuscripcion);
 
-            StackAppsSuscripcion = AppsSuscripcion;         
+            StackAppsSuscripcion = AppsSuscripcion;
             StackAppsRecientes = AppsRecientes;
         }
 
@@ -89,6 +90,9 @@ namespace Launch
                 btn.Content = "Instalar";
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;
+                btn.Background = null;
+                btn.Click += btn_Click;
+                
 
                 StackPanel sp = new StackPanel();
                 sp.Orientation = Orientation.Vertical;
@@ -98,9 +102,16 @@ namespace Launch
                 sp.Children.Add(lbl);
                 sp.Children.Add(btn);
 
+
                 AppStack.Add(sp);
             }
         }
+
+        static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MessageBox.Show("Instalar app ?");
+        }
+        
     }
 }
 
