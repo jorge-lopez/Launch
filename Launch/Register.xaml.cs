@@ -60,10 +60,13 @@ namespace Launch
             if ((bool)rdoBtn_usuario.IsChecked)
             {
                 if(Cliente.Registrar(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
+                {
                     MessageBox.Show("Cliente Añadido");
+                    this.Close();
+                }                    
                 else
                     MessageBox.Show("Cliente ya existe");
-                this.Close();
+                
             }
             else
             {

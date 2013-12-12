@@ -65,6 +65,9 @@
       <DependentUpon>Configuracion.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModeloRegistro.cs" />
+    <Compile Include="Perfil.xaml.cs">
+      <DependentUpon>Perfil.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Principal.xaml.cs">
       <DependentUpon>Principal.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,10 @@
     </Compile>
     <Compile Include="Validacion.cs" />
     <Page Include="Configuracion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Perfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
