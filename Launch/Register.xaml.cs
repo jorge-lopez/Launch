@@ -98,6 +98,7 @@ namespace Launch
 
         private void btn_registrar_Click(object sender, RoutedEventArgs e)
         {
+            
             if ((bool)rdoBtn_usuario.IsChecked)
             {
                 //Send this to the service to register a new client

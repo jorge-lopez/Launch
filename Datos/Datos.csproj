@@ -47,31 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APP.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APP_PURCHASED.cs">
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COMMENT.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COSTUMER.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DEVELOPER.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LaunchDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LaunchDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LaunchDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LaunchDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LaunchDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LaunchDB.edmx</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LaunchModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -83,48 +71,45 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LaunchModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LaunchModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="MEMBERSHIP.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registro_Login.cs" />
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>LaunchDB.tt</DependentUpon>
+      <DependentUpon>LaunchModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="LaunchDB.edmx">
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="LaunchModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LaunchDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>LaunchModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="LaunchDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LaunchDB.edmx</DependentUpon>
-      <LastGenOutput>LaunchDB.Context.cs</LastGenOutput>
-    </None>
-    <None Include="LaunchDB.edmx.diagram">
-      <DependentUpon>LaunchDB.edmx</DependentUpon>
-    </None>
-    <None Include="LaunchDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LaunchDB.edmx</DependentUpon>
-      <LastGenOutput>LaunchDB.cs</LastGenOutput>
-    </None>
     <None Include="LaunchModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LaunchModel.edmx</DependentUpon>
       <LastGenOutput>LaunchModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="LaunchModel.edmx.diagram">
+      <DependentUpon>LaunchModel.edmx</DependentUpon>
     </None>
     <None Include="LaunchModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LaunchModel.edmx</DependentUpon>
       <LastGenOutput>LaunchModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />

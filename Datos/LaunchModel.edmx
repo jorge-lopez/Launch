@@ -16,14 +16,13 @@
           <Property Name="Description" Type="varchar" MaxLength="50" />
           <Property Name="Category" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="MembershipQueue" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LAUNCH.dbo.APP_PURCHASED' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="APP_PURCHASED">
           <Key>
-            <PropertyRef Name="ID_App" />
-            <PropertyRef Name="ID_Costumer" />
+            <PropertyRef Name="ID_Purchase" />
           </Key>
+          <Property Name="ID_Purchase" Type="int" Nullable="false" />
           <Property Name="ID_App" Type="int" Nullable="false" />
           <Property Name="ID_Costumer" Type="int" Nullable="false" />
         </EntityType>
@@ -95,13 +94,13 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
         </Association>
         <Association Name="FK_APP_PURCHASED_APP">
           <End Role="APP" Type="Self.APP" Multiplicity="1" />
-          <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="*" />
+          <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="APP">
               <PropertyRef Name="ID_App" />
             </Principal>
             <Dependent Role="APP_PURCHASED">
-              <PropertyRef Name="ID_App" />
+              <PropertyRef Name="ID_Purchase" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -113,7 +112,7 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
               <PropertyRef Name="ID_Costumer" />
             </Principal>
             <Dependent Role="APP_PURCHASED">
-              <PropertyRef Name="ID_Costumer" />
+              <PropertyRef Name="ID_App" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,16 +185,11 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="LAUNCHModelStoreContainer">
           <EntitySet Name="APP" EntityType="Self.APP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APP_PURCHASED" EntityType="Self.APP_PURCHASED" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COSTUMER" EntityType="Self.COSTUMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEVELOPER" EntityType="Self.DEVELOPER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEMBERSHIP" EntityType="Self.MEMBERSHIP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="APP_PURCHASED" EntityType="Self.APP_PURCHASED" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[APP_PURCHASED].[ID_App] AS [ID_App], 
-[APP_PURCHASED].[ID_Costumer] AS [ID_Costumer]
-FROM [dbo].[APP_PURCHASED] AS [APP_PURCHASED]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="COMMENT" EntityType="Self.COMMENT" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [COMMENT].[ID_User] AS [ID_User], 
@@ -245,9 +239,20 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Category" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="MembershipQueue" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DEVELOPER" Relationship="Self.FK_APP_DEVELOPER" FromRole="APP" ToRole="DEVELOPER" />
+          <NavigationProperty Name="APP_PURCHASED" Relationship="Self.FK_APP_PURCHASED_APP" FromRole="APP" ToRole="APP_PURCHASED" />
           <NavigationProperty Name="COMMENTs" Relationship="Self.FK_COMMENT_APP" FromRole="APP" ToRole="COMMENT" />
-          <NavigationProperty Name="COSTUMERs" Relationship="Self.APP_PURCHASED" FromRole="APP" ToRole="COSTUMER" />
+        </EntityType>
+        <EntityType Name="APP_PURCHASED">
+          <Key>
+            <PropertyRef Name="ID_Purchase" />
+          </Key>
+          <Property Name="ID_Purchase" Type="Int32" Nullable="false" />
+          <Property Name="ID_App" Type="Int32" Nullable="false" />
+          <Property Name="ID_Costumer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="APP" Relationship="Self.FK_APP_PURCHASED_APP" FromRole="APP_PURCHASED" ToRole="APP" />
+          <NavigationProperty Name="COSTUMER" Relationship="Self.FK_APP_PURCHASED_COSTUMER" FromRole="APP_PURCHASED" ToRole="COSTUMER" />
         </EntityType>
         <EntityType Name="COSTUMER">
           <Key>
@@ -259,9 +264,9 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <Property Name="Email" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_Membership" Type="Int32" />
+          <NavigationProperty Name="APP_PURCHASED" Relationship="Self.FK_APP_PURCHASED_COSTUMER" FromRole="COSTUMER" ToRole="APP_PURCHASED" />
           <NavigationProperty Name="COMMENTs" Relationship="Self.FK_COMMENT_COSTUMER" FromRole="COSTUMER" ToRole="COMMENT" />
           <NavigationProperty Name="MEMBERSHIPs" Relationship="Self.FK_MEMBERSHIP_COSTUMER" FromRole="COSTUMER" ToRole="MEMBERSHIP" />
-          <NavigationProperty Name="APPs" Relationship="Self.APP_PURCHASED" FromRole="COSTUMER" ToRole="APP" />
         </EntityType>
         <EntityType Name="DEVELOPER">
           <Key>
@@ -320,6 +325,18 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_APP_PURCHASED_APP">
+          <End Role="APP" Type="Self.APP" Multiplicity="1" />
+          <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="APP">
+              <PropertyRef Name="ID_App" />
+            </Principal>
+            <Dependent Role="APP_PURCHASED">
+              <PropertyRef Name="ID_Purchase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_COMMENT_APP">
           <End Role="APP" Type="Self.APP" Multiplicity="1" />
           <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
@@ -328,6 +345,18 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
               <PropertyRef Name="ID_App" />
             </Principal>
             <Dependent Role="COMMENT">
+              <PropertyRef Name="ID_App" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APP_PURCHASED_COSTUMER">
+          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="1" />
+          <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COSTUMER">
+              <PropertyRef Name="ID_Costumer" />
+            </Principal>
+            <Dependent Role="APP_PURCHASED">
               <PropertyRef Name="ID_App" />
             </Dependent>
           </ReferentialConstraint>
@@ -356,12 +385,9 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="APP_PURCHASED">
-          <End Role="APP" Type="Self.APP" Multiplicity="*" />
-          <End Role="COSTUMER" Type="Self.COSTUMER" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="LAUNCHEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="APPs" EntityType="Self.APP" />
+          <EntitySet Name="APP_PURCHASED" EntityType="Self.APP_PURCHASED" />
           <EntitySet Name="COSTUMERs" EntityType="Self.COSTUMER" />
           <EntitySet Name="DEVELOPERs" EntityType="Self.DEVELOPER" />
           <EntitySet Name="MEMBERSHIPs" EntityType="Self.MEMBERSHIP" />
@@ -371,9 +397,17 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <End Role="DEVELOPER" EntitySet="DEVELOPERs" />
             <End Role="APP" EntitySet="APPs" />
           </AssociationSet>
+          <AssociationSet Name="FK_APP_PURCHASED_APP" Association="Self.FK_APP_PURCHASED_APP">
+            <End Role="APP" EntitySet="APPs" />
+            <End Role="APP_PURCHASED" EntitySet="APP_PURCHASED" />
+          </AssociationSet>
           <AssociationSet Name="FK_COMMENT_APP" Association="Self.FK_COMMENT_APP">
             <End Role="APP" EntitySet="APPs" />
             <End Role="COMMENT" EntitySet="COMMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APP_PURCHASED_COSTUMER" Association="Self.FK_APP_PURCHASED_COSTUMER">
+            <End Role="COSTUMER" EntitySet="COSTUMERs" />
+            <End Role="APP_PURCHASED" EntitySet="APP_PURCHASED" />
           </AssociationSet>
           <AssociationSet Name="FK_COMMENT_COSTUMER" Association="Self.FK_COMMENT_COSTUMER">
             <End Role="COSTUMER" EntitySet="COSTUMERs" />
@@ -382,10 +416,6 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <AssociationSet Name="FK_MEMBERSHIP_COSTUMER" Association="Self.FK_MEMBERSHIP_COSTUMER">
             <End Role="COSTUMER" EntitySet="COSTUMERs" />
             <End Role="MEMBERSHIP" EntitySet="MEMBERSHIPs" />
-          </AssociationSet>
-          <AssociationSet Name="APP_PURCHASED" Association="Self.APP_PURCHASED">
-            <End Role="APP" EntitySet="APPs" />
-            <End Role="COSTUMER" EntitySet="COSTUMERs" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -445,6 +475,16 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="MembershipQueue" ColumnName="MembershipQueue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APP_PURCHASED">
+            <EntityTypeMapping TypeName="LAUNCHModel.APP_PURCHASED">
+              <MappingFragment StoreEntitySet="APP_PURCHASED">
+                <ScalarProperty Name="ID_Purchase" ColumnName="ID_Purchase" />
+                <ScalarProperty Name="ID_App" ColumnName="ID_App" />
+                <ScalarProperty Name="ID_Costumer" ColumnName="ID_Costumer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -502,14 +542,6 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="APP_PURCHASED" TypeName="LAUNCHModel.APP_PURCHASED" StoreEntitySet="APP_PURCHASED">
-            <EndProperty Name="APP">
-              <ScalarProperty Name="ID_App" ColumnName="ID_App" />
-            </EndProperty>
-            <EndProperty Name="COSTUMER">
-              <ScalarProperty Name="ID_Costumer" ColumnName="ID_Costumer" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="LAUNCHModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="LAUNCHModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="LAUNCHModel.Store.sp_dropdiagram" />

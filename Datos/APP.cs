@@ -17,7 +17,6 @@ namespace Datos
         public APP()
         {
             this.COMMENTs = new HashSet<COMMENT>();
-            this.COSTUMERs = new HashSet<COSTUMER>();
         }
     
         public int ID_App { get; set; }
@@ -27,9 +26,10 @@ namespace Datos
         public string Description { get; set; }
         public string Category { get; set; }
         public byte[] Photo { get; set; }
+        public bool MembershipQueue { get; set; }
     
         public virtual DEVELOPER DEVELOPER { get; set; }
+        public virtual APP_PURCHASED APP_PURCHASED { get; set; }
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
-        public virtual ICollection<COSTUMER> COSTUMERs { get; set; }
     }
 }
