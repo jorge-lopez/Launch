@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BuisenessLogic;
-
+using Services;
 
 namespace Launch
 {
@@ -102,7 +102,6 @@ namespace Launch
             if ((bool)rdoBtn_usuario.IsChecked)
             {
                 //Send this to the service to register a new client
-                
                 MessageBox.Show("Cliente Añadido");
                 this.Close();
             }

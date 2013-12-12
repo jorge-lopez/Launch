@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LAUNCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LAUNCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="APP">
           <Key>
             <PropertyRef Name="ID_App" />
           </Key>
-          <Property Name="ID_App" Type="int" Nullable="false" />
+          <Property Name="ID_App" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Developer" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="PublishedDate" Type="datetime" Nullable="false" />
@@ -22,7 +22,7 @@
           <Key>
             <PropertyRef Name="ID_Purchase" />
           </Key>
-          <Property Name="ID_Purchase" Type="int" Nullable="false" />
+          <Property Name="ID_Purchase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_App" Type="int" Nullable="false" />
           <Property Name="ID_Costumer" Type="int" Nullable="false" />
         </EntityType>
@@ -44,7 +44,7 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
           <Key>
             <PropertyRef Name="ID_Costumer" />
           </Key>
-          <Property Name="ID_Costumer" Type="int" Nullable="false" />
+          <Property Name="ID_Costumer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="15" Nullable="false" />
@@ -55,7 +55,7 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
           <Key>
             <PropertyRef Name="ID_Developer" />
           </Key>
-          <Property Name="ID_Developer" Type="int" Nullable="false" />
+          <Property Name="ID_Developer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="15" Nullable="false" />
@@ -65,7 +65,7 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
           <Key>
             <PropertyRef Name="ID_Membership" />
           </Key>
-          <Property Name="ID_Costumer" Type="int" Nullable="false" />
+          <Property Name="ID_Costumer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Membership" Type="int" Nullable="false" />
           <Property Name="LastPayment" Type="datetime" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -223,8 +223,7 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <End Role="MEMBERSHIP" EntitySet="MEMBERSHIP" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LAUNCHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

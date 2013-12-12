@@ -10,7 +10,7 @@ using Datos;
 
 namespace Services
 {
-    public class DummyTest:Registro_Login
+    public class DummyTest:DBManagement
     {
         public static string RegresarNombre(string Correo)
         {
