@@ -98,17 +98,18 @@ namespace Launch
 
         private void btn_registrar_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if ((bool)rdoBtn_usuario.IsChecked)
             {
                 //Send this to the service to register a new client
-                MessageBox.Show("Cliente Agnadido");
+                
+                MessageBox.Show("Cliente Añadido");
                 this.Close();
             }
             else
             {
                 //Make a Developer and send it to the service
-                MessageBox.Show("desarrollador Agnadido");
+                MessageBox.Show("Desarrollador Añadido");
                 this.Close();
             }
         }

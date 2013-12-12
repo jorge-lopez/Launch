@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public abstract class Registro_Login
+    public class Registro_Login
     {
         //Metodo que agrega un Costumer a la base de datos
         public static bool AddCostumer(string _FirstName, string _LastName, string _Email, string _Password)

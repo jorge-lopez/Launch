@@ -10,8 +10,7 @@ using Datos;
 
 namespace Services
 {
-    //Dummy para Login!
-    public class SUsuario
+    public class DummyTest:Registro_Login
     {
         public static string RegresarNombre(string Correo)
         {
@@ -30,14 +29,15 @@ namespace Services
 
         public static bool Registrar(IUsuario Cliente)
         {
-            if(Existe(Cliente.Correo, Cliente.Contrasegna))
+            if (Existe(Cliente.Correo, Cliente.Contrasegna))
             {
+                AddCostumer(Cliente.Nombre, Cliente.Apellido, Cliente.Correo, Cliente.Contrasegna);
                 return true;
                 //procede con SQL connection String
             }
             else
             {
-                throw new InvalidOperationException("Ya existe un usuario con el mismo correo");                
+                throw new InvalidOperationException("Ya existe un usuario con el mismo correo");
             }
         }
 

@@ -1,14 +1,16 @@
-﻿using Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Runtime.Remoting.Services;
+using System.Data;
+using Services;
 
 namespace BuisenessLogic
 {
-    public class Cliente //: IUsuario
+    public class Cliente //:IUsuario
+    //public class Cliente : DummyTest
     {
         
         public string Nombre { get; set; }
