@@ -8,23 +8,36 @@ namespace Datos
 {
     public class DBManagement
     {
+        #region Add Methods
         //Metodo que agrega un Costumer a la base de datos
         public static bool AddCostumer(string _FirstName, string _LastName, string _Email, string _Password)
         {
-            using (var dbContext= new LAUNCHEntities())
+            using (var dbContext = new LAUNCHEntities())
             {
-                var costumer = new COSTUMER
+                var Existe = (from c in dbContext.COSTUMERs
+                              where c.Email == _Email
+                              select c).Any();
+
+                if (Existe == true)
                 {
-                    FirstName = _FirstName,
-                    LastName = _LastName,
-                    Email = _Email,
-                    Password = _Password
-                };
-                dbContext.COSTUMERs.Add(costumer);
+                    throw new InvalidOperationException("Ya existe un usuario con ese correo. Escoje otro");
+                }
 
-                var changesSaved = dbContext.SaveChanges();
+                else
+                {
+                    var costumer = new COSTUMER
+                    {
+                        FirstName = _FirstName,
+                        LastName = _LastName,
+                        Email = _Email,
+                        Password = _Password
+                    };
+                    dbContext.COSTUMERs.Add(costumer);
 
-                return changesSaved >= 1;
+                    var changesSaved = dbContext.SaveChanges();
+
+                    return changesSaved >= 1;
+                }
             }
         }
 
@@ -48,7 +61,32 @@ namespace Datos
             }
         }
 
-        public static bool AddApp()
+        //Metodo que agrega un Costumer a la base de datos
+        public static bool AddApp(DEVELOPER user,string _Name, string _Description, string _Category, Byte[] _Photo)
+        {
+            using (var dbContext= new LAUNCHEntities())
+            {
+                var app = new APP
+                {
+                    ID_Developer = user.ID_Developer,
+                    Name = _Name,
+                    PublishedDate = DateTime.Now,
+                    Description = _Description,
+                    Category = _Category,
+                    Photo = _Photo,
+                    MembershipQueue = false
+                };
+                dbContext.APPs.Add(app);
 
+                var changesSaved = dbContext.SaveChanges();
+
+                return changesSaved >= 1;
+            }
+
+
+        }
+
+
+        #endregion
     }
 }
