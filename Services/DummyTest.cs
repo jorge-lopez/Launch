@@ -27,11 +27,11 @@ namespace Services
                 return false;
         }
 
-        public static bool Registrar(IUsuario Cliente)
+        public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-            if (Existe(Cliente.Correo, Cliente.Contrasegna))
+            if (Existe(Correo, Contrasegna))
             {
-                DBManagement.AddCustomer(Cliente.Nombre, Cliente.Apellido, Cliente.Correo, Cliente.Contrasegna);
+                DBManagement.AddCustomer(Nombre, Apellido, Correo, Contrasegna);
                 return true;
                 //procede con SQL connection String
             }

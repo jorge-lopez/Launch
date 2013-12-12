@@ -52,16 +52,27 @@ namespace BuisenessLogic
             bool b = SUsuario.Existe(correo, contrasegna);            
             return b;
         }
-        
-        public static void Registrar(IUsuario cliente)
+
+        public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
+
             try
             {
-                SUsuario.Registrar(cliente);
+                if (String.IsNullOrEmpty(Nombre) ||
+                    String.IsNullOrEmpty(Apellido) ||
+                    String.IsNullOrEmpty(Correo) ||
+                    String.IsNullOrEmpty(Contrasegna) )
+                    throw new ArgumentNullException();
+
+                if (DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna))                                    
+                    return true;
+                
+                return false;
             }
             catch(Exception ex)
             {
                 string Error = ex.Message;
+                return false;
             }
         }
 

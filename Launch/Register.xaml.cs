@@ -59,8 +59,10 @@ namespace Launch
 
             if ((bool)rdoBtn_usuario.IsChecked)
             {
-                //Send this to the service to register a new client
-                MessageBox.Show("Cliente Añadido");
+                if(Cliente.Registrar(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
+                    MessageBox.Show("Cliente Añadido");
+                else
+                    MessageBox.Show("Cliente ya existe");
                 this.Close();
             }
             else
