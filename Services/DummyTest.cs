@@ -10,7 +10,7 @@ using Datos;
 
 namespace Services
 {
-    public class DummyTest:DBManagement
+    public class DummyTest
     {
         public static string RegresarNombre(string Correo)
         {
@@ -31,7 +31,7 @@ namespace Services
         {
             if (Existe(Cliente.Correo, Cliente.Contrasegna))
             {
-                AddCostumer(Cliente.Nombre, Cliente.Apellido, Cliente.Correo, Cliente.Contrasegna);
+                DBManagement.AddCostumer(Cliente.Nombre, Cliente.Apellido, Cliente.Correo, Cliente.Contrasegna);
                 return true;
                 //procede con SQL connection String
             }

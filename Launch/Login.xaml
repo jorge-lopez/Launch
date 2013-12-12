@@ -17,11 +17,11 @@
         <Image HorizontalAlignment="Left" Height="122" Margin="92,5,0,0" VerticalAlignment="Top" Width="121" Source="Imagenes/Launch.jpg" Stretch="Fill"/>
         <Label Name="lbl_logo" Content="LAUNCH" HorizontalAlignment="Left" Margin="118,132,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.894,0.123" Foreground="#FF6A6A6A" FontSize="16" />
         <Label Name="lbl_correo"  Content="Correo:" HorizontalAlignment="Left" Margin="30,172,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="txtBox_correo" HorizontalAlignment="Left" Height="23" Margin="123,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" BorderThickness="1" Background="{x:Null}" BorderBrush="#FF727272" TabIndex="0"/>
-        <Label Name="lbl_contrasegna" Content="Contraseña" HorizontalAlignment="Left" Margin="30,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.894,0.123"/>
-        <PasswordBox Name="pwdBox_contrasegna" HorizontalAlignment="Left" Margin="123,225,0,0" VerticalAlignment="Top" Width="145" BorderThickness="1" Background="{x:Null}" BorderBrush="#FF727272" TabIndex="1"/>
+        <TextBox Name="txtBox_correo" HorizontalAlignment="Left" Height="23" Margin="111,172,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="177" BorderThickness="1" Background="{x:Null}" BorderBrush="#FF727272" TabIndex="0" />
+        <Label Name="lbl_contrasegna" Content="Contraseña:" HorizontalAlignment="Left" Margin="30,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.894,0.123"/>
+        <PasswordBox Name="pwdBox_contrasegna" HorizontalAlignment="Left" Margin="111,225,0,0" VerticalAlignment="Top" Width="177" BorderThickness="1" Background="{x:Null}" BorderBrush="#FF727272" TabIndex="1"/>
         <Button Name="btn_login" Content="Iniciar Sesión" HorizontalAlignment="Left" Margin="118,295,0,0" VerticalAlignment="Top" Width="95" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Background="#FFD9792C" Foreground="White" IsDefault="True" Click="btn_login_Click"/>
-        
+
         <TextBlock Margin="63,340,30,10">No estás registrado ?<Hyperlink Click="Hyperlink_Click">Haz Click AQUI</Hyperlink></TextBlock>
 
     </Grid>
