@@ -1,0 +1,42 @@
+﻿<Controls:MetroWindow 
+        x:Class="Launch.Aplicacion"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Aplicacion" Height="546" Width="650" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Orange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+
+        <Button Name="btn_nombre" Content="{Binding NombreCompleto}" HorizontalAlignment="Left" Margin="15,18,0,0" VerticalAlignment="Top" Click="btn_Nombre_Click" RenderTransformOrigin="1.35,0.56" FontSize="13"/>
+        <Button Name="btn_correo" Content="{Binding Correo}" HorizontalAlignment="Left" Margin="15,41,0,0" VerticalAlignment="Top" Click="btn_Nombre_Click" FontSize="13"/>
+        <TextBox Name="txtBox_busqueda" HorizontalAlignment="Left" Height="23" Margin="438,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159" BorderBrush="Black"/>
+        <Button Name="btn_busqueda"  HorizontalAlignment="Left" Margin="602,32,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_busqueda_Click" Width="24" Height="24" RenderTransformOrigin="8.712,-1.191">
+            <Button.Background>
+                <ImageBrush ImageSource="Imagenes/search.png"/>
+            </Button.Background>
+        </Button>
+
+        <Button Name="btn_principal"  HorizontalAlignment="Left" Margin="263,22,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_principal_Click" Width="136" Height="44">
+            <Button.Background>
+                <ImageBrush ImageSource="Imagenes/Launch Logo.png"/>
+            </Button.Background>
+        </Button>
+
+
+        <Label Name="lbl_nombreApp" Content="{Binding NombreApp}" HorizontalAlignment="Left" Margin="350,104,0,0" VerticalAlignment="Top" FontSize="16" />
+        <Label Name="lbl_desarrollador" Content="{Binding Desarrollador}" HorizontalAlignment="Left" Margin="350,138,0,0" VerticalAlignment="Top" FontSize="14" />
+        <Label Name="lbl_fechaPublicada" Content="{Binding FechaPublicada}" HorizontalAlignment="Left" Margin="350,172,0,0" VerticalAlignment="Top" FontSize="12" />
+        <TextBlock Name="txtBlk_descripcion" Text="{Binding Descripcion}" Margin="350,240,47,161"/>
+
+    </Grid>
+</Controls:MetroWindow>
