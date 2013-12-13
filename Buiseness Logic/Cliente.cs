@@ -79,7 +79,7 @@ namespace BuisenessLogic
         
         public static bool Login (string correo, string contrasegna)
         {
-            bool b = Service.Existe(correo, contrasegna);            
+            bool b = Service.Login(correo, contrasegna);            
             return b;
         }
 
