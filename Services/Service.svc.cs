@@ -25,6 +25,11 @@ namespace Services
             return DBManagement.AddDeveloper(_FirstName, _LastName, _email, _password);
         }
 
+        static public bool Login(string _email, string _password)
+        {
+            return DBManagement.Login(_email, _password);
+        }
+
         public bool AgregarApp(string _devEmail, string _name, string _description, string _category, byte[] _photo)
         {
             DEVELOPER dev = new DEVELOPER();
