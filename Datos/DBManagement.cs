@@ -25,16 +25,25 @@ namespace Datos
                 }
                 else
                 {
-                    var customer = new CUSTOMER
+                    try
                     {
-                        FirstName = _FirstName,
-                        LastName = _LastName,
-                        Email = _Email,
-                        Password = _Password
-                    };
-                    dbContext.CUSTOMERs.Add(customer);
-                    var changesSaved = dbContext.SaveChanges();
-                    return changesSaved >= 1;
+
+                        var customer = new CUSTOMER
+                        {
+                            FirstName = _FirstName,
+                            LastName = _LastName,
+                            Email = _Email,
+                            Password = _Password
+                        };
+                        dbContext.CUSTOMERs.Add(customer);
+                        var changesSaved = dbContext.SaveChanges();
+                        return changesSaved >= 1;
+                    }
+                    catch(Exception ex)
+                    {
+                        string error = ex.Message;
+                        return false;
+                    }
                 }
             }
         }
