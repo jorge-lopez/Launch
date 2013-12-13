@@ -13,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BuisenessLogic;
-
 using System.ComponentModel;
+using Services;
 
 namespace Launch
 {
@@ -59,7 +59,7 @@ namespace Launch
 
             if ((bool)rdoBtn_usuario.IsChecked)
             {
-                if(Cliente.Registrar(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
+                if (Service.AgregarCustomer(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
                 {
                     MessageBox.Show("Cliente Añadido");
                     this.Close();
