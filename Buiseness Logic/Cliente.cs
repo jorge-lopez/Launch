@@ -66,7 +66,7 @@ namespace BuisenessLogic
                 //if (DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna))                                    
                 //    return true;
 
-                DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna);
+                Service.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
                 return true;
             }
             catch(Exception ex)

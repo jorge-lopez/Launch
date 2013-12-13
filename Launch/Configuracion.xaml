@@ -99,6 +99,6 @@
         <Label Name="lbl_verificaContrasegna_error"  Content="No coinciden las credenciales" HorizontalAlignment="Left" Margin="118,401,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.2,-0.462" Foreground="#FFDC5151" FontSize="14" Width="196" HorizontalContentAlignment="Center" Visibility="Hidden"/>
 
         <Button Name="btn_actualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="188,456,0,0" VerticalAlignment="Top" Width="95" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Background="#FFD9792C" Foreground="White" IsEnabled="False" IsDefault="True" Click="btn_actualizar_Click"/>
-        <Button Name="btn_regresar" Content="Regresar" HorizontalAlignment="Left" Margin="39,456,0,0" VerticalAlignment="Top" Width="95" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Background="#FFD9792C" Foreground="White"  Click="btn_regresar_Click"/>
+        <Button Name="btn_regresar" Content="Cancelar" HorizontalAlignment="Left" Margin="39,456,0,0" VerticalAlignment="Top" Width="95" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Background="#FFD9792C" Foreground="White"  Click="btn_regresar_Click"/>
     </Grid>
 </Controls:MetroWindow>

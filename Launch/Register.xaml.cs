@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BuisenessLogic;
 using System.ComponentModel;
-using Services;
 
 namespace Launch
 {
@@ -59,13 +58,13 @@ namespace Launch
 
             if ((bool)rdoBtn_usuario.IsChecked)
             {
-                if (Service.AgregarCustomer(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
+                if (Cliente.Registrar(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
                 {
                     MessageBox.Show("Cliente Añadido");
                     this.Close();
                 }                    
                 else
-                    MessageBox.Show("Cliente ya existe");
+                    MessageBox.Show("Error al registrar usuario");
                 
             }
             else
@@ -86,6 +85,11 @@ namespace Launch
                 btn_registrar.IsEnabled = true;
             else
                 btn_registrar.IsEnabled = false;
+        }
+
+        private void btn_regresar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 

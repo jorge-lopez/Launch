@@ -19,7 +19,7 @@ namespace Launch
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Login// : MetroWindow
+    public partial class Login
     {
         public Login()
         {
@@ -43,7 +43,7 @@ namespace Launch
                 this.Close();
             }
             else
-                MessageBox.Show("nope");
+                MessageBox.Show("Las credencials son incorrectas");
             
         }
     }
