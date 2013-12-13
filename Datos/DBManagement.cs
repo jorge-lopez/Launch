@@ -27,7 +27,6 @@ namespace Datos
                 {
                     try
                     {
-
                         var customer = new CUSTOMER
                         {
                             FirstName = _FirstName,
@@ -63,16 +62,24 @@ namespace Datos
                 }
                 else
                 {
-                    var developer = new DEVELOPER
+                    try
                     {
-                        FirstName = _FirstName,
-                        LastName = _LastName,
-                        Email = _Email,
-                        Password = _Password
-                    };
-                    dbContext.DEVELOPERs.Add(developer);
-                    var changesSaved = dbContext.SaveChanges();
-                    return changesSaved >= 1;
+                        var developer = new DEVELOPER
+                        {
+                            FirstName = _FirstName,
+                            LastName = _LastName,
+                            Email = _Email,
+                            Password = _Password
+                        };
+                        dbContext.DEVELOPERs.Add(developer);
+                        var changesSaved = dbContext.SaveChanges();
+                        return changesSaved >= 1;
+                    }
+                    catch(Exception ex)
+                    {
+                        string error = ex.Message;
+                        return false;
+                    }
                 }
             }
         }
@@ -161,6 +168,28 @@ namespace Datos
         #endregion
 
         #region Read Methods
+
+        //Solo funciona en customers
+        public static bool Login(string _email, string _password)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                var EncontrarUsuario = (from e in dbContext.CUSTOMERs
+                                      where e.Email== _email && e.Password==_password
+                                      select e).Any();
+               
+                if (EncontrarUsuario==false)
+                {
+                    throw new System.MemberAccessException();
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
         //Manda llamar de la base de datos el Customer con el email que se le mande
         public static CUSTOMER getActiveCustomer(string _email)
         {
