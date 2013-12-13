@@ -16,12 +16,22 @@
     </Window.Resources>
     <Grid>
 
-        <Button Name="btn_Nombre" Content="{Binding NombreCompleto}" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_Nombre_Click"/>
-        <Button Name="btn_Correo" Content="{Binding Correo}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_Nombre_Click"/>
-        <Label Name="lbl_asd" Content="#asd#" HorizontalAlignment="Left" Margin="414,31,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="496,32,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Name="btn_nombre" Content="{Binding NombreCompleto}" HorizontalAlignment="Left" Margin="15,18,0,0" VerticalAlignment="Top" Click="btn_Nombre_Click" RenderTransformOrigin="1.35,0.56" FontSize="13"/>
+        <Button Name="btn_correo" Content="{Binding Correo}" HorizontalAlignment="Left" Margin="15,41,0,0" VerticalAlignment="Top" Click="btn_Nombre_Click" FontSize="13"/>
+        <TextBox Name="txtBox_busqueda" HorizontalAlignment="Left" Height="23" Margin="438,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159" BorderBrush="Black"/>
+        <Button Name="btn_busqueda"  HorizontalAlignment="Left" Margin="602,32,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_busqueda_Click" Width="24" Height="24" RenderTransformOrigin="8.712,-1.191">
+            <Button.Background>
+                <ImageBrush ImageSource="Imagenes/search.png"/>
+            </Button.Background>
+        </Button>
+        <Button Name="btn_principal"  HorizontalAlignment="Left" Margin="263,22,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_principal_Click" Width="136" Height="44">
+            <Button.Background>
+                <ImageBrush ImageSource="Imagenes/Launch Logo.png"/>
+            </Button.Background>
+        </Button>
 
-        <ScrollViewer x:Name="sv_suscripcion" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Margin="10,109,10,243" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        <Label Name="lbl_appsSuscriptores" Content="Apps de Suscripcion" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <ScrollViewer x:Name="sv_suscripcion" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Margin="10,139,10,213" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
             <ItemsControl ItemsSource="{Binding StackAppsSuscripcion}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -30,7 +40,8 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-        <ScrollViewer x:Name="sv_Nuevos" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Margin="10,315,10,37" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        <Label Name="lbl_appsRecientes" Content="Apps Recientes" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <ScrollViewer x:Name="sv_Nuevos" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Margin="10,345,10,7" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
             <ItemsControl  ItemsSource="{Binding StackAppsRecientes}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

@@ -5,20 +5,24 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Launch
 {
- class PrincipalControles : INotifyPropertyChanged
+    class AplicacionControles: INotifyPropertyChanged
     {
         private Cliente ClienteEnSesion;
+        private Aplicaciones AplicacionEnVentana;
         private string _nombreCompleto;
         private string _correo;
-        private IEnumerable _StackAppsSuscripcion;
-        private IEnumerable _StackAppsRecientes;
+        private string _nombreApp;
+        private string _desarrollador;
+        private string _fechaPublicada;
+        private string _descripcion;
+        private byte[] _imagen;
+        private IEnumerable _StackComentarios;
         
         public string NombreCompleto
         {
@@ -29,7 +33,7 @@ namespace Launch
             private set
             {
                 _nombreCompleto = value;
-                OnNotifyPropertyChanged("Nombre");
+                OnNotifyPropertyChanged("NombreCompleto");
             }
         }
         public string Correo
@@ -44,36 +48,90 @@ namespace Launch
                 OnNotifyPropertyChanged("Correo");
             }
         }
-        
-        public IEnumerable StackAppsSuscripcion
+        public string NombreApp
         {
-            get { return _StackAppsSuscripcion; }
+            get
+            {
+                return AplicacionEnVentana.NombreApp;
+            }
+            private set
+            {
+                _nombreApp = value;
+                OnNotifyPropertyChanged("NombreApp");
+            }
+        }
+        public string Desarrollador
+        {
+            get
+            {
+                return AplicacionEnVentana.Desarrollador;
+            }
+            private set
+            {
+                _desarrollador = value;
+                OnNotifyPropertyChanged("Desarrollador");
+            }
+        }
+        public string FechaPublicada
+        {
+            get
+            {
+                return String.Format("{0}/{1}/{2}",
+                    AplicacionEnVentana.FechaPublica.Day,
+                    AplicacionEnVentana.FechaPublica.Month,
+                    AplicacionEnVentana.FechaPublica.Year);
+            }
+            private set
+            {
+                _fechaPublicada = value;
+                OnNotifyPropertyChanged("FechaPublicada");
+            }
+        }
+        public string Descripcion
+        {
+            get
+            {
+                return AplicacionEnVentana.Descripcion;
+            }
+            private set
+            {
+                _descripcion = value;
+                OnNotifyPropertyChanged("Descripcion");
+            }
+        }
+        public byte[] Imagen
+        {
+            get
+            {
+                return AplicacionEnVentana.Imagen;
+            }
+            private set
+            {
+                _imagen = value;
+                OnNotifyPropertyChanged("Imagen");
+            }
+        }
+
+        public IEnumerable StackComentarios
+        {
+            get { return _StackComentarios; }
             set
             {
-                _StackAppsSuscripcion = value;
-                OnNotifyPropertyChanged("StackAppsSuscripcion");
+                _StackComentarios = value;
+                OnNotifyPropertyChanged("StackComentarios");
             }
         }
 
         
-        public IEnumerable StackAppsRecientes
+        public AplicacionControles(string Correo, string NombreApp)
         {
-            get { return _StackAppsRecientes; }
-            set
-            {
-                _StackAppsRecientes = value;
-                OnNotifyPropertyChanged("StackAppsRecientes");
-            }
-        }
+            //Usuario en Sesion
+            ClienteEnSesion = new Cliente(Correo);
+            NombreCompleto = ClienteEnSesion.Nombre + " " + ClienteEnSesion.Apellido;
 
-        public PrincipalControles(string correo)
-        {
-            ClienteEnSesion = new Cliente(correo);
-            _nombreCompleto = ClienteEnSesion.Nombre + " " + ClienteEnSesion.Apellido;
-            StackAppsSuscripcion = new List<StackPanel>();
-            StackAppsRecientes = new List<StackPanel>();
-
-            Generar();
+            //Aplicacion en cuestion
+            AplicacionEnVentana = new Aplicaciones(NombreApp);            
+            
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnNotifyPropertyChanged(string propiedad)
@@ -86,14 +144,11 @@ namespace Launch
 
         private void Generar()
         {
-            IList<StackPanel> AppsSuscripcion = new List<StackPanel>();
-            IList<StackPanel> AppsRecientes = new List<StackPanel>();
+            IList<StackPanel> AppsCompradas = new List<StackPanel>();            
 
-            GenerarAppsRecientes(AppsRecientes);
-            GenerarAppsRecientes(AppsSuscripcion);
+            GenerarAppsRecientes(AppsCompradas);
 
-            StackAppsSuscripcion = AppsSuscripcion;
-            StackAppsRecientes = AppsRecientes;
+            StackComentarios = AppsCompradas;
         }
 
         private static void GenerarAppsRecientes(IList<StackPanel> AppStack)
@@ -121,7 +176,7 @@ namespace Launch
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;
                 btn.Background = null;
-                btn.Click += btn_Click;
+
                 
 
                 StackPanel sp = new StackPanel();
@@ -135,15 +190,7 @@ namespace Launch
 
                 AppStack.Add(sp);
             }
-        }
-
-        static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            MessageBox.Show("Instalar app ?");
-        }
+        }       
         
     }
 }
-   
-
-
