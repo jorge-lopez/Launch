@@ -150,10 +150,6 @@
       <Project>{6b111bcb-5b30-4de6-81fa-62ee7abbf0fb}</Project>
       <Name>BuisenessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commons\Commons.csproj">
-      <Project>{e95663f4-4466-4a6c-9e33-403ed189ce05}</Project>
-      <Name>Commons</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{be801ce1-fd1b-4871-ab4d-f9178afa5b91}</Project>
       <Name>Services</Name>

@@ -13,8 +13,6 @@ namespace Services
     //Dummy para Login!
     public class Service
     {
-
-
         static public bool AgregarCustomer(string _FirstName, string _LastName, string _email, string _password)
         {
             return DBManagement.AddCustomer(_FirstName, _LastName, _email, _password);
@@ -28,6 +26,28 @@ namespace Services
         static public bool Login(string _email, string _password)
         {
             return DBManagement.Login(_email, _password);
+        }
+
+        static public string[] ClienteActivo(string _email)
+        {
+            try
+            {
+                string[] elCliente = new string[4];
+                CUSTOMER c = new CUSTOMER();
+                c = DBManagement.getActiveCustomer(_email);
+                elCliente[0] = c.FirstName;
+                elCliente[1] = c.LastName;
+                elCliente[2] = c.Email;
+                elCliente[3] = c.Password;
+                return elCliente;
+            }
+            catch(Exception ex)
+            {
+                string error = ex.Message;
+                return null;
+            }
+
+            
         }
 
         public bool AgregarApp(string _devEmail, string _name, string _description, string _category, byte[] _photo)
