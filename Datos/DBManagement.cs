@@ -16,8 +16,8 @@ namespace Datos
             {
                 //verifica si ya existe un customer en la base de datos con ese email
                 var Existent = (from c in dbContext.CUSTOMERs
-                              where c.Email == _Email
-                              select c).Any();
+                                where c.Email == _Email
+                                select c).Any();
                 //tira una excepcion si ya existe, y si no, agrega al customer a la base y lo guarda
                 if (Existent == true)
                 {
@@ -103,27 +103,27 @@ namespace Datos
         {
             using (var dbContext = new LAUNCHEntities())
             {
-                    var comment = new COMMENT
-                    {
-                        ID_Customer=customer.ID_Customer,
-                        ID_App=app.ID_App,
-                        Date=DateTime.Now,
-                        Content=_content
-                    };
-                    dbContext.COMMENTs.Add(comment);
-                    var changesSaved = dbContext.SaveChanges();
-                    return changesSaved >= 1;
-                }
+                var comment = new COMMENT
+                {
+                    ID_Customer = customer.ID_Customer,
+                    ID_App = app.ID_App,
+                    Date = DateTime.Now,
+                    Content = _content
+                };
+                dbContext.COMMENTs.Add(comment);
+                var changesSaved = dbContext.SaveChanges();
+                return changesSaved >= 1;
             }
+        }
 
         public static bool AddMembership()
         {
             using (var dbContext = new LAUNCHEntities())
             {
-                var membership=new MEMBERSHIP
+                var membership = new MEMBERSHIP
                 {
-                    LastPayment=DateTime.Now,
-                    Active=true
+                    LastPayment = DateTime.Now,
+                    Active = true
                 };
                 dbContext.MEMBERSHIPs.Add(membership);
                 var changesSaved = dbContext.SaveChanges();
@@ -134,24 +134,96 @@ namespace Datos
 
         public static bool AddApp_Purchased(APP app, CUSTOMER customer)
         {
-             using (var dbContext = new LAUNCHEntities())
-             {
-                 var app_purchased = new APP_PURCHASED
-                 {
-                     ID_App = app.ID_App,
-                     ID_Customer = customer.ID_Customer
-                 };
-                 dbContext.APP_PURCHASED.Add(app_purchased);
-                 var changesSaved = dbContext.SaveChanges();
-                 return changesSaved >= 1;
+            using (var dbContext = new LAUNCHEntities())
+            {
+                var app_purchased = new APP_PURCHASED
+                {
+                    ID_App = app.ID_App,
+                    ID_Customer = customer.ID_Customer
+                };
+                dbContext.APP_PURCHASED.Add(app_purchased);
+                var changesSaved = dbContext.SaveChanges();
+                return changesSaved >= 1;
 
-             }
+            }
 
         }
 
         #endregion
 
         #region Read Methods
+        //Manda llamar de la base de datos el Customer con el email que se le mande
+        public static CUSTOMER getActiveCustomer(string _email)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                return dbContext.CUSTOMERs.First(u => u.Email == _email);
+            }
+        }
+        //Manda llamar de la base de datos el Developer con el email que se le mande
+        public static DEVELOPER getActiveDeveloper(string _email)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                return dbContext.DEVELOPERs.First(d => d.Email == _email);
+            }
+        }
+        //Lee todas las aplicaciones disponibles en la base de datos
+        public static List<APP> getAllApps()
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                List<APP> theApps = new List<APP>();
+                var getApps = from a in dbContext.APPs
+                              select a;
+
+                foreach (var g in getApps)
+                {
+                    theApps.Add(g);
+                }
+                return theApps;
+            }
+
+        }
+        //Lee todos los comments disponibles de una aplicacion
+        public static List<COMMENT> getAllCommentsFromApp(APP app)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                List<COMMENT> theComments = new List<COMMENT>();
+                var getComments = from c in dbContext.COMMENTs
+                                  where c.ID_App == app.ID_App
+                                  select c;
+
+                foreach (var c in getComments)
+                {
+                    theComments.Add(c);
+                }
+                return theComments;
+
+            }
+
+        }
+        //Lee todas las aplicaciones compradas por un usuario
+        public static List<APP_PURCHASED> getAppsPurchasedByCustomer(CUSTOMER customer)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                List<APP_PURCHASED> thePurchases = new List<APP_PURCHASED>();
+                var getPurchases = from p in dbContext.APP_PURCHASED
+                                   where p.ID_Customer == customer.ID_Customer
+                                   select p;
+
+                foreach (var p in getPurchases)
+                {
+                    thePurchases.Add(p);
+                }
+                return thePurchases;
+            }
+
+        }
+
+
 
         #endregion
 
