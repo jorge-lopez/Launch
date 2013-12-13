@@ -59,7 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Aplicaciones.cs" />
+    <Compile Include="AplicacionControles.cs" />
+    <Compile Include="Aplicacion.xaml.cs">
+      <DependentUpon>Aplicacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClienteControles.cs" />
     <Compile Include="Configuracion.xaml.cs">
       <DependentUpon>Configuracion.xaml</DependentUpon>
@@ -68,6 +71,7 @@
     <Compile Include="Perfil.xaml.cs">
       <DependentUpon>Perfil.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PerfilControles.cs" />
     <Compile Include="Principal.xaml.cs">
       <DependentUpon>Principal.xaml</DependentUpon>
     </Compile>
@@ -77,7 +81,10 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Validacion.cs" />
+    <Page Include="Aplicacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Configuracion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +158,9 @@
       <Project>{be801ce1-fd1b-4871-ab4d-f9178afa5b91}</Project>
       <Name>Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagenes\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

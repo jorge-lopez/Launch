@@ -12,13 +12,12 @@ using System.Windows.Media.Imaging;
 
 namespace Launch
 {
- class PrincipalControles : INotifyPropertyChanged
+    class PerfilControles: INotifyPropertyChanged
     {
-        private Cliente ClienteEnSesion;
+        private static Cliente ClienteEnSesion;
         private string _nombreCompleto;
         private string _correo;
-        private IEnumerable _StackAppsSuscripcion;
-        private IEnumerable _StackAppsRecientes;
+        private IEnumerable _StackAppsCompradas;
         
         public string NombreCompleto
         {
@@ -29,7 +28,7 @@ namespace Launch
             private set
             {
                 _nombreCompleto = value;
-                OnNotifyPropertyChanged("Nombre");
+                OnNotifyPropertyChanged("NombreCompleto");
             }
         }
         public string Correo
@@ -43,36 +42,23 @@ namespace Launch
                 _correo = value;
                 OnNotifyPropertyChanged("Correo");
             }
-        }
-        
-        public IEnumerable StackAppsSuscripcion
+        }        
+        public IEnumerable StackAppsCompradas
         {
-            get { return _StackAppsSuscripcion; }
+            get { return _StackAppsCompradas; }
             set
             {
-                _StackAppsSuscripcion = value;
-                OnNotifyPropertyChanged("StackAppsSuscripcion");
+                _StackAppsCompradas = value;
+                OnNotifyPropertyChanged("StackAppsCompradas");
             }
         }
 
         
-        public IEnumerable StackAppsRecientes
-        {
-            get { return _StackAppsRecientes; }
-            set
-            {
-                _StackAppsRecientes = value;
-                OnNotifyPropertyChanged("StackAppsRecientes");
-            }
-        }
-
-        public PrincipalControles(string correo)
+        public PerfilControles(string correo)
         {
             ClienteEnSesion = new Cliente(correo);
             _nombreCompleto = ClienteEnSesion.Nombre + " " + ClienteEnSesion.Apellido;
-            StackAppsSuscripcion = new List<StackPanel>();
-            StackAppsRecientes = new List<StackPanel>();
-
+            StackAppsCompradas = new List<StackPanel>();
             Generar();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -86,14 +72,11 @@ namespace Launch
 
         private void Generar()
         {
-            IList<StackPanel> AppsSuscripcion = new List<StackPanel>();
-            IList<StackPanel> AppsRecientes = new List<StackPanel>();
+            IList<StackPanel> AppsCompradas = new List<StackPanel>();            
 
-            GenerarAppsRecientes(AppsRecientes);
-            GenerarAppsRecientes(AppsSuscripcion);
+            GenerarAppsRecientes(AppsCompradas);
 
-            StackAppsSuscripcion = AppsSuscripcion;
-            StackAppsRecientes = AppsRecientes;
+            StackAppsCompradas = AppsCompradas;
         }
 
         private static void GenerarAppsRecientes(IList<StackPanel> AppStack)
@@ -101,6 +84,7 @@ namespace Launch
             int st = 10;
             for (int i = 0; i < st; i++)
             {
+
                 //Imagen Applicacion
                 Image img = new Image();
                 img.Source = new BitmapImage(new Uri("Imagenes/Launch Corp..png", UriKind.Relative));  //Aqui va el metodo para la imagen
@@ -117,11 +101,13 @@ namespace Launch
 
                 //Boton Instalar                 
                 Button btn = new Button();
-                btn.Content = "Instalar";
+                btn.Name = "SuperApp";
+                btn.Content = "Correr";
                 btn.MaxWidth = 90;
-                btn.BorderBrush = Brushes.Black;
+                btn.BorderBrush = Brushes.Black;    
                 btn.Background = null;
                 btn.Click += btn_Click;
+
                 
 
                 StackPanel sp = new StackPanel();
@@ -139,11 +125,16 @@ namespace Launch
 
         static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MessageBox.Show("Instalar app ?");
+            
+            Button btn = (Button)sender;            
+            string s = btn.Name;            
+            Aplicacion a = new Aplicacion(ClienteEnSesion.Correo, s);
+            a.Show();
+
+            //Window w = (Window)sender;
+            //w.Close();
+            //e.Handled = true;
         }
         
     }
 }
-   
-
-

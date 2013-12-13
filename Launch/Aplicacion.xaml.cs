@@ -16,37 +16,24 @@ using System.Windows.Shapes;
 namespace Launch
 {
     /// <summary>
-    /// Interaction logic for Principal.xaml
+    /// Interaction logic for Applicacion.xaml
     /// </summary>
-    public partial class Principal //: Window
+    public partial class Aplicacion 
     {
-        private string _correo;
-        public Principal(string Correo)
+        string _correo;
+        public Aplicacion(string Correo, string NombreApp)
         {
             InitializeComponent();
             _correo = Correo;
-            this.DataContext = new PrincipalControles(Correo);
-        }
-
-        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            ScrollViewer scv = (ScrollViewer)sender;
-            scv.ScrollToHorizontalOffset(scv.HorizontalOffset - (e.Delta *0.125));
-            e.Handled = true;            
+            this.DataContext = new AplicacionControles(Correo, NombreApp);
         }
 
         private void btn_Nombre_Click(object sender, RoutedEventArgs e)
         {
-            Perfil p = new Perfil(_correo);
-            p.Show();
-            this.Close();
-
+            Configuracion c = new Configuracion(_correo);
+            c.ShowDialog();
         }
 
-        private void btn_busqueda_Click(object sender, RoutedEventArgs e)
-        {
-            //look for something
-        }
 
         private void btn_principal_Click(object sender, RoutedEventArgs e)
         {
@@ -54,7 +41,9 @@ namespace Launch
             p.Show();
             this.Close();
         }
-        
+        private void btn_busqueda_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }
