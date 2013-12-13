@@ -49,13 +49,12 @@ namespace BuisenessLogic
         
         public static bool Login (string correo, string contrasegna)
         {
-            bool b = SUsuario.Existe(correo, contrasegna);            
+            bool b = Service.Existe(correo, contrasegna);            
             return b;
         }
 
         public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-
             try
             {
                 if (String.IsNullOrEmpty(Nombre) ||
@@ -64,10 +63,11 @@ namespace BuisenessLogic
                     String.IsNullOrEmpty(Contrasegna) )
                     throw new ArgumentNullException();
 
-                if (DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna))                                    
-                    return true;
-                
-                return false;
+                //if (DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna))                                    
+                //    return true;
+
+                DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna);
+                return true;
             }
             catch(Exception ex)
             {

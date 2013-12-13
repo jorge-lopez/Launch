@@ -78,7 +78,7 @@ namespace Datos
                                 select c).Any();
                 if (Existent == true)
                 {
-                    throw new InvalidOperationException("Ya existe un developer con ese correo. Escoge otro");
+                    throw new InvalidOperationException("Ya existe un App con ese nombre. Escoge otro");
                 }
                 else
                 {
@@ -160,6 +160,7 @@ namespace Datos
                 return dbContext.CUSTOMERs.First(u => u.Email == _email);
             }
         }
+
         //Manda llamar de la base de datos el Developer con el email que se le mande
         public static DEVELOPER getActiveDeveloper(string _email)
         {
@@ -168,6 +169,7 @@ namespace Datos
                 return dbContext.DEVELOPERs.First(d => d.Email == _email);
             }
         }
+
         //Lee todas las aplicaciones disponibles en la base de datos
         public static List<APP> getAllApps()
         {
@@ -185,6 +187,16 @@ namespace Datos
             }
 
         }
+        //Da la informacion de la App solicitada
+        public static APP getInfofromApp(string _name)
+        {
+            using (var dbContext= new LAUNCHEntities())
+            {
+                return dbContext.APPs.First(a => a.Name == _name);
+            }
+
+        }
+
         //Lee todos los comments disponibles de una aplicacion
         public static List<COMMENT> getAllCommentsFromApp(APP app)
         {
@@ -204,6 +216,7 @@ namespace Datos
             }
 
         }
+
         //Lee todas las aplicaciones compradas por un usuario
         public static List<APP_PURCHASED> getAppsPurchasedByCustomer(CUSTOMER customer)
         {
@@ -222,10 +235,33 @@ namespace Datos
             }
 
         }
+        #endregion
+
+
+        #region Update Methods
+        public static bool updateCustomer(string _firstName, string _lastName, string _email, string _password)
+        {
+            using (var dbContext= new LAUNCHEntities())
+            {
+                var buscarCustomer = from c in dbContext.CUSTOMERs
+                                     where c.Email == _email
+                                     select c;
+                foreach (var c in buscarCustomer)
+                {
+                    c.FirstName = _firstName;
+                    c.LastName = _lastName;
+                    c.Email = _email;
+                    c.Password = _password;
+                }
+                var changesSaved = dbContext.SaveChanges();
+                return changesSaved >= 1;
+            }
+        }
 
 
 
         #endregion
+
 
     }
 }

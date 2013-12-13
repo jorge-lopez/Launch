@@ -27,18 +27,19 @@ namespace Services
                 return false;
         }
 
-        public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
+       // public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
+         public static void Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-            if (Existe(Correo, Contrasegna))
-            {
+            //if (Existe(Correo, Contrasegna))
+            //{
                 DBManagement.AddCustomer(Nombre, Apellido, Correo, Contrasegna);
-                return true;
+                //return true;
                 //procede con SQL connection String
-            }
-            else
-            {
-                throw new InvalidOperationException("Ya existe un usuario con el mismo correo");
-            }
+            //}
+            //else
+            //{
+            //    throw new InvalidOperationException("Ya existe un usuario con el mismo correo");
+            //}
         }
 
         /*
