@@ -158,7 +158,7 @@ namespace Launch
             {
                 //Imagen Applicacion
                 Image img = new Image();
-                img.Source = new BitmapImage(new Uri("Imagenes/Launch Corp..png", UriKind.Relative));  //Aqui va el metodo para la imagen
+                img.Source = new BitmapImage(new Uri("/Launch;component/Imagenes/Launch Corp..png", UriKind.Relative));  //Aqui va el metodo para la imagen
                 img.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 img.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 img.Height = 89;

@@ -3,6 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:w="clr-namespace:Launch"
+        Icon="/Launch;component/Imagenes/Icon.ico"
         Title="Registrarse" Height="530.27" Width="324.642" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
@@ -63,7 +64,7 @@
     
     <!-- INICIA GRID-->
     <Grid Margin="0,0,0,-1">
-        <Image HorizontalAlignment="Left" Height="122" Margin="98,0,0,0" VerticalAlignment="Top" Width="121" Source="Imagenes/Launch.jpg" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="122" Margin="98,0,0,0" VerticalAlignment="Top" Width="121" Source="/Launch;component/Imagenes/Launch.jpg" Stretch="Fill"/>
         <Label Name="lbl_logo" Content="LAUNCH" HorizontalAlignment="Left" Margin="124,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.894,0.123" Foreground="#FF6A6A6A" FontSize="16" />
 
         <RadioButton x:Name="rdoBtn_usuario" Content="Usuario" HorizontalAlignment="Left" Margin="44,163,0,0" VerticalAlignment="Top" BorderBrush="Black" Checked="rdoBtn_usuario_Checked" GroupName="tipo" Background="{x:Null}" />
