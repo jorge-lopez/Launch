@@ -21,7 +21,7 @@ namespace BuisenessLogic
         {
             get
             {
-                return DummyTest.RegresarNombre(_correo);
+                return _nombre;
             }
             private set
             {
@@ -29,33 +29,64 @@ namespace BuisenessLogic
                 OnNotifyPropertyChanged("Nombre");
             }
         }
-        public string Apellido { get; set; }
+        public string Apellido
+        {
+            get
+            {
+                return _apellido;
+            }
+            private set
+            {
+                _apellido = value;
+                OnNotifyPropertyChanged("Nombre");
+            }
+        }
         public string Correo 
         { 
-            get{ return _correo;}            
+            get
+            {
+                return _correo;
+            }            
             private set
             {
                 _correo = value;
                 OnNotifyPropertyChanged("Corrreo");
             }
         }
-        public string Contrasegna { get; set; }
+        public string Contrasegna 
+        {
+            get { return _contrasegna; }
+            private set
+            {
+                _contrasegna = _nombre;
+                OnNotifyPropertyChanged("Corrreo");
+            }
+        }
         //List<Aplicaciones> appsInstaladas = new List<Aplicaciones>();
 
         public Cliente(string correo)
         {
             _correo = correo;
+            var valores = Service.ClienteActivo(Correo);
+            if (valores != null)
+            {
+                Nombre = valores[0];
+                Apellido = valores[1];
+                Correo = valores[2];
+                Contrasegna = valores[3];
+            }
         }
         
         public static bool Login (string correo, string contrasegna)
         {
-            bool b = Service.Login(correo, contrasegna);          
+            bool b = Service.Existe(correo, contrasegna);            
             return b;
         }
 
         public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-
+            try
+            {
                 if (String.IsNullOrEmpty(Nombre) ||
                     String.IsNullOrEmpty(Apellido) ||
                     String.IsNullOrEmpty(Correo) ||
@@ -65,10 +96,14 @@ namespace BuisenessLogic
                 //if (DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna))                                    
                 //    return true;
 
-                if(Service.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna))
-                    return true;
-                else
-                    return false;
+                Service.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                string Error = ex.Message;
+                return false;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
