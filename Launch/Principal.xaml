@@ -17,7 +17,7 @@
     <Grid>
 
         <Button Name="btn_nombre" Content="{Binding NombreCompleto}" HorizontalAlignment="Left" Margin="15,18,0,0" VerticalAlignment="Top" Click="btn_Nombre_Click" RenderTransformOrigin="1.35,0.56" FontSize="13"/>
-        <Button Name="btn_correo" Content="{Binding Correo}" HorizontalAlignment="Left" Margin="15,41,0,0" VerticalAlignment="Top" Click="btn_Nombre_Click" FontSize="13"/>
+        <Label Name="btn_correo" Content="{Binding Correo}" HorizontalAlignment="Left" Margin="15,41,0,0" VerticalAlignment="Top" MouseDown="btn_Nombre_Click" FontSize="13"/>
         <TextBox Name="txtBox_busqueda" HorizontalAlignment="Left" Height="23" Margin="438,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159" BorderBrush="Black"/>
         <Button Name="btn_busqueda"  HorizontalAlignment="Left" Margin="602,32,0,0" VerticalAlignment="Top" FontSize="16" Click="btn_busqueda_Click" Width="24" Height="24" RenderTransformOrigin="8.712,-1.191">
             <Button.Background>
@@ -30,7 +30,7 @@
             </Button.Background>
         </Button>
 
-        <Label Name="lbl_appsSuscriptores" Content="Apps de Suscripcion" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Name="lbl_appsSuscriptores" Content="Apps de Suscripción" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontSize="24"/>
         <ScrollViewer x:Name="sv_suscripcion" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Margin="10,139,10,213" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
             <ItemsControl ItemsSource="{Binding StackAppsSuscripcion}" >
                 <ItemsControl.ItemsPanel>
