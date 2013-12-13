@@ -62,9 +62,11 @@ namespace Launch
                 {
                     MessageBox.Show("Cliente Añadido");
                     this.Close();
-                }                    
+                }
                 else
+                {
                     MessageBox.Show("Error al registrar usuario");
+                }
                 
             }
             else

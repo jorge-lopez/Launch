@@ -55,8 +55,7 @@ namespace BuisenessLogic
 
         public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-            try
-            {
+
                 if (String.IsNullOrEmpty(Nombre) ||
                     String.IsNullOrEmpty(Apellido) ||
                     String.IsNullOrEmpty(Correo) ||
@@ -66,14 +65,10 @@ namespace BuisenessLogic
                 //if (DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna))                                    
                 //    return true;
 
-                Service.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
-                return true;
-            }
-            catch(Exception ex)
-            {
-                string Error = ex.Message;
-                return false;
-            }
+                if(Service.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna))
+                    return true;
+                else
+                    return false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
