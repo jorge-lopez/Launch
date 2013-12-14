@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Remoting.Services;
 using System.Data;
-using Services;
 using System.ComponentModel;
+using Commons;
+using Buiseness_Logic.LaunchServices;
 
 namespace BuisenessLogic
 {
-    public class Cliente : INotifyPropertyChanged
-    //public class Cliente : DummyTest
+    public class Cliente : INotifyPropertyChanged, ICliente
     {
         private string _nombre;
         private string _apellido;
@@ -38,71 +38,78 @@ namespace BuisenessLogic
             private set
             {
                 _apellido = value;
-                OnNotifyPropertyChanged("Nombre");
+                OnNotifyPropertyChanged("Apellido");
             }
         }
-        public string Correo 
-        { 
+        public string Correo
+        {
             get
             {
                 return _correo;
-            }            
+            }
             private set
             {
                 _correo = value;
-                OnNotifyPropertyChanged("Corrreo");
+                OnNotifyPropertyChanged("Correo");
             }
         }
-        public string Contrasegna 
+        public string Contrasegna
         {
             get { return _contrasegna; }
             private set
             {
-                _contrasegna = _nombre;
-                OnNotifyPropertyChanged("Corrreo");
+                _contrasegna = value;
+                OnNotifyPropertyChanged("Contrasegna");
             }
         }
         //List<Aplicaciones> appsInstaladas = new List<Aplicaciones>();
 
+
         public Cliente(string correo)
         {
-            _correo = correo;
-            var valores = Service.ClienteActivo(Correo);
-            if (valores != null)
+            Correo = correo;
+            using (ServiceClient SCliente = new ServiceClient())
             {
-                Nombre = valores[0];
-                Apellido = valores[1];
-                Correo = valores[2];
-                Contrasegna = valores[3];
+                var valores = SCliente.ClienteActivo(this);
+                if (valores != null)
+                {
+                    Nombre = valores[0];
+                    Apellido = valores[1];
+                    Contrasegna = valores[3];
+                }
             }
         }
-        
-        public static bool Login (string correo, string contrasegna)
+        public Cliente(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-            bool b = Service.Login(correo, contrasegna);            
-            return b;
+            this.Nombre = Nombre;
+            this.Apellido = Apellido;
+            this.Correo = Correo;
+            this.Contrasegna = Contrasegna;
         }
-
+        public void Actualizar()
+        {
+            using (ServiceClient SCliente = new ServiceClient())
+            {
+                SCliente.ActualizarCustomer(this);
+            }
+        }
+        public static bool Login(string correo, string contrasegna)
+        {
+            using (ServiceClient SCliente = new ServiceClient())
+            {
+                return SCliente.Login(correo, contrasegna);
+            }
+        }
         public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-            try
+            using (ServiceClient SCliente = new ServiceClient())
             {
-                if (String.IsNullOrEmpty(Nombre) ||
-                    String.IsNullOrEmpty(Apellido) ||
-                    String.IsNullOrEmpty(Correo) ||
-                    String.IsNullOrEmpty(Contrasegna) )
-                    throw new ArgumentNullException();
+                if (String.IsNullOrEmpty(Nombre) || String.IsNullOrEmpty(Apellido) ||
+                    String.IsNullOrEmpty(Correo) || String.IsNullOrEmpty(Contrasegna))
+                    return false;
 
-                //if (DummyTest.Registrar(Nombre, Apellido, Correo, Contrasegna))                                    
-                //    return true;
-
-                Service.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
-                return true;
-            }
-            catch(Exception ex)
-            {
-                string Error = ex.Message;
-                return false;
+                Cliente c = new Cliente(Nombre, Apellido, Correo, Contrasegna);
+                return SCliente.AgregarCustomer(c);
             }
         }
 
@@ -123,7 +130,7 @@ namespace BuisenessLogic
         public void Remover()
         { }
 
-        
+
 
     }
 }

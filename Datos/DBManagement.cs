@@ -150,19 +150,26 @@ namespace Datos
 
         }
 
-        public static bool AddApp_Purchased(APP app, CUSTOMER customer)
+        public static bool AddApp_Purchased(string NombreApp, string Correo)
         {
             using (var dbContext = new LAUNCHEntities())
             {
+                var IdApp = (from a in dbContext.APPs
+                            where a.Name == NombreApp
+                            select a.ID_App).Single();
+                
+                var IdCustomer = (from c in dbContext.CUSTOMERs
+                            where c.Email == Correo
+                            select c.ID_Customer).Single();
+
                 var app_purchased = new APP_PURCHASED
                 {
-                    ID_App = app.ID_App,
-                    ID_Customer = customer.ID_Customer
+                    ID_App = IdApp,
+                    ID_Customer = IdCustomer
                 };
                 dbContext.APP_PURCHASED.Add(app_purchased);
                 var changesSaved = dbContext.SaveChanges();
                 return changesSaved >= 1;
-
             }
 
         }
@@ -180,15 +187,9 @@ namespace Datos
                                         where e.Email == _email && e.Password == _password
                                         select e).Any();
 
-                if (EncontrarUsuario == false)
-                {
-                    throw new System.MemberAccessException();
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                if (EncontrarUsuario)
+                    return true;                                
+                return true;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using BuisenessLogic;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Launch
     /// <summary>
     /// Interaction logic for Configuracion.xaml
     /// </summary>
-    public partial class Configuracion 
+    public partial class Configuracion
     {
         ModeloRegistro Mreg;
         int _errors = 0;
@@ -50,7 +51,8 @@ namespace Launch
 
         private void btn_actualizar_Click(object sender, RoutedEventArgs e)
         {
-            //update
+            Cliente c = new Cliente(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password);
+            c.Actualizar();
             this.Close();
         }
 

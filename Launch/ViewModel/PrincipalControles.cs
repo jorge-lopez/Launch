@@ -14,7 +14,7 @@ namespace Launch
 {
  class PrincipalControles : INotifyPropertyChanged
     {
-        private Cliente ClienteEnSesion;
+        private static Cliente ClienteEnSesion;
         private string _nombreCompleto;
         private string _correo;
         private IEnumerable _StackAppsSuscripcion;
@@ -139,7 +139,15 @@ namespace Launch
 
         static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MessageBox.Show("Instalar app ?");
+
+            Button btn = (Button)sender;
+            string s = btn.Name;
+            Aplicacion a = new Aplicacion(ClienteEnSesion.Correo, s);
+            a.Show();
+
+            //Window w = (Window)sender;
+            //w.Close();
+            //e.Handled = true;
         }
         
     }

@@ -35,16 +35,17 @@ namespace Launch
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            bool LoginExitoso = Cliente.Login(txtBox_correo.Text, pwdBox_contrasegna.Password);
-            if (LoginExitoso)
-            {
-                Principal p = new Principal(txtBox_correo.Text);
-                p.Show();
-                this.Close();
-            }
-            else
-                MessageBox.Show("Las credencials son incorrectas");
+              bool LoginExitoso = Cliente.Login(txtBox_correo.Text, pwdBox_contrasegna.Password);
+                if (LoginExitoso)
+                {
+                    Principal p = new Principal(txtBox_correo.Text);
+                    p.Show();
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Las credencials son incorrectas");
             
+           
         }
     }
 }
