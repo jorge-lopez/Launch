@@ -12,21 +12,21 @@ namespace Datos
         //Metodo que agrega un Customer a la base de datos
         public static bool AddCustomer(string _FirstName, string _LastName, string _Email, string _Password)
         {
-            using (var dbContext = new LAUNCHEntities())
+            try
             {
-                //verifica si ya existe un customer en la base de datos con ese email
-                var Existent = (from c in dbContext.CUSTOMERs
-                                where c.Email == _Email
-                                select c).Any();
-                //tira una excepcion si ya existe, y si no, agrega al customer a la base y lo guarda
-                if (Existent == true)
-                {
-                    throw new InvalidOperationException("Ya existe un usuario con ese correo. Escoge otro");
-                }
-                else
-                {
-                    try
+                    using (var dbContext = new LAUNCHEntities())
                     {
+                        dbContext.Database.Connection.Open();
+                        //verifica si ya existe un customer en la base de datos con ese email
+                        var Existent = (from c in dbContext.CUSTOMERs
+                                        where c.Email == _Email
+                                        select c).Any();
+                        //tira una excepcion si ya existe, y si no, agrega al customer a la base y lo guarda
+                        if (Existent == true)
+                        {
+                            throw new InvalidOperationException("Ya existe un usuario con ese correo. Escoge otro");
+                        }
+
                         var customer = new CUSTOMER
                         {
                             FirstName = _FirstName,
@@ -37,15 +37,16 @@ namespace Datos
                         dbContext.CUSTOMERs.Add(customer);
                         var changesSaved = dbContext.SaveChanges();
                         return changesSaved >= 1;
-                        
+
                     }
-                    catch(Exception ex)
+            }
+                    catch (Exception ex)
                     {
                         string error = ex.Message;
                         return false;
                     }
-                }
-            }
+                
+            
         }
 
         //Metodo que agrega un Developer a la base de datos
@@ -76,7 +77,7 @@ namespace Datos
                         var changesSaved = dbContext.SaveChanges();
                         return changesSaved >= 1;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         string error = ex.Message;
                         return false;
@@ -176,10 +177,10 @@ namespace Datos
             using (var dbContext = new LAUNCHEntities())
             {
                 var EncontrarUsuario = (from e in dbContext.CUSTOMERs
-                                      where e.Email== _email && e.Password==_password
-                                      select e).Any();
-               
-                if (EncontrarUsuario==false)
+                                        where e.Email == _email && e.Password == _password
+                                        select e).Any();
+
+                if (EncontrarUsuario == false)
                 {
                     throw new System.MemberAccessException();
                     return false;
@@ -229,7 +230,7 @@ namespace Datos
         //Da la informacion de la App solicitada
         public static APP getInfofromApp(string _name)
         {
-            using (var dbContext= new LAUNCHEntities())
+            using (var dbContext = new LAUNCHEntities())
             {
                 return dbContext.APPs.First(a => a.Name == _name);
             }
@@ -280,7 +281,7 @@ namespace Datos
         #region Update Methods
         public static bool updateCustomer(string _firstName, string _lastName, string _email, string _password)
         {
-            using (var dbContext= new LAUNCHEntities())
+            using (var dbContext = new LAUNCHEntities())
             {
                 var buscarCustomer = from c in dbContext.CUSTOMERs
                                      where c.Email == _email
