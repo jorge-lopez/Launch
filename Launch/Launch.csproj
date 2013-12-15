@@ -78,6 +78,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\AplicacionControles.cs" />
+    <Compile Include="ViewModel\PerfilDesarrolladorControles.cs" />
     <Compile Include="View\Aplicacion.xaml.cs">
       <DependentUpon>Aplicacion.xaml</DependentUpon>
     </Compile>
@@ -90,6 +91,9 @@
       <DependentUpon>Perfil.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\PerfilControles.cs" />
+    <Compile Include="View\PerfilDesarrollador.xaml.cs">
+      <DependentUpon>PerfilDesarrollador.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Principal.xaml.cs">
       <DependentUpon>Principal.xaml</DependentUpon>
     </Compile>
@@ -108,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Perfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PerfilDesarrollador.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,6 +203,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagenes\publishApp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

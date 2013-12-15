@@ -1,5 +1,6 @@
 ﻿using Buiseness_Logic;
 using BuisenessLogic;
+using Launch.View;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace Launch
                     {
                         ///Es desarrollador
                         Desarrollador d = new Desarrollador(txtBox_correo.Text);
-                        Principal p = new Principal(d);
+                        PerfilDesarrollador p = new PerfilDesarrollador(d);
                         p.Show();
                         this.Close();
                     }
