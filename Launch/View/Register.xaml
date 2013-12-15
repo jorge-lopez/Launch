@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:w="clr-namespace:Launch"
         Icon="/Launch;component/Imagenes/Icon.ico"
-        Title="Registrarse" Height="530.27" Width="324.642" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Registrarse" Height="530" Width="325" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,7 +13,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Orange.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
-               
+
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Margin" Value="0,2,40,2" />
@@ -34,7 +34,7 @@
                             </DockPanel>
                         </ControlTemplate>
                     </Setter.Value>
-                </Setter>              
+                </Setter>
             </Style>
             <Style TargetType="{x:Type PasswordBox}">
                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -61,7 +61,7 @@
 
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <!-- INICIA GRID-->
     <Grid Margin="0,0,0,-1">
         <Image HorizontalAlignment="Left" Height="122" Margin="98,0,0,0" VerticalAlignment="Top" Width="121" Source="/Launch;component/Imagenes/Launch.jpg" Stretch="Fill"/>
@@ -74,14 +74,14 @@
         <TextBox x:Name="txtBox_nombre" HorizontalAlignment="Left"  Height="23" Margin="153,200,0,0"  VerticalAlignment="Top" Width="145" BorderThickness="1" Background="{x:Null}" BorderBrush="#FF727272" TabIndex="0"  
                     Validation.Error="Validation_Error"
                     Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=Nombre,
-                    ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />                   
+                    ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
 
 
         <Label Name="lbl_apellido"  Content="Apellido:" HorizontalAlignment="Left" Margin="20,240,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtBox_apellido" HorizontalAlignment="Left" Height="23" Margin="153,240,0,0" VerticalAlignment="Top" Width="145" BorderThickness="1" Background="{x:Null}" BorderBrush="#FF727272" TabIndex="1" 
                     Validation.Error="Validation_Error"
                     Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=Apellido,
-                    ValidatesOnDataErrors=true, NotifyOnValidationError=true}" /> 
+                    ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
 
         <Label Name="lbl_correo"  Content="Correo:" HorizontalAlignment="Left" Margin="20,280,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtBox_correo" HorizontalAlignment="Left" Height="23" Margin="153,280,0,0" VerticalAlignment="Top" Width="145" BorderThickness="1" Background="{x:Null}" BorderBrush="#FF727272" TabIndex="2"
@@ -103,7 +103,7 @@
                     ValidatesOnDataErrors=true, NotifyOnValidationError=true}"/>
         <Label Name="lbl_verificaContrasegna_error"  Content="No coinciden las credenciales" HorizontalAlignment="Left" Margin="118,401,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.2,-0.462" Foreground="#FFDC5151" FontSize="14" Width="196" HorizontalContentAlignment="Center" Visibility="Hidden"/>
 
-        <Button Name="btn_registrar" Content="Registrarse" HorizontalAlignment="Left" Margin="188,456,0,0" VerticalAlignment="Top" Width="95" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Background="#FFD9792C" Foreground="White" IsEnabled="False" IsDefault="True" Click="btn_registrar_Click"/>        
+        <Button Name="btn_registrar" Content="Registrarse" HorizontalAlignment="Left" Margin="188,456,0,0" VerticalAlignment="Top" Width="95" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Background="#FFD9792C" Foreground="White" IsEnabled="False" IsDefault="True" Click="btn_registrar_Click"/>
         <Button Name="btn_regresar" Content="Cancelar" HorizontalAlignment="Left" Margin="39,456,0,0" VerticalAlignment="Top" Width="95" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Background="#FFD9792C" Foreground="White"  Click="btn_regresar_Click"/>
 
     </Grid>

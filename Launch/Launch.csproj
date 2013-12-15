@@ -78,6 +78,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\AplicacionControles.cs" />
+    <Compile Include="ViewModel\ModeloPublicarApp.cs" />
     <Compile Include="ViewModel\PerfilDesarrolladorControles.cs" />
     <Compile Include="View\Aplicacion.xaml.cs">
       <DependentUpon>Aplicacion.xaml</DependentUpon>
@@ -96,6 +97,9 @@
     </Compile>
     <Compile Include="View\Principal.xaml.cs">
       <DependentUpon>Principal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PublicarApp.xaml.cs">
+      <DependentUpon>PublicarApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -120,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Principal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PublicarApp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

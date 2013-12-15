@@ -65,5 +65,11 @@ namespace Launch.View
                 this.Close();
             }
         }
+
+        private void btn_publicarApp_Click(object sender, RoutedEventArgs e)
+        {
+            PublicarApp p = new PublicarApp(_usuario);
+            p.ShowDialog();
+        }
     }
 }

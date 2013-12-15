@@ -22,7 +22,6 @@ namespace Launch
     /// </summary>
     public partial class Configuracion
     {
-        ModeloRegistro Mreg;
         int _errors = 0;
         private IUsuario _cliente;
         public Configuracion(IUsuario Cliente)

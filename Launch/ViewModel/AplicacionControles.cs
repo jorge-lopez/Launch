@@ -53,7 +53,7 @@ namespace Launch
         {
             get
             {
-                return AplicacionEnVentana.NombreApp;
+                return AplicacionEnVentana.Nombre;
             }
             private set
             {
@@ -78,9 +78,9 @@ namespace Launch
             get
             {
                 return String.Format("{0}/{1}/{2}",
-                    AplicacionEnVentana.FechaPublica.Day,
-                    AplicacionEnVentana.FechaPublica.Month,
-                    AplicacionEnVentana.FechaPublica.Year);
+                    AplicacionEnVentana.FechaPublicada.Day,
+                    AplicacionEnVentana.FechaPublicada.Month,
+                    AplicacionEnVentana.FechaPublicada.Year);
             }
             private set
             {
