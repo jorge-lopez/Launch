@@ -187,9 +187,8 @@ namespace Datos
                                         where e.Email == _email && e.Password == _password
                                         select e).Any();
 
-                if (EncontrarUsuario)
-                    return true;                                
-                return true;
+                return EncontrarUsuario;
+                 
             }
         }
 

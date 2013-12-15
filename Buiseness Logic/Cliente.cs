@@ -17,6 +17,7 @@ namespace BuisenessLogic
         private string _apellido;
         private string _correo;
         private string _contrasegna;
+        
         public string Nombre
         {
             get
@@ -64,18 +65,18 @@ namespace BuisenessLogic
         }
         //List<Aplicaciones> appsInstaladas = new List<Aplicaciones>();
 
-
         public Cliente(string correo)
         {
             Correo = correo;
             using (ServiceClient SCliente = new ServiceClient())
             {
-                var valores = SCliente.ClienteActivo(this);
-                if (valores != null)
+                var c = SCliente.ClienteActivo(this.Correo);
+                
+                if (c!= null)
                 {
-                    Nombre = valores[0];
-                    Apellido = valores[1];
-                    Contrasegna = valores[3];
+                    this.Nombre = c[0];
+                    this.Apellido = c[1];
+                    this.Contrasegna = c[2];
                 }
             }
         }
@@ -90,7 +91,7 @@ namespace BuisenessLogic
         {
             using (ServiceClient SCliente = new ServiceClient())
             {
-                SCliente.ActualizarCustomer(this);
+                SCliente.ActualizarCustomer(Nombre, Apellido, Correo, Contrasegna);
             }
         }
         public static bool Login(string correo, string contrasegna)
@@ -109,7 +110,7 @@ namespace BuisenessLogic
                     return false;
 
                 Cliente c = new Cliente(Nombre, Apellido, Correo, Contrasegna);
-                return SCliente.AgregarCustomer(c);
+                return SCliente.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
             }
         }
 

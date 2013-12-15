@@ -17,13 +17,13 @@ namespace Services
     {
 
         [OperationContract]
-        bool AgregarCustomer(ICliente NuevoCliente);                
+        bool AgregarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna);                
         [OperationContract]
         bool Login(string Correo, string Contrasegna);
         [OperationContract]
-        string[] ClienteActivo(ICliente Cliente);
+        string[] ClienteActivo(string Correo);
         [OperationContract]
-        bool ActualizarCustomer(ICliente Cliente);
+        bool ActualizarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna);
         [OperationContract]
         bool AgregarMembership(ICliente Cliente);
         [OperationContract]

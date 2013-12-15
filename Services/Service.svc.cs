@@ -14,27 +14,24 @@ namespace Services
     //Dummy para Login!
     public class Service : IService
     {        
-        public bool AgregarCustomer(ICliente NuevoCliente)
+        public bool AgregarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-            return DBManagement.AddCustomer(NuevoCliente.Nombre,
-                    NuevoCliente.Apellido, NuevoCliente.Correo,
-                    NuevoCliente.Contrasegna);
+            return DBManagement.AddCustomer(Nombre, Apellido, Correo, Contrasegna);
         }       
         public bool Login(string Correo, string Contrasegna)
         {
             return DBManagement.Login(Correo, Contrasegna);
         }
-        public string[] ClienteActivo(ICliente Cliente)
+        public string[] ClienteActivo(string Correo)
         {
             try
             {
-                string[] elCliente = new string[4];
-                CUSTOMER c = new CUSTOMER();
-                c = DBManagement.getActiveCustomer(Cliente.Correo);
-                elCliente[0] = c.FirstName;
-                elCliente[1] = c.LastName;
-                elCliente[3] = c.Password;
-                return elCliente;
+                var c = DBManagement.getActiveCustomer(Correo);
+                string[] valores = new string[3];
+                valores[0] = c.FirstName;
+                valores[1] = c.LastName;
+                valores[2] = c.Password;
+                return valores;
             }
             catch (Exception ex)
             {
@@ -44,9 +41,9 @@ namespace Services
 
 
         }
-        public bool ActualizarCustomer(ICliente Cliente)
+        public bool ActualizarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
-            return DBManagement.updateCustomer(Cliente.Nombre, Cliente.Apellido, Cliente.Correo, Cliente.Contrasegna);
+            return DBManagement.updateCustomer(Nombre, Apellido, Correo, Contrasegna);
         }
         public bool AgregarMembership(ICliente Cliente)
         {

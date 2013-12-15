@@ -16,11 +16,10 @@ namespace Buiseness_Logic.LaunchServices {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarCustomer", ReplyAction="http://tempuri.org/IService/AgregarCustomerResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
-        bool AgregarCustomer(object NuevoCliente);
+        bool AgregarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarCustomer", ReplyAction="http://tempuri.org/IService/AgregarCustomerResponse")]
-        System.Threading.Tasks.Task<bool> AgregarCustomerAsync(object NuevoCliente);
+        System.Threading.Tasks.Task<bool> AgregarCustomerAsync(string Nombre, string Apellido, string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Login", ReplyAction="http://tempuri.org/IService/LoginResponse")]
         bool Login(string Correo, string Contrasegna);
@@ -29,18 +28,16 @@ namespace Buiseness_Logic.LaunchServices {
         System.Threading.Tasks.Task<bool> LoginAsync(string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ClienteActivo", ReplyAction="http://tempuri.org/IService/ClienteActivoResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
-        string[] ClienteActivo(object Cliente);
+        string[] ClienteActivo(string Correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ClienteActivo", ReplyAction="http://tempuri.org/IService/ClienteActivoResponse")]
-        System.Threading.Tasks.Task<string[]> ClienteActivoAsync(object Cliente);
+        System.Threading.Tasks.Task<string[]> ClienteActivoAsync(string Correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ActualizarCustomer", ReplyAction="http://tempuri.org/IService/ActualizarCustomerResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
-        bool ActualizarCustomer(object Cliente);
+        bool ActualizarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ActualizarCustomer", ReplyAction="http://tempuri.org/IService/ActualizarCustomerResponse")]
-        System.Threading.Tasks.Task<bool> ActualizarCustomerAsync(object Cliente);
+        System.Threading.Tasks.Task<bool> ActualizarCustomerAsync(string Nombre, string Apellido, string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarMembership", ReplyAction="http://tempuri.org/IService/AgregarMembershipResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
@@ -84,12 +81,12 @@ namespace Buiseness_Logic.LaunchServices {
                 base(binding, remoteAddress) {
         }
         
-        public bool AgregarCustomer(object NuevoCliente) {
-            return base.Channel.AgregarCustomer(NuevoCliente);
+        public bool AgregarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
         }
         
-        public System.Threading.Tasks.Task<bool> AgregarCustomerAsync(object NuevoCliente) {
-            return base.Channel.AgregarCustomerAsync(NuevoCliente);
+        public System.Threading.Tasks.Task<bool> AgregarCustomerAsync(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.AgregarCustomerAsync(Nombre, Apellido, Correo, Contrasegna);
         }
         
         public bool Login(string Correo, string Contrasegna) {
@@ -100,20 +97,20 @@ namespace Buiseness_Logic.LaunchServices {
             return base.Channel.LoginAsync(Correo, Contrasegna);
         }
         
-        public string[] ClienteActivo(object Cliente) {
-            return base.Channel.ClienteActivo(Cliente);
+        public string[] ClienteActivo(string Correo) {
+            return base.Channel.ClienteActivo(Correo);
         }
         
-        public System.Threading.Tasks.Task<string[]> ClienteActivoAsync(object Cliente) {
-            return base.Channel.ClienteActivoAsync(Cliente);
+        public System.Threading.Tasks.Task<string[]> ClienteActivoAsync(string Correo) {
+            return base.Channel.ClienteActivoAsync(Correo);
         }
         
-        public bool ActualizarCustomer(object Cliente) {
-            return base.Channel.ActualizarCustomer(Cliente);
+        public bool ActualizarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.ActualizarCustomer(Nombre, Apellido, Correo, Contrasegna);
         }
         
-        public System.Threading.Tasks.Task<bool> ActualizarCustomerAsync(object Cliente) {
-            return base.Channel.ActualizarCustomerAsync(Cliente);
+        public System.Threading.Tasks.Task<bool> ActualizarCustomerAsync(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.ActualizarCustomerAsync(Nombre, Apellido, Correo, Contrasegna);
         }
         
         public bool AgregarMembership(object Cliente) {
