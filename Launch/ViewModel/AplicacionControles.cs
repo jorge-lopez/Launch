@@ -1,4 +1,5 @@
 ﻿using BuisenessLogic;
+using Commons;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Launch
 {
     class AplicacionControles: INotifyPropertyChanged
     {
-        private Cliente ClienteEnSesion;
+        private IUsuario UsuarioEnSesion;
         private Aplicaciones AplicacionEnVentana;
         private string _nombreCompleto;
         private string _correo;
@@ -40,7 +41,7 @@ namespace Launch
         {
             get
             {
-                return ClienteEnSesion.Correo;
+                return UsuarioEnSesion.Correo;
             }
             private set
             {
@@ -123,11 +124,11 @@ namespace Launch
         }
 
         
-        public AplicacionControles(string Correo, string NombreApp)
+        public AplicacionControles(IUsuario Usuario, string NombreApp)
         {
             //Usuario en Sesion
-            ClienteEnSesion = new Cliente(Correo);
-            NombreCompleto = ClienteEnSesion.Nombre + " " + ClienteEnSesion.Apellido;
+            UsuarioEnSesion = Usuario;
+            NombreCompleto = UsuarioEnSesion.Nombre + " " + UsuarioEnSesion.Apellido;
 
             //Aplicacion en cuestion
             AplicacionEnVentana = new Aplicaciones(NombreApp);            

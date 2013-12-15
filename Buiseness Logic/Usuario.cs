@@ -10,7 +10,7 @@ namespace Buiseness_Logic
 {
     public abstract class Usuario
     {
-        public static bool Login(string correo, string contrasegna)
+        public static bool[] Login(string correo, string contrasegna)
         {
             using (ServiceClient SCliente = new ServiceClient())
             {

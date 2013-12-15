@@ -1,4 +1,5 @@
 ﻿using BuisenessLogic;
+using Commons;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,12 @@ namespace Launch
     {
         ModeloRegistro Mreg;
         int _errors = 0;
-        public Configuracion(string correo)
+        private IUsuario _cliente;
+        public Configuracion(IUsuario Cliente)
         {
             InitializeComponent();
-            Mreg = new ModeloRegistro(correo);
-            DataContext = Mreg;
+            _cliente = Cliente;
+            DataContext = new ModeloRegistro(Cliente); 
         }
         private void pwdBox_verificaContrasegna_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -51,8 +53,7 @@ namespace Launch
 
         private void btn_actualizar_Click(object sender, RoutedEventArgs e)
         {
-            Cliente c = new Cliente(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password);
-            c.Actualizar();
+            _cliente.Actualizar(txtBox_nombre.Text, txtBox_apellido.Text, pwdBox_contrasegna.Password);
             this.Close();
         }
 

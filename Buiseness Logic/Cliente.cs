@@ -11,7 +11,7 @@ using Buiseness_Logic.LaunchServices;
 
 namespace BuisenessLogic
 {
-    public class Cliente : INotifyPropertyChanged, ICliente
+    public class Cliente : INotifyPropertyChanged, IUsuario
     {
         private string _nombre;
         private string _apellido;
@@ -87,32 +87,14 @@ namespace BuisenessLogic
             this.Correo = Correo;
             this.Contrasegna = Contrasegna;
         }
-        public void Actualizar()
+        public void Actualizar(string Nombre, string Apellido, string Contrasegna)
         {
             using (ServiceClient SCliente = new ServiceClient())
             {
-                SCliente.ActualizarCustomer(Nombre, Apellido, Correo, Contrasegna);
+                SCliente.ActualizarCustomer(Nombre, Apellido, this.Correo, Contrasegna);
             }
         }
-        //public static bool Login(string correo, string contrasegna)
-        //{
-        //    using (ServiceClient SCliente = new ServiceClient())
-        //    {
-        //        return SCliente.Login(correo, contrasegna);
-        //    }
-        //}
-        //public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
-        //{
-        //    using (ServiceClient SCliente = new ServiceClient())
-        //    {
-        //        if (String.IsNullOrEmpty(Nombre) || String.IsNullOrEmpty(Apellido) ||
-        //            String.IsNullOrEmpty(Correo) || String.IsNullOrEmpty(Contrasegna))
-        //            return false;
 
-        //        Cliente c = new Cliente(Nombre, Apellido, Correo, Contrasegna);
-        //        return SCliente.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
-        //    }
-        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnNotifyPropertyChanged(string propiedad)

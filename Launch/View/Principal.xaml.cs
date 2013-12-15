@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using Commons;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,14 @@ using System.Windows.Shapes;
 
 namespace Launch
 {
-    /// <summary>
-    /// Interaction logic for Principal.xaml
-    /// </summary>
-    public partial class Principal //: Window
+    public partial class Principal
     {
-        private string _correo;
-        public Principal(string Correo)
+        private IUsuario _cliente;
+        public Principal(IUsuario Cliente)
         {
             InitializeComponent();
-            _correo = Correo;
-            this.DataContext = new PrincipalControles(Correo);
+            _cliente = Cliente;
+            this.DataContext = new PrincipalControles(Cliente);
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -37,7 +35,7 @@ namespace Launch
 
         private void btn_Nombre_Click(object sender, RoutedEventArgs e)
         {
-            Perfil p = new Perfil(_correo);
+            Perfil p = new Perfil(_cliente);
             p.Show();
             this.Close();
 
@@ -50,7 +48,7 @@ namespace Launch
 
         private void btn_principal_Click(object sender, RoutedEventArgs e)
         {
-            Principal p = new Principal(_correo);
+            Principal p = new Principal(_cliente);
             p.Show();
             this.Close();
         }

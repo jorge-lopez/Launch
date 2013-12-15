@@ -179,16 +179,23 @@ namespace Datos
         #region Read Methods
 
         //Solo funciona en customers
-        public static bool Login(string _email, string _password)
+        public static bool[] Login(string _email, string _password)
         {
             using (var dbContext = new LAUNCHEntities())
             {
-                var EncontrarUsuario = (from e in dbContext.CUSTOMERs
+                bool[] Resultados = new bool[2];                
+                var EncontrarCliente = (from e in dbContext.CUSTOMERs
                                         where e.Email == _email && e.Password == _password
                                         select e).Any();
 
-                return EncontrarUsuario;
-                 
+                var EncontrarDeveloper= (from e in dbContext.DEVELOPERs
+                                        where e.Email == _email && e.Password == _password
+                                        select e).Any();
+                
+                Resultados[0] = EncontrarCliente || EncontrarDeveloper;
+                if(Resultados[0])
+                    Resultados[1] = EncontrarDeveloper;
+                return Resultados;                 
             }
         }
 
@@ -284,6 +291,24 @@ namespace Datos
             using (var dbContext = new LAUNCHEntities())
             {
                 var buscarCustomer = from c in dbContext.CUSTOMERs
+                                     where c.Email == _email
+                                     select c;
+                foreach (var c in buscarCustomer)
+                {
+                    c.FirstName = _firstName;
+                    c.LastName = _lastName;
+                    c.Email = _email;
+                    c.Password = _password;
+                }
+                var changesSaved = dbContext.SaveChanges();
+                return changesSaved >= 1;
+            }
+        }
+        public static bool updateDeveloper(string _firstName, string _lastName, string _email, string _password)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                var buscarCustomer = from c in dbContext.DEVELOPERs
                                      where c.Email == _email
                                      select c;
                 foreach (var c in buscarCustomer)

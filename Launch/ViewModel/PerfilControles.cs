@@ -1,4 +1,5 @@
 ﻿using BuisenessLogic;
+using Commons;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Launch
 {
     class PerfilControles: INotifyPropertyChanged
     {
-        private static Cliente ClienteEnSesion;
+        private static IUsuario UsuarioEnSesion;
         private string _nombreCompleto;
         private string _correo;
         private IEnumerable _StackAppsCompradas;
@@ -35,7 +36,7 @@ namespace Launch
         {
             get
             {
-                return ClienteEnSesion.Correo;
+                return UsuarioEnSesion.Correo;
             }
             private set
             {
@@ -54,10 +55,10 @@ namespace Launch
         }
 
         
-        public PerfilControles(string correo)
+        public PerfilControles(IUsuario Cliente)
         {
-            ClienteEnSesion = new Cliente(correo);
-            _nombreCompleto = ClienteEnSesion.Nombre + " " + ClienteEnSesion.Apellido;
+            UsuarioEnSesion = Cliente;
+            _nombreCompleto = UsuarioEnSesion.Nombre + " " + UsuarioEnSesion.Apellido;
             StackAppsCompradas = new List<StackPanel>();
             Generar();
         }
@@ -128,7 +129,7 @@ namespace Launch
             
             Button btn = (Button)sender;            
             string s = btn.Name;            
-            Aplicacion a = new Aplicacion(ClienteEnSesion.Correo, s);
+            Aplicacion a = new Aplicacion(UsuarioEnSesion, s);
             a.Show();
 
             //Window w = (Window)sender;

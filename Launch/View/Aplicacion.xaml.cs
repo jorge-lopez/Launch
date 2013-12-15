@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using Commons;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,24 +21,24 @@ namespace Launch
     /// </summary>
     public partial class Aplicacion 
     {
-        string _correo;
-        public Aplicacion(string Correo, string NombreApp)
+        private IUsuario _usuario;
+        public Aplicacion(IUsuario Usuario, string NombreApp)
         {
             InitializeComponent();
-            _correo = Correo;
-            this.DataContext = new AplicacionControles(Correo, NombreApp);
+            _usuario = Usuario;
+            this.DataContext = new AplicacionControles(Usuario, NombreApp);
         }
 
         private void btn_Nombre_Click(object sender, RoutedEventArgs e)
         {
-            Configuracion c = new Configuracion(_correo);
+            Configuracion c = new Configuracion(_usuario);
             c.ShowDialog();
         }
 
 
         private void btn_principal_Click(object sender, RoutedEventArgs e)
         {
-            Principal p = new Principal(_correo);
+            Principal p = new Principal(_usuario);
             p.Show();
             this.Close();
         }

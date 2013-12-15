@@ -18,7 +18,14 @@ namespace Services
         {
             return DBManagement.AddCustomer(Nombre, Apellido, Correo, Contrasegna);
         }       
-        public bool Login(string Correo, string Contrasegna)
+        /// <summary>
+        /// Regresa dos bools, siendo el primero si precedio o no el login
+        /// El segundo nso indica si es un Cliente, de ser falso seria un Developer
+        /// </summary>
+        /// <param name="Correo"></param>
+        /// <param name="Contrasegna"></param>
+        /// <returns>bool[0] = Procedio, bool[1]= IsCliente</returns>
+        public bool[] Login(string Correo, string Contrasegna)
         {
             return DBManagement.Login(Correo, Contrasegna);
         }
@@ -38,8 +45,6 @@ namespace Services
                 string error = ex.Message;
                 return null;
             }
-
-
         }
         public bool ActualizarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
@@ -62,6 +67,28 @@ namespace Services
         public bool AgregarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
             return DBManagement.AddDeveloper(Nombre, Apellido, Correo, Contrasegna);
+        }
+
+        public bool ActualizarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna)
+        {
+            return DBManagement.updateDeveloper(Nombre, Apellido, Correo, Contrasegna);
+        }
+        public string[] DesarrolladorActivo(string Correo)
+        {
+            try
+            {
+                var c = DBManagement.getActiveDeveloper(Correo);
+                string[] valores = new string[3];
+                valores[0] = c.FirstName;
+                valores[1] = c.LastName;
+                valores[2] = c.Password;
+                return valores;
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                return null;
+            }
         }
         //public bool AgregarApp(string _devEmail, string _name, string _description, string _category, byte[] _photo)
         //{

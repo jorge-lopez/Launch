@@ -49,6 +49,18 @@
   <wsdl:message name="IService_AgregarDeveloper_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarDeveloperResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_ActualizarDeveloper_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarDeveloper" />
+  </wsdl:message>
+  <wsdl:message name="IService_ActualizarDeveloper_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarDeveloperResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_DesarrolladorActivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:DesarrolladorActivo" />
+  </wsdl:message>
+  <wsdl:message name="IService_DesarrolladorActivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DesarrolladorActivoResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_ObtenerApps_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerApps" />
   </wsdl:message>
@@ -83,6 +95,14 @@
     <wsdl:operation name="AgregarDeveloper">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarDeveloper" message="tns:IService_AgregarDeveloper_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/AgregarDeveloperResponse" message="tns:IService_AgregarDeveloper_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarDeveloper">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ActualizarDeveloper" message="tns:IService_ActualizarDeveloper_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ActualizarDeveloperResponse" message="tns:IService_ActualizarDeveloper_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DesarrolladorActivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/DesarrolladorActivo" message="tns:IService_DesarrolladorActivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/DesarrolladorActivoResponse" message="tns:IService_DesarrolladorActivo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerApps">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerApps" message="tns:IService_ObtenerApps_InputMessage" />
@@ -147,6 +167,24 @@
     </wsdl:operation>
     <wsdl:operation name="AgregarDeveloper">
       <soap:operation soapAction="http://tempuri.org/IService/AgregarDeveloper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarDeveloper">
+      <soap:operation soapAction="http://tempuri.org/IService/ActualizarDeveloper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DesarrolladorActivo">
+      <soap:operation soapAction="http://tempuri.org/IService/DesarrolladorActivo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

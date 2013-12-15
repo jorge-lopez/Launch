@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using Commons;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,12 @@ namespace Launch
     /// </summary>
     public partial class Perfil
     {
-        string _correo;
-        public Perfil(string Correo)
+        private IUsuario _cliente;
+        public Perfil(IUsuario Cliente)
         {
-            InitializeComponent(); 
-            _correo = Correo;
-            this.DataContext = new PerfilControles(Correo);
+            InitializeComponent();
+            _cliente = Cliente;
+            this.DataContext = new PerfilControles(Cliente);
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -37,14 +38,14 @@ namespace Launch
 
         private void btn_Nombre_Click(object sender, RoutedEventArgs e)
         {
-            Configuracion c = new Configuracion(_correo);
+            Configuracion c = new Configuracion(_cliente);
             c.ShowDialog();
         }
 
 
         private void btn_principal_Click(object sender, RoutedEventArgs e)
         {
-            Principal p = new Principal(_correo);
+            Principal p = new Principal(_cliente);
             p.Show();
             this.Close();
         }

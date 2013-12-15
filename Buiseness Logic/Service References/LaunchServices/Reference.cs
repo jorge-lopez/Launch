@@ -22,10 +22,10 @@ namespace Buiseness_Logic.LaunchServices {
         System.Threading.Tasks.Task<bool> AgregarCustomerAsync(string Nombre, string Apellido, string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Login", ReplyAction="http://tempuri.org/IService/LoginResponse")]
-        bool Login(string Correo, string Contrasegna);
+        bool[] Login(string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Login", ReplyAction="http://tempuri.org/IService/LoginResponse")]
-        System.Threading.Tasks.Task<bool> LoginAsync(string Correo, string Contrasegna);
+        System.Threading.Tasks.Task<bool[]> LoginAsync(string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ClienteActivo", ReplyAction="http://tempuri.org/IService/ClienteActivoResponse")]
         string[] ClienteActivo(string Correo);
@@ -56,6 +56,18 @@ namespace Buiseness_Logic.LaunchServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarDeveloper", ReplyAction="http://tempuri.org/IService/AgregarDeveloperResponse")]
         System.Threading.Tasks.Task<bool> AgregarDeveloperAsync(string Nombre, string Apellido, string Correo, string Contrasegna);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ActualizarDeveloper", ReplyAction="http://tempuri.org/IService/ActualizarDeveloperResponse")]
+        bool ActualizarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ActualizarDeveloper", ReplyAction="http://tempuri.org/IService/ActualizarDeveloperResponse")]
+        System.Threading.Tasks.Task<bool> ActualizarDeveloperAsync(string Nombre, string Apellido, string Correo, string Contrasegna);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DesarrolladorActivo", ReplyAction="http://tempuri.org/IService/DesarrolladorActivoResponse")]
+        string[] DesarrolladorActivo(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DesarrolladorActivo", ReplyAction="http://tempuri.org/IService/DesarrolladorActivoResponse")]
+        System.Threading.Tasks.Task<string[]> DesarrolladorActivoAsync(string Correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerApps", ReplyAction="http://tempuri.org/IService/ObtenerAppsResponse")]
         string[][] ObtenerApps(string Correo);
@@ -99,11 +111,11 @@ namespace Buiseness_Logic.LaunchServices {
             return base.Channel.AgregarCustomerAsync(Nombre, Apellido, Correo, Contrasegna);
         }
         
-        public bool Login(string Correo, string Contrasegna) {
+        public bool[] Login(string Correo, string Contrasegna) {
             return base.Channel.Login(Correo, Contrasegna);
         }
         
-        public System.Threading.Tasks.Task<bool> LoginAsync(string Correo, string Contrasegna) {
+        public System.Threading.Tasks.Task<bool[]> LoginAsync(string Correo, string Contrasegna) {
             return base.Channel.LoginAsync(Correo, Contrasegna);
         }
         
@@ -145,6 +157,22 @@ namespace Buiseness_Logic.LaunchServices {
         
         public System.Threading.Tasks.Task<bool> AgregarDeveloperAsync(string Nombre, string Apellido, string Correo, string Contrasegna) {
             return base.Channel.AgregarDeveloperAsync(Nombre, Apellido, Correo, Contrasegna);
+        }
+        
+        public bool ActualizarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.ActualizarDeveloper(Nombre, Apellido, Correo, Contrasegna);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ActualizarDeveloperAsync(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.ActualizarDeveloperAsync(Nombre, Apellido, Correo, Contrasegna);
+        }
+        
+        public string[] DesarrolladorActivo(string Correo) {
+            return base.Channel.DesarrolladorActivo(Correo);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> DesarrolladorActivoAsync(string Correo) {
+            return base.Channel.DesarrolladorActivoAsync(Correo);
         }
         
         public string[][] ObtenerApps(string Correo) {

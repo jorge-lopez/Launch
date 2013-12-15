@@ -8,7 +8,7 @@ using System.Web;
 namespace Services
 {
     [DataContract]
-    public class ServiceCliente : ICliente
+    public class ServiceCliente// : IUsuario
     {
         [DataMember]
         public string Nombre { get; private set; }
@@ -42,5 +42,7 @@ namespace Services
             this.Correo = Correo;
             this.Contrasegna = Contrasegna;
         }
+
+        
     }
 }

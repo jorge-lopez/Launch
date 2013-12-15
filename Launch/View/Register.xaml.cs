@@ -26,8 +26,7 @@ namespace Launch
         {
             InitializeComponent();
             rdoBtn_usuario.IsChecked = true;
-            Mreg = new ModeloRegistro();
-            DataContext = Mreg;
+            DataContext = new ModeloRegistro();
         }
 
         private void rdoBtn_usuario_Checked(object sender, RoutedEventArgs e)

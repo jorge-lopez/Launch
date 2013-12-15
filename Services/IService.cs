@@ -19,7 +19,7 @@ namespace Services
         [OperationContract]
         bool AgregarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna);                
         [OperationContract]
-        bool Login(string Correo, string Contrasegna);
+        bool[] Login(string Correo, string Contrasegna);
         [OperationContract]
         string[] ClienteActivo(string Correo);
         [OperationContract]
@@ -32,6 +32,10 @@ namespace Services
         //Metodos Por usarse
         [OperationContract]
         bool AgregarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna);
+        [OperationContract]
+        bool ActualizarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna);
+        [OperationContract]
+        string[] DesarrolladorActivo(string Correo);
         //[OperationContract]
         //bool AgregarApp(DEVELOPER developer, string _name, string _description, string _category, Byte[] _photo);
         //[OperationContract]

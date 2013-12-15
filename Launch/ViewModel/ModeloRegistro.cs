@@ -1,4 +1,5 @@
 ﻿using BuisenessLogic;
+using Commons;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,13 +20,12 @@ namespace Launch
         public string Verifica { get; set; }
 
         public ModeloRegistro() { }
-        public ModeloRegistro(string correo)
+        public ModeloRegistro(IUsuario Usuario)
         {
-            Cliente c = new Cliente(correo);
-            Nombre = c.Nombre;
-            Apellido = c.Apellido;
-            Correo = c.Correo;
-            Contrasegna = c.Contrasegna;
+            Nombre = Usuario.Nombre;
+            Apellido = Usuario.Apellido;
+            Correo = Usuario.Correo;
+            Contrasegna = Usuario.Contrasegna;
             Verifica = Contrasegna;
         }
         public string Error
