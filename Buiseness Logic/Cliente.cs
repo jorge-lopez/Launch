@@ -94,25 +94,25 @@ namespace BuisenessLogic
                 SCliente.ActualizarCustomer(Nombre, Apellido, Correo, Contrasegna);
             }
         }
-        public static bool Login(string correo, string contrasegna)
-        {
-            using (ServiceClient SCliente = new ServiceClient())
-            {
-                return SCliente.Login(correo, contrasegna);
-            }
-        }
-        public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
-        {
-            using (ServiceClient SCliente = new ServiceClient())
-            {
-                if (String.IsNullOrEmpty(Nombre) || String.IsNullOrEmpty(Apellido) ||
-                    String.IsNullOrEmpty(Correo) || String.IsNullOrEmpty(Contrasegna))
-                    return false;
+        //public static bool Login(string correo, string contrasegna)
+        //{
+        //    using (ServiceClient SCliente = new ServiceClient())
+        //    {
+        //        return SCliente.Login(correo, contrasegna);
+        //    }
+        //}
+        //public static bool Registrar(string Nombre, string Apellido, string Correo, string Contrasegna)
+        //{
+        //    using (ServiceClient SCliente = new ServiceClient())
+        //    {
+        //        if (String.IsNullOrEmpty(Nombre) || String.IsNullOrEmpty(Apellido) ||
+        //            String.IsNullOrEmpty(Correo) || String.IsNullOrEmpty(Contrasegna))
+        //            return false;
 
-                Cliente c = new Cliente(Nombre, Apellido, Correo, Contrasegna);
-                return SCliente.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
-            }
-        }
+        //        Cliente c = new Cliente(Nombre, Apellido, Correo, Contrasegna);
+        //        return SCliente.AgregarCustomer(Nombre, Apellido, Correo, Contrasegna);
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnNotifyPropertyChanged(string propiedad)

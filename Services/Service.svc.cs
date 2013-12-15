@@ -45,16 +45,24 @@ namespace Services
         {
             return DBManagement.updateCustomer(Nombre, Apellido, Correo, Contrasegna);
         }
-        public bool AgregarMembership(ICliente Cliente)
+        public bool AgregarMembership(string Correo)
         {
             //Este metodo deberia requerir un Cliente a quien agregarle la Membresia 
             return DBManagement.AddMembership();
         }
-        public bool AgregarAppPurchased(string NombreApp, ICliente Cliente)
+        public bool AgregarAppPurchased(string NombreApp, string Correo)
         {
-            return DBManagement.AddApp_Purchased(NombreApp, Cliente.Correo);
+            return DBManagement.AddApp_Purchased(NombreApp, Correo);
+        }
+        public List<List<string>> ObtenerApps(string Correo)
+        {
+            return null;
         }
 
+        public bool AgregarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna)
+        {
+            return DBManagement.AddDeveloper(Nombre, Apellido, Correo, Contrasegna);
+        }
         //public bool AgregarApp(string _devEmail, string _name, string _description, string _category, byte[] _photo)
         //{
         //    DEVELOPER dev = new DEVELOPER();

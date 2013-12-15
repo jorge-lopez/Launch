@@ -14,12 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BuisenessLogic;
 using System.ComponentModel;
+using Buiseness_Logic;
 
 namespace Launch
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Register
     {
         ModeloRegistro Mreg;
@@ -58,22 +56,23 @@ namespace Launch
 
             if ((bool)rdoBtn_usuario.IsChecked)
             {
-                if (Cliente.Registrar(txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
+                if (Usuario.Registrar(true, txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
                 {
                     MessageBox.Show("Cliente Añadido");
                     this.Close();
                 }
-                else
-                {
+                else                
                     MessageBox.Show("Error al registrar usuario");
-                }
-                
             }
             else
             {
-                //Make a Developer and send it to the service
-                MessageBox.Show("Desarrollador Añadido");
-                this.Close();
+                if (Usuario.Registrar(false, txtBox_nombre.Text, txtBox_apellido.Text, txtBox_correo.Text, pwdBox_contrasegna.Password))
+                {
+                    MessageBox.Show("Desarrollador Añadido");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Error al registrar usuario");               
             }
         }
         private void Validation_Error(object sender, ValidationErrorEventArgs e)

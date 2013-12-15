@@ -1,4 +1,5 @@
-﻿using BuisenessLogic;
+﻿using Buiseness_Logic;
+using BuisenessLogic;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace Launch
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-              bool LoginExitoso = Cliente.Login(txtBox_correo.Text, pwdBox_contrasegna.Password);
+              bool LoginExitoso = Usuario.Login(txtBox_correo.Text, pwdBox_contrasegna.Password);
                 if (LoginExitoso)
                 {
                     Principal p = new Principal(txtBox_correo.Text);

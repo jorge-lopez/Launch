@@ -25,20 +25,20 @@ namespace Services
         [OperationContract]
         bool ActualizarCustomer(string Nombre, string Apellido, string Correo, string Contrasegna);
         [OperationContract]
-        bool AgregarMembership(ICliente Cliente);
+        bool AgregarMembership(string Correo);
         [OperationContract]
-        bool AgregarAppPurchased(string NombreApp, ICliente customer);
+        bool AgregarAppPurchased(string NombreApp, string Correo);
         
         //Metodos Por usarse
-        //[OperationContract]
-        //bool AgregarDeveloper(string _FirstName, string _LastName, string _email, string _password);
+        [OperationContract]
+        bool AgregarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna);
         //[OperationContract]
         //bool AgregarApp(DEVELOPER developer, string _name, string _description, string _category, Byte[] _photo);
         //[OperationContract]
         //bool AgregarComment(CUSTOMER customer, APP app, string _content);
 
-        //[OperationContract]
-        //List<APP> ObtenerApps();
+        [OperationContract]
+        List<List<string>> ObtenerApps(string Correo);
 
         //[OperationContract]
         //List<DEVELOPER> ObtenerDevelopers();

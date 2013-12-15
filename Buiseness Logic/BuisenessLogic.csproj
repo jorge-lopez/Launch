@@ -44,12 +44,14 @@
     <Compile Include="Aplicaciones.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Comentarios.cs" />
+    <Compile Include="Desarrollador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\LaunchServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -40,18 +40,28 @@ namespace Buiseness_Logic.LaunchServices {
         System.Threading.Tasks.Task<bool> ActualizarCustomerAsync(string Nombre, string Apellido, string Correo, string Contrasegna);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarMembership", ReplyAction="http://tempuri.org/IService/AgregarMembershipResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
-        bool AgregarMembership(object Cliente);
+        bool AgregarMembership(string Correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarMembership", ReplyAction="http://tempuri.org/IService/AgregarMembershipResponse")]
-        System.Threading.Tasks.Task<bool> AgregarMembershipAsync(object Cliente);
+        System.Threading.Tasks.Task<bool> AgregarMembershipAsync(string Correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarAppPurchased", ReplyAction="http://tempuri.org/IService/AgregarAppPurchasedResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
-        bool AgregarAppPurchased(string NombreApp, object customer);
+        bool AgregarAppPurchased(string NombreApp, string Correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarAppPurchased", ReplyAction="http://tempuri.org/IService/AgregarAppPurchasedResponse")]
-        System.Threading.Tasks.Task<bool> AgregarAppPurchasedAsync(string NombreApp, object customer);
+        System.Threading.Tasks.Task<bool> AgregarAppPurchasedAsync(string NombreApp, string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarDeveloper", ReplyAction="http://tempuri.org/IService/AgregarDeveloperResponse")]
+        bool AgregarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarDeveloper", ReplyAction="http://tempuri.org/IService/AgregarDeveloperResponse")]
+        System.Threading.Tasks.Task<bool> AgregarDeveloperAsync(string Nombre, string Apellido, string Correo, string Contrasegna);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerApps", ReplyAction="http://tempuri.org/IService/ObtenerAppsResponse")]
+        string[][] ObtenerApps(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerApps", ReplyAction="http://tempuri.org/IService/ObtenerAppsResponse")]
+        System.Threading.Tasks.Task<string[][]> ObtenerAppsAsync(string Correo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -113,20 +123,36 @@ namespace Buiseness_Logic.LaunchServices {
             return base.Channel.ActualizarCustomerAsync(Nombre, Apellido, Correo, Contrasegna);
         }
         
-        public bool AgregarMembership(object Cliente) {
-            return base.Channel.AgregarMembership(Cliente);
+        public bool AgregarMembership(string Correo) {
+            return base.Channel.AgregarMembership(Correo);
         }
         
-        public System.Threading.Tasks.Task<bool> AgregarMembershipAsync(object Cliente) {
-            return base.Channel.AgregarMembershipAsync(Cliente);
+        public System.Threading.Tasks.Task<bool> AgregarMembershipAsync(string Correo) {
+            return base.Channel.AgregarMembershipAsync(Correo);
         }
         
-        public bool AgregarAppPurchased(string NombreApp, object customer) {
-            return base.Channel.AgregarAppPurchased(NombreApp, customer);
+        public bool AgregarAppPurchased(string NombreApp, string Correo) {
+            return base.Channel.AgregarAppPurchased(NombreApp, Correo);
         }
         
-        public System.Threading.Tasks.Task<bool> AgregarAppPurchasedAsync(string NombreApp, object customer) {
-            return base.Channel.AgregarAppPurchasedAsync(NombreApp, customer);
+        public System.Threading.Tasks.Task<bool> AgregarAppPurchasedAsync(string NombreApp, string Correo) {
+            return base.Channel.AgregarAppPurchasedAsync(NombreApp, Correo);
+        }
+        
+        public bool AgregarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.AgregarDeveloper(Nombre, Apellido, Correo, Contrasegna);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AgregarDeveloperAsync(string Nombre, string Apellido, string Correo, string Contrasegna) {
+            return base.Channel.AgregarDeveloperAsync(Nombre, Apellido, Correo, Contrasegna);
+        }
+        
+        public string[][] ObtenerApps(string Correo) {
+            return base.Channel.ObtenerApps(Correo);
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> ObtenerAppsAsync(string Correo) {
+            return base.Channel.ObtenerAppsAsync(Correo);
         }
     }
 }

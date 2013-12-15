@@ -67,7 +67,7 @@
   <xs:element name="AgregarMembership">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Cliente" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -82,7 +82,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="NombreApp" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="customer" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -90,6 +90,37 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="AgregarAppPurchasedResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarDeveloper">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Apellido" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Contrasegna" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarDeveloperResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AgregarDeveloperResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerApps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAppsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerAppsResult" nillable="true" type="q2:ArrayOfArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
