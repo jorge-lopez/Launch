@@ -59,10 +59,7 @@ namespace Services
         {
             return DBManagement.AddApp_Purchased(NombreApp, Correo);
         }
-        public List<List<string>> ObtenerApps(string Correo)
-        {
-            return null;
-        }
+        
 
         public bool AgregarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna)
         {
@@ -90,12 +87,26 @@ namespace Services
                 return null;
             }
         }
-        //public bool AgregarApp(string _devEmail, string _name, string _description, string _category, byte[] _photo)
-        //{
-        //    DEVELOPER dev = new DEVELOPER();
-        //    //dev.Email=.First(a => a.Name == _name);
-        //    return DBManagement.AddApp(dev, _name, _description, _category, _photo);
-        //}
+        public bool AgregarApp(string _devEmail, string _name, string _description, string _category, byte[] _photo)
+        {
+            return DBManagement.AddApp(_devEmail, _name, _description, _category, _photo);
+        }
+        public List<List<string>> ObtenerAppsDeveloper(string Correo)
+        {
+            return DBManagement.getAppsPublishedByDeveloper(Correo);
+        }
+        public byte[] ObtenerImagenApp(string Correo)
+        {
+            return DBManagement.getAppsPhoto(Correo);
+        }
+        public List<List<string>> ObtenerAppsSuscripcion() 
+        {
+            return DBManagement.getSuscriptionApps();
+        }
+        public List<List<string>> ObtenerAppsRecientes()
+        {
+            return DBManagement.getRecentApps();
+        }
         //public bool AgregarComment(CUSTOMER customer, APP app, string _content)
         //{
         //    throw new NotImplementedException();

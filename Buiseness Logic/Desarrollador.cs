@@ -46,5 +46,12 @@ namespace BuisenessLogic
                 SCliente.ActualizarDeveloper(Nombre, Apellido, this.Correo, Contrasegna);
             }
         }
+        public IList<IList<string>> ObtenerPrimeros10Apps()
+        {
+            using (ServiceClient SCliente = new ServiceClient())
+            {
+                return SCliente.ObtenerAppsDeveloper(this.Correo);
+            }
+        }
     }
 }

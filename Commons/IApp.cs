@@ -10,7 +10,7 @@ namespace Commons
     {
         string Desarrollador { get; }
         string Nombre { get; }
-        DateTime FechaPublicada { get; }
+        string FechaPublicada { get; }
         string Categoria { get; }
         string Descripcion { get; }
         byte[] Imagen { get; }

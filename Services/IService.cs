@@ -36,13 +36,15 @@ namespace Services
         bool ActualizarDeveloper(string Nombre, string Apellido, string Correo, string Contrasegna);
         [OperationContract]
         string[] DesarrolladorActivo(string Correo);
-        //[OperationContract]
-        //bool AgregarApp(DEVELOPER developer, string _name, string _description, string _category, Byte[] _photo);
+        [OperationContract]
+        bool AgregarApp(string CorreoDesarrollador, string Nombre, string Descripcion, string Categoria, byte[] Imagen);
         //[OperationContract]
         //bool AgregarComment(CUSTOMER customer, APP app, string _content);
 
         [OperationContract]
-        List<List<string>> ObtenerApps(string Correo);
+        List<List<string>> ObtenerAppsDeveloper(string Correo);
+        [OperationContract]
+        byte[] ObtenerImagenApp(string Correo);
 
         //[OperationContract]
         //List<DEVELOPER> ObtenerDevelopers();
@@ -64,6 +66,10 @@ namespace Services
 
         //[OperationContract]
         //List<APP_PURCHASED> obtenerAppsCompradasPorCliente(CUSTOMER customer);
+        [OperationContract]
+        List<List<string>> ObtenerAppsSuscripcion();
+        [OperationContract]
+        List<List<string>> ObtenerAppsRecientes();
 
     }
 }

@@ -69,11 +69,35 @@ namespace Buiseness_Logic.LaunchServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/DesarrolladorActivo", ReplyAction="http://tempuri.org/IService/DesarrolladorActivoResponse")]
         System.Threading.Tasks.Task<string[]> DesarrolladorActivoAsync(string Correo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerApps", ReplyAction="http://tempuri.org/IService/ObtenerAppsResponse")]
-        string[][] ObtenerApps(string Correo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarApp", ReplyAction="http://tempuri.org/IService/AgregarAppResponse")]
+        bool AgregarApp(string CorreoDesarrollador, string Nombre, string Descripcion, string Categoria, byte[] Imagen);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerApps", ReplyAction="http://tempuri.org/IService/ObtenerAppsResponse")]
-        System.Threading.Tasks.Task<string[][]> ObtenerAppsAsync(string Correo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AgregarApp", ReplyAction="http://tempuri.org/IService/AgregarAppResponse")]
+        System.Threading.Tasks.Task<bool> AgregarAppAsync(string CorreoDesarrollador, string Nombre, string Descripcion, string Categoria, byte[] Imagen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsDeveloper", ReplyAction="http://tempuri.org/IService/ObtenerAppsDeveloperResponse")]
+        string[][] ObtenerAppsDeveloper(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsDeveloper", ReplyAction="http://tempuri.org/IService/ObtenerAppsDeveloperResponse")]
+        System.Threading.Tasks.Task<string[][]> ObtenerAppsDeveloperAsync(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerImagenApp", ReplyAction="http://tempuri.org/IService/ObtenerImagenAppResponse")]
+        byte[] ObtenerImagenApp(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerImagenApp", ReplyAction="http://tempuri.org/IService/ObtenerImagenAppResponse")]
+        System.Threading.Tasks.Task<byte[]> ObtenerImagenAppAsync(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsSuscripcion", ReplyAction="http://tempuri.org/IService/ObtenerAppsSuscripcionResponse")]
+        string[][] ObtenerAppsSuscripcion();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsSuscripcion", ReplyAction="http://tempuri.org/IService/ObtenerAppsSuscripcionResponse")]
+        System.Threading.Tasks.Task<string[][]> ObtenerAppsSuscripcionAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsRecientes", ReplyAction="http://tempuri.org/IService/ObtenerAppsRecientesResponse")]
+        string[][] ObtenerAppsRecientes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsRecientes", ReplyAction="http://tempuri.org/IService/ObtenerAppsRecientesResponse")]
+        System.Threading.Tasks.Task<string[][]> ObtenerAppsRecientesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -175,12 +199,44 @@ namespace Buiseness_Logic.LaunchServices {
             return base.Channel.DesarrolladorActivoAsync(Correo);
         }
         
-        public string[][] ObtenerApps(string Correo) {
-            return base.Channel.ObtenerApps(Correo);
+        public bool AgregarApp(string CorreoDesarrollador, string Nombre, string Descripcion, string Categoria, byte[] Imagen) {
+            return base.Channel.AgregarApp(CorreoDesarrollador, Nombre, Descripcion, Categoria, Imagen);
         }
         
-        public System.Threading.Tasks.Task<string[][]> ObtenerAppsAsync(string Correo) {
-            return base.Channel.ObtenerAppsAsync(Correo);
+        public System.Threading.Tasks.Task<bool> AgregarAppAsync(string CorreoDesarrollador, string Nombre, string Descripcion, string Categoria, byte[] Imagen) {
+            return base.Channel.AgregarAppAsync(CorreoDesarrollador, Nombre, Descripcion, Categoria, Imagen);
+        }
+        
+        public string[][] ObtenerAppsDeveloper(string Correo) {
+            return base.Channel.ObtenerAppsDeveloper(Correo);
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> ObtenerAppsDeveloperAsync(string Correo) {
+            return base.Channel.ObtenerAppsDeveloperAsync(Correo);
+        }
+        
+        public byte[] ObtenerImagenApp(string Correo) {
+            return base.Channel.ObtenerImagenApp(Correo);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> ObtenerImagenAppAsync(string Correo) {
+            return base.Channel.ObtenerImagenAppAsync(Correo);
+        }
+        
+        public string[][] ObtenerAppsSuscripcion() {
+            return base.Channel.ObtenerAppsSuscripcion();
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> ObtenerAppsSuscripcionAsync() {
+            return base.Channel.ObtenerAppsSuscripcionAsync();
+        }
+        
+        public string[][] ObtenerAppsRecientes() {
+            return base.Channel.ObtenerAppsRecientes();
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> ObtenerAppsRecientesAsync() {
+            return base.Channel.ObtenerAppsRecientesAsync();
         }
     }
 }

@@ -5,6 +5,7 @@ using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Launch.View
     {
         private int _errors = 0;
         IUsuario _dev;
+        byte[] _imagen;
         public PublicarApp(IUsuario Desarrollador)
         {
             InitializeComponent();
@@ -34,7 +36,7 @@ namespace Launch.View
         }
         private void btn_publicar_Click(object sender, RoutedEventArgs e)
         {
-            if (Aplicaciones.Registrar(_dev.Correo, txtBox_nombre.Text, DateTime.Today, txtBox_categoria.Text, txtBox_descripcion.Text, null))
+            if (Aplicaciones.Publicar(_dev.Correo, txtBox_nombre.Text, txtBox_categoria.Text, txtBox_descripcion.Text, _imagen))
                 MessageBox.Show("Aplicacion publicada con exito");
         }
         private void Validation_Error(object sender, ValidationErrorEventArgs e)
@@ -59,11 +61,82 @@ namespace Launch.View
         private void btn_imagen_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files(*.png)|*.png|All files (*.*)|*.*";
-            //ofd.InitialDirectory = @"C:\";
-            ofd.Title = "Please select an image file to encrypt.";
-            ofd.ShowDialog();
-        
-        }        
+            ofd.Multiselect = false;
+            ofd.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+            ofd.Title = "Por favor seleccione una imagen.";
+            if(ofd.ShowDialog() == true)
+                imageToByteArray(ofd);
+        }
+        public void imageToByteArray(OpenFileDialog ofd)
+        {
+
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(new Uri(ofd.FileName)));
+            encoder.QualityLevel = 100;
+            byte[] bit = new byte[0];
+            using (MemoryStream stream = new MemoryStream())
+            {
+                encoder.Frames.Add(BitmapFrame.Create(new Uri(ofd.FileName)));
+                encoder.Save(stream);
+                bit = stream.ToArray();
+                stream.Close();
+            }
+            
+
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(bit))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.DecodePixelWidth = 100;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+
+
+            JpegBitmapEncoder encoder2 = new JpegBitmapEncoder();
+            encoder2.Frames.Add(BitmapFrame.Create(image));
+            encoder2.QualityLevel = 100;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                encoder2.Frames.Add(BitmapFrame.Create(image));
+                encoder2.Save(stream);
+                _imagen = stream.ToArray();
+                stream.Close();
+            }
+
+            byteArrayToImage(_imagen);
+
+        }
+
+        public void byteArrayToImage(byte[] byteArrayIn)
+        {
+
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(byteArrayIn))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;                
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+
+            img.Source = image;
+            return;
+
+        }
+
+
+
+
+
     }
 }

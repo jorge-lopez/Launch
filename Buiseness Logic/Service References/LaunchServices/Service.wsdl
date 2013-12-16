@@ -61,11 +61,35 @@
   <wsdl:message name="IService_DesarrolladorActivo_OutputMessage">
     <wsdl:part name="parameters" element="tns:DesarrolladorActivoResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_ObtenerApps_InputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerApps" />
+  <wsdl:message name="IService_AgregarApp_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarApp" />
   </wsdl:message>
-  <wsdl:message name="IService_ObtenerApps_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerAppsResponse" />
+  <wsdl:message name="IService_AgregarApp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsDeveloper_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsDeveloper" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsDeveloper_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsDeveloperResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerImagenApp_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerImagenApp" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerImagenApp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerImagenAppResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsSuscripcion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsSuscripcion" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsSuscripcion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsSuscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsRecientes_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsRecientes" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsRecientes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsRecientesResponse" />
   </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="AgregarCustomer">
@@ -104,9 +128,25 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/DesarrolladorActivo" message="tns:IService_DesarrolladorActivo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/DesarrolladorActivoResponse" message="tns:IService_DesarrolladorActivo_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ObtenerApps">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerApps" message="tns:IService_ObtenerApps_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerAppsResponse" message="tns:IService_ObtenerApps_OutputMessage" />
+    <wsdl:operation name="AgregarApp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarApp" message="tns:IService_AgregarApp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AgregarAppResponse" message="tns:IService_AgregarApp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsDeveloper">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerAppsDeveloper" message="tns:IService_ObtenerAppsDeveloper_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerAppsDeveloperResponse" message="tns:IService_ObtenerAppsDeveloper_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerImagenApp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerImagenApp" message="tns:IService_ObtenerImagenApp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerImagenAppResponse" message="tns:IService_ObtenerImagenApp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsSuscripcion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerAppsSuscripcion" message="tns:IService_ObtenerAppsSuscripcion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerAppsSuscripcionResponse" message="tns:IService_ObtenerAppsSuscripcion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsRecientes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerAppsRecientes" message="tns:IService_ObtenerAppsRecientes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerAppsRecientesResponse" message="tns:IService_ObtenerAppsRecientes_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -192,8 +232,44 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ObtenerApps">
-      <soap:operation soapAction="http://tempuri.org/IService/ObtenerApps" style="document" />
+    <wsdl:operation name="AgregarApp">
+      <soap:operation soapAction="http://tempuri.org/IService/AgregarApp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsDeveloper">
+      <soap:operation soapAction="http://tempuri.org/IService/ObtenerAppsDeveloper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerImagenApp">
+      <soap:operation soapAction="http://tempuri.org/IService/ObtenerImagenApp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsSuscripcion">
+      <soap:operation soapAction="http://tempuri.org/IService/ObtenerAppsSuscripcion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsRecientes">
+      <soap:operation soapAction="http://tempuri.org/IService/ObtenerAppsRecientes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

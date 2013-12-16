@@ -141,17 +141,73 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ObtenerApps">
+  <xs:element name="AgregarApp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CorreoDesarrollador" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Categoria" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Imagen" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarAppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AgregarAppResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAppsDeveloper">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ObtenerAppsResponse">
+  <xs:element name="ObtenerAppsDeveloperResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerAppsResult" nillable="true" type="q4:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerAppsDeveloperResult" nillable="true" type="q4:ArrayOfArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerImagenApp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerImagenAppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObtenerImagenAppResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAppsSuscripcion">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAppsSuscripcionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerAppsSuscripcionResult" nillable="true" type="q5:ArrayOfArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAppsRecientes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAppsRecientesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerAppsRecientesResult" nillable="true" type="q6:ArrayOfArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

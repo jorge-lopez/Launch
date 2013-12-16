@@ -14,39 +14,39 @@ namespace Datos
         {
             try
             {
-                    using (var dbContext = new LAUNCHEntities())
+                using (var dbContext = new LAUNCHEntities())
+                {
+                    dbContext.Database.Connection.Open();
+                    //verifica si ya existe un customer en la base de datos con ese email
+                    var Existent = (from c in dbContext.CUSTOMERs
+                                    where c.Email == _Email
+                                    select c).Any();
+                    //tira una excepcion si ya existe, y si no, agrega al customer a la base y lo guarda
+                    if (Existent == true)
                     {
-                        dbContext.Database.Connection.Open();
-                        //verifica si ya existe un customer en la base de datos con ese email
-                        var Existent = (from c in dbContext.CUSTOMERs
-                                        where c.Email == _Email
-                                        select c).Any();
-                        //tira una excepcion si ya existe, y si no, agrega al customer a la base y lo guarda
-                        if (Existent == true)
-                        {
-                            throw new InvalidOperationException("Ya existe un usuario con ese correo. Escoge otro");
-                        }
-
-                        var customer = new CUSTOMER
-                        {
-                            FirstName = _FirstName,
-                            LastName = _LastName,
-                            Email = _Email,
-                            Password = _Password
-                        };
-                        dbContext.CUSTOMERs.Add(customer);
-                        var changesSaved = dbContext.SaveChanges();
-                        return changesSaved >= 1;
-
+                        throw new InvalidOperationException("Ya existe un usuario con ese correo. Escoge otro");
                     }
+
+                    var customer = new CUSTOMER
+                    {
+                        FirstName = _FirstName,
+                        LastName = _LastName,
+                        Email = _Email,
+                        Password = _Password
+                    };
+                    dbContext.CUSTOMERs.Add(customer);
+                    var changesSaved = dbContext.SaveChanges();
+                    return changesSaved >= 1;
+
+                }
             }
-                    catch (Exception ex)
-                    {
-                        string error = ex.Message;
-                        return false;
-                    }
-                
-            
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                return false;
+            }
+
+
         }
 
         //Metodo que agrega un Developer a la base de datos
@@ -87,7 +87,7 @@ namespace Datos
         }
 
         //Metodo que agrega una App a la base de datos
-        public static bool AddApp(DEVELOPER user, string _Name, string _Description, string _Category, Byte[] _Photo)
+        public static bool AddApp(string _Dev, string _Name, string _Description, string _Category, Byte[] _Photo)
         {
             using (var dbContext = new LAUNCHEntities())
             {
@@ -96,13 +96,18 @@ namespace Datos
                                 select c).Any();
                 if (Existent == true)
                 {
-                    throw new InvalidOperationException("Ya existe un App con ese nombre. Escoge otro");
+                    return false;
+                    //throw new InvalidOperationException("Ya existe un App con ese nombre. Escoge otro");
                 }
                 else
                 {
+                    int IdDeveloper = (from c in dbContext.DEVELOPERs
+                                       where c.Email == _Dev
+                                       select c.ID_Developer).First();
+
                     var app = new APP
                     {
-                        ID_Developer = user.ID_Developer,
+                        ID_Developer = IdDeveloper,
                         Name = _Name,
                         PublishedDate = DateTime.Now,
                         Description = _Description,
@@ -155,12 +160,12 @@ namespace Datos
             using (var dbContext = new LAUNCHEntities())
             {
                 var IdApp = (from a in dbContext.APPs
-                            where a.Name == NombreApp
-                            select a.ID_App).Single();
-                
+                             where a.Name == NombreApp
+                             select a.ID_App).Single();
+
                 var IdCustomer = (from c in dbContext.CUSTOMERs
-                            where c.Email == Correo
-                            select c.ID_Customer).Single();
+                                  where c.Email == Correo
+                                  select c.ID_Customer).Single();
 
                 var app_purchased = new APP_PURCHASED
                 {
@@ -183,19 +188,19 @@ namespace Datos
         {
             using (var dbContext = new LAUNCHEntities())
             {
-                bool[] Resultados = new bool[2];                
+                bool[] Resultados = new bool[2];
                 var EncontrarCliente = (from e in dbContext.CUSTOMERs
                                         where e.Email == _email && e.Password == _password
                                         select e).Any();
 
-                var EncontrarDeveloper= (from e in dbContext.DEVELOPERs
-                                        where e.Email == _email && e.Password == _password
-                                        select e).Any();
-                
+                var EncontrarDeveloper = (from e in dbContext.DEVELOPERs
+                                          where e.Email == _email && e.Password == _password
+                                          select e).Any();
+
                 Resultados[0] = EncontrarCliente || EncontrarDeveloper;
-                if(Resultados[0])
+                if (Resultados[0])
                     Resultados[1] = EncontrarDeveloper;
-                return Resultados;                 
+                return Resultados;
             }
         }
 
@@ -279,6 +284,111 @@ namespace Datos
                     thePurchases.Add(p);
                 }
                 return thePurchases;
+            }
+
+        }
+        public static List<List<string>> getAppsPublishedByDeveloper(string DeveloperEmail)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                List<List<string>> thePublished = new List<List<string>>();
+
+                DEVELOPER Dev = (from d in dbContext.DEVELOPERs
+                                 where d.Email == DeveloperEmail
+                                 select d).Single();
+
+
+                var getPurchases = from p in dbContext.APPs
+                                   where p.ID_Developer == Dev.ID_Developer
+                                   orderby p.PublishedDate ascending
+                                   select p;
+                int i = 0;
+                foreach (var p in getPurchases)
+                {
+                    if (i < 10)
+                    {
+                        i++;
+                        List<string> temp = new List<string>();
+                        temp.Add(p.ID_App.ToString());
+                        temp.Add(p.Name);
+                        temp.Add(String.Format("{0}/{1}/{2}", p.PublishedDate.Day, p.PublishedDate.Month, p.PublishedDate.Year));
+                        temp.Add(p.Category);
+                        temp.Add(p.Description);
+
+                        thePublished.Add(temp);
+                    }
+                    else break;
+                }
+                return thePublished;
+            }
+
+        }
+        public static List<List<string>> getSuscriptionApps()
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                List<List<string>> thePublished = new List<List<string>>();
+                var getPurchases = from p in dbContext.APPs                                   
+                                   orderby p.PublishedDate ascending
+                                   select p;
+                int i = 0;
+                foreach (var p in getPurchases)
+                {
+                    if (i < 10)
+                    {
+                        i++;
+                        List<string> temp = new List<string>();
+                        temp.Add(p.ID_App.ToString());
+                        temp.Add(p.Name);
+                        temp.Add(String.Format("{0}/{1}/{2}", p.PublishedDate.Day, p.PublishedDate.Month, p.PublishedDate.Year));
+                        temp.Add(p.Category);
+                        temp.Add(p.Description);
+
+                        thePublished.Add(temp);
+                    }
+                    else break;
+                } 
+                return thePublished;
+            }            
+        }
+        public static List<List<string>> getRecentApps()
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                List<List<string>> thePublished = new List<List<string>>();
+                var getPurchases = from p in dbContext.APPs
+                                   orderby p.PublishedDate ascending
+                                   select p;
+                int i = 0;
+                foreach (var p in getPurchases)
+                {
+                    if (i < 10)
+                    {
+                        i++;
+                        List<string> temp = new List<string>();
+                        temp.Add(p.ID_App.ToString());
+                        temp.Add(p.Name);
+                        temp.Add(String.Format("{0}/{1}/{2}", p.PublishedDate.Day, p.PublishedDate.Month, p.PublishedDate.Year));
+                        temp.Add(p.Category);
+                        temp.Add(p.Description);
+
+                        thePublished.Add(temp);
+                    }
+                    else break;
+                }
+                return thePublished;
+            }
+        }
+        public static byte[] getAppsPhoto(string NameApp)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            { 
+
+                var getPhoto = (from p in dbContext.APPs
+                                   where p.Name == NameApp                                   
+                                   select p.Photo).Single();                
+                
+                return getPhoto;
             }
 
         }

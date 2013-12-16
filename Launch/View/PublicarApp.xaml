@@ -42,7 +42,7 @@
     </Window.Resources>
     <Grid>
 
-        <Image HorizontalAlignment="Left" Height="122" Margin="98,0,0,0" VerticalAlignment="Top" Width="121" Source="/Launch;component/Imagenes/Launch.jpg" Stretch="Fill"/>
+        <Image Name="img" HorizontalAlignment="Left" Height="122" Margin="98,0,0,0" VerticalAlignment="Top" Width="121" Source="/Launch;component/Imagenes/Launch.jpg" Stretch="Fill"/>
         <Label Name="lbl_logo" Content="LAUNCH" HorizontalAlignment="Left" Margin="124,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.894,0.123" Foreground="#FF6A6A6A" FontSize="16" />
 
         <Label Name="lbl_nombre"  Content="Nombre:" HorizontalAlignment="Left" Margin="20,200,0,0" VerticalAlignment="Top"/>

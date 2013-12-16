@@ -77,10 +77,7 @@ namespace Launch
         {
             get
             {
-                return String.Format("{0}/{1}/{2}",
-                    AplicacionEnVentana.FechaPublicada.Day,
-                    AplicacionEnVentana.FechaPublicada.Month,
-                    AplicacionEnVentana.FechaPublicada.Year);
+                return AplicacionEnVentana.FechaPublicada;
             }
             private set
             {

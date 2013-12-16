@@ -1,7 +1,9 @@
-﻿using Commons;
+﻿using BuisenessLogic;
+using Commons;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +15,17 @@ namespace Launch.ViewModel
 {
     class PerfilDesarrolladorControles
     {
-        private static IUsuario UsuarioEnSesion;
+        private static Desarrollador UsuarioEnSesion;
 
         public string NombreCompleto { get; private set; }
-        public string Correo { get; private set; }
+        public string Correo { get { return UsuarioEnSesion.Correo; } }
         public IEnumerable StackAppsPublicadas { get; private set; }
 
 
         public PerfilDesarrolladorControles(IUsuario Cliente)
         {
-            UsuarioEnSesion = Cliente;
-            NombreCompleto = UsuarioEnSesion.Nombre + " " + UsuarioEnSesion.Apellido;
+            UsuarioEnSesion = new Desarrollador(null,null,Cliente.Correo,null);
+            NombreCompleto = Cliente.Nombre + " " + Cliente.Apellido;
             StackAppsPublicadas = new List<StackPanel>();
             Generar();
         }
@@ -40,13 +42,15 @@ namespace Launch.ViewModel
 
         private static void GenerarAppsRecientes(IList<StackPanel> AppStack)
         {
-            int st = 10;
-            for (int i = 0; i < st; i++)
-            {
 
+            IList<IList<string>> lasApps = UsuarioEnSesion.ObtenerPrimeros10Apps();
+            
+            foreach (var app in lasApps)
+            {
+                
                 //Imagen Applicacion
                 Image img = new Image();
-                img.Source = new BitmapImage(new Uri("/Launch;component/Imagenes/Launch Corp..png", UriKind.Relative));  //Aqui va el metodo para la imagen
+                img.Source = ObtenerImagen(app[1]);
                 img.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 img.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 img.Height = 89;
@@ -54,13 +58,13 @@ namespace Launch.ViewModel
 
                 //Label aplicacion Nombre
                 Label lbl = new Label();
-                lbl.Content = "Nuevas"; //Aqui va el metodo para obtener el Nombre de la aplicacion
+                lbl.Content = app[1]; //Aqui va el metodo para obtener el Nombre de la aplicacion
                 lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
 
 
                 //Boton Instalar                 
                 Button btn = new Button();
-                btn.Name = "SuperApp";
+                btn.Name = app[0];
                 btn.Content = "Correr";
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;    
@@ -93,6 +97,23 @@ namespace Launch.ViewModel
             //Window w = (Window)sender;
             //w.Close();
             //e.Handled = true;
+        }
+        private static BitmapImage ObtenerImagen(string NombreApp)
+        {
+            byte[] laImagen = Aplicaciones.ObtenerImagen(NombreApp);
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(laImagen))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
         
     }

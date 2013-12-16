@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -90,21 +91,24 @@ namespace Launch
             IList<StackPanel> AppsSuscripcion = new List<StackPanel>();
             IList<StackPanel> AppsRecientes = new List<StackPanel>();
 
-            GenerarAppsRecientes(AppsRecientes);
-            GenerarAppsRecientes(AppsSuscripcion);
+            IList<IList<string>> lasApps;
+            
+            lasApps= Aplicaciones.ObtenerAppsRecientes();
+            GenerarAppsRecientes(AppsRecientes,lasApps);
+            lasApps = Aplicaciones.ObtenerAppsSuscripcion();
+            GenerarAppsRecientes(AppsSuscripcion,lasApps);
 
             StackAppsSuscripcion = AppsSuscripcion;
             StackAppsRecientes = AppsRecientes;
         }
 
-        private static void GenerarAppsRecientes(IList<StackPanel> AppStack)
+        private static void GenerarAppsRecientes(IList<StackPanel> AppStack, IList<IList<string>> lasApps)
         {
-            int st = 10;
-            for (int i = 0; i < st; i++)
+            foreach (var app in lasApps)
             {
                 //Imagen Applicacion
                 Image img = new Image();
-                img.Source = new BitmapImage(new Uri("/Launch;component/Imagenes/Launch Corp..png", UriKind.Relative));  //Aqui va el metodo para la imagen
+                img.Source = ObtenerImagen(app[1]);
                 img.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 img.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 img.Height = 89;
@@ -112,12 +116,13 @@ namespace Launch
 
                 //Label aplicacion Nombre
                 Label lbl = new Label();
-                lbl.Content = "Nuevas"; //Aqui va el metodo para obtener el Nombre de la aplicacion
+                lbl.Content = app[1]; //Aqui va el metodo para obtener el Nombre de la aplicacion
                 lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
 
 
                 //Boton Instalar                 
                 Button btn = new Button();
+                btn.Name = app[0];
                 btn.Content = "Instalar";
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;
@@ -150,7 +155,23 @@ namespace Launch
             //w.Close();
             //e.Handled = true;
         }
-        
+        private static BitmapImage ObtenerImagen(string NombreApp)
+        {
+            byte[] laImagen = Aplicaciones.ObtenerImagen(NombreApp);
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(laImagen))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
     }
 }
    
