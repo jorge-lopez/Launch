@@ -107,6 +107,14 @@ namespace Services
         {
             return DBManagement.getRecentApps();
         }
+        public List<List<string>> ObtenerAppsComprados(string Correo)
+        {
+            return DBManagement.getAppsPurchasedByCustomer(Correo);
+        }
+        public List<string> ObtenerAppInfo(int IdApp)
+        {
+            return DBManagement.getInfofromApp(IdApp);
+        }
         //public bool AgregarComment(CUSTOMER customer, APP app, string _content)
         //{
         //    throw new NotImplementedException();

@@ -18,14 +18,17 @@ namespace BuisenessLogic
         public string Descripcion { get; private set; }
         public byte[] Imagen { get; private set; }
 
-        public Aplicaciones(string NombreApp)
-        {
-            this.Nombre = NombreApp;
-            this.Descripcion = "Aplicacion para para disfrutaren casa\nSiguiente semana habra updates ;D";
-            this.FechaPublicada = "DateTime.Today";
-            this.Desarrollador = "Manny y George";
-
-        }
+        public Aplicaciones(string IdApp)
+        {            
+            int i = int.Parse(IdApp);
+            IList<string> Propiedades = ObtenerAppInfo(i);
+            this.Desarrollador = Propiedades[0];
+            this.Nombre = Propiedades[1];
+            this.FechaPublicada = Propiedades[2];
+            this.Categoria = Propiedades[3];
+            this.Descripcion = Propiedades[4];
+            
+        }        
         public static bool Publicar(string CorreoDesarrollador, string NombreApp, string Categoria, string Descripcion, byte[] Imagen)
         {
             using (ServiceClient sc = new ServiceClient())
@@ -54,6 +57,14 @@ namespace BuisenessLogic
             using (ServiceClient SCliente = new ServiceClient())
             {
                 return SCliente.ObtenerAppsRecientes();
+            }
+        }
+        private IList<string> ObtenerAppInfo(int IdApp)
+        {
+            using (ServiceClient SCliente = new ServiceClient())
+            {
+                
+                return SCliente.ObtenerAppInfo(IdApp);
             }
         }
 

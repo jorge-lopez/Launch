@@ -240,11 +240,20 @@ namespace Datos
 
         }
         //Da la informacion de la App solicitada
-        public static APP getInfofromApp(string _name)
+        public static List<string> getInfofromApp(int _IdApp)
         {
             using (var dbContext = new LAUNCHEntities())
             {
-                return dbContext.APPs.First(a => a.Name == _name);
+                var App = dbContext.APPs.First(a => a.ID_App == _IdApp);
+                var Developer = dbContext.DEVELOPERs.First(a => a.ID_Developer == App.ID_Developer);
+                List<string> temp = new List<string>();
+                temp.Add(Developer.FirstName + " " + Developer.LastName);
+                temp.Add(App.Name);
+                temp.Add(String.Format("{0}/{1}/{2}", App.PublishedDate.Day, App.PublishedDate.Month, App.PublishedDate.Year));
+                temp.Add(App.Category);
+                temp.Add(App.Description);
+
+                return temp;
             }
 
         }
@@ -270,20 +279,34 @@ namespace Datos
         }
 
         //Lee todas las aplicaciones compradas por un usuario
-        public static List<APP_PURCHASED> getAppsPurchasedByCustomer(CUSTOMER customer)
+        public static List<List<string>> getAppsPurchasedByCustomer(string Email)
         {
             using (var dbContext = new LAUNCHEntities())
             {
-                List<APP_PURCHASED> thePurchases = new List<APP_PURCHASED>();
+                List<List<string>> thePurchases = new List<List<string>>();
+                var Customer = dbContext.CUSTOMERs.First(c => c.Email == Email);
                 var getPurchases = from p in dbContext.APP_PURCHASED
-                                   where p.ID_Customer == customer.ID_Customer
+                                   where p.ID_Customer == Customer.ID_Customer
                                    select p;
 
+                int i = 0;
                 foreach (var p in getPurchases)
                 {
-                    thePurchases.Add(p);
+                    if (i < 10)
+                    {
+                        i++;
+                        List<string> temp = new List<string>();
+                        temp.Add(p.ID_App.ToString());
+                        temp.Add(p.APP.Name);
+                        temp.Add(String.Format("{0}/{1}/{2}", p.APP.PublishedDate.Day, p.APP.PublishedDate.Month, p.APP.PublishedDate.Year));
+                        temp.Add(p.APP.Category);
+                        temp.Add(p.APP.Description);
+
+                        thePurchases.Add(temp);
+                    }
+                    else break;
                 }
-                return thePurchases;
+                return thePurchases;                
             }
 
         }

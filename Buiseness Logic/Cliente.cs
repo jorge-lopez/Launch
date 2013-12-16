@@ -94,7 +94,13 @@ namespace BuisenessLogic
                 SCliente.ActualizarCustomer(Nombre, Apellido, this.Correo, Contrasegna);
             }
         }
-
+        public IList<IList<string>> ObtenerAppsCompradas()
+        {
+            using (ServiceClient SCliente = new ServiceClient())
+            {
+                return SCliente.ObtenerAppsComprados(this.Correo);
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnNotifyPropertyChanged(string propiedad)
@@ -104,6 +110,8 @@ namespace BuisenessLogic
                 PropertyChanged(this, new PropertyChangedEventArgs(propiedad));
             }
         }
+
+        
         public void Instalar()
         { }
         public void ComprarMembresia()

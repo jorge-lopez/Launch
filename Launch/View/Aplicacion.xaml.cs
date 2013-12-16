@@ -22,11 +22,11 @@ namespace Launch
     public partial class Aplicacion 
     {
         private IUsuario _usuario;
-        public Aplicacion(IUsuario Usuario, string NombreApp)
+        public Aplicacion(IUsuario Usuario, string IdApp)
         {
             InitializeComponent();
             _usuario = Usuario;
-            this.DataContext = new AplicacionControles(Usuario, NombreApp);
+            this.DataContext = new AplicacionControles(Usuario, IdApp);
         }
 
         private void btn_Nombre_Click(object sender, RoutedEventArgs e)

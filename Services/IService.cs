@@ -70,6 +70,9 @@ namespace Services
         List<List<string>> ObtenerAppsSuscripcion();
         [OperationContract]
         List<List<string>> ObtenerAppsRecientes();
-
+        [OperationContract]
+        List<List<string>> ObtenerAppsComprados(string Correo);
+        [OperationContract]
+        List<string> ObtenerAppInfo(int IdApp);
     }
 }

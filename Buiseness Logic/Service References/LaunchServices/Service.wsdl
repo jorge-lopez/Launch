@@ -91,6 +91,18 @@
   <wsdl:message name="IService_ObtenerAppsRecientes_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerAppsRecientesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsComprados_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsComprados" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppsComprados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppsCompradosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService_ObtenerAppInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAppInfoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="AgregarCustomer">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarCustomer" message="tns:IService_AgregarCustomer_InputMessage" />
@@ -147,6 +159,14 @@
     <wsdl:operation name="ObtenerAppsRecientes">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerAppsRecientes" message="tns:IService_ObtenerAppsRecientes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerAppsRecientesResponse" message="tns:IService_ObtenerAppsRecientes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsComprados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerAppsComprados" message="tns:IService_ObtenerAppsComprados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerAppsCompradosResponse" message="tns:IService_ObtenerAppsComprados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ObtenerAppInfo" message="tns:IService_ObtenerAppInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ObtenerAppInfoResponse" message="tns:IService_ObtenerAppInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -270,6 +290,24 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerAppsRecientes">
       <soap:operation soapAction="http://tempuri.org/IService/ObtenerAppsRecientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppsComprados">
+      <soap:operation soapAction="http://tempuri.org/IService/ObtenerAppsComprados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAppInfo">
+      <soap:operation soapAction="http://tempuri.org/IService/ObtenerAppInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

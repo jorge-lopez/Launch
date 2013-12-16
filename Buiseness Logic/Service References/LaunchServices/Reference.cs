@@ -98,6 +98,18 @@ namespace Buiseness_Logic.LaunchServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsRecientes", ReplyAction="http://tempuri.org/IService/ObtenerAppsRecientesResponse")]
         System.Threading.Tasks.Task<string[][]> ObtenerAppsRecientesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsComprados", ReplyAction="http://tempuri.org/IService/ObtenerAppsCompradosResponse")]
+        string[][] ObtenerAppsComprados(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppsComprados", ReplyAction="http://tempuri.org/IService/ObtenerAppsCompradosResponse")]
+        System.Threading.Tasks.Task<string[][]> ObtenerAppsCompradosAsync(string Correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppInfo", ReplyAction="http://tempuri.org/IService/ObtenerAppInfoResponse")]
+        string[] ObtenerAppInfo(int IdApp);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerAppInfo", ReplyAction="http://tempuri.org/IService/ObtenerAppInfoResponse")]
+        System.Threading.Tasks.Task<string[]> ObtenerAppInfoAsync(int IdApp);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -237,6 +249,22 @@ namespace Buiseness_Logic.LaunchServices {
         
         public System.Threading.Tasks.Task<string[][]> ObtenerAppsRecientesAsync() {
             return base.Channel.ObtenerAppsRecientesAsync();
+        }
+        
+        public string[][] ObtenerAppsComprados(string Correo) {
+            return base.Channel.ObtenerAppsComprados(Correo);
+        }
+        
+        public System.Threading.Tasks.Task<string[][]> ObtenerAppsCompradosAsync(string Correo) {
+            return base.Channel.ObtenerAppsCompradosAsync(Correo);
+        }
+        
+        public string[] ObtenerAppInfo(int IdApp) {
+            return base.Channel.ObtenerAppInfo(IdApp);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> ObtenerAppInfoAsync(int IdApp) {
+            return base.Channel.ObtenerAppInfoAsync(IdApp);
         }
     }
 }

@@ -122,7 +122,7 @@ namespace Launch
 
                 //Boton Instalar                 
                 Button btn = new Button();
-                btn.Name = app[0];
+                btn.Name = "App_"+ app[0];
                 btn.Content = "Instalar";
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;
@@ -147,8 +147,8 @@ namespace Launch
         {
 
             Button btn = (Button)sender;
-            string s = btn.Name;
-            Aplicacion a = new Aplicacion(UsuarioEnSesion, s);
+            var s = btn.Name.Split('_');
+            Aplicacion a = new Aplicacion(UsuarioEnSesion, s[1]);
             a.Show();
 
             //Window w = (Window)sender;
