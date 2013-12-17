@@ -78,7 +78,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AgregarAppPurchased">
+  <xs:element name="AgregarAppPurchasedbyId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdApp" type="xs:int" />
+        <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarAppPurchasedbyIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AgregarAppPurchasedbyIdResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarAppPurchasedbyName">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="NombreApp" nillable="true" type="xs:string" />
@@ -86,10 +101,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AgregarAppPurchasedResponse">
+  <xs:element name="AgregarAppPurchasedbyNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AgregarAppPurchasedResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="AgregarAppPurchasedbyNameResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

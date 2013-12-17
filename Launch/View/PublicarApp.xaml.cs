@@ -38,6 +38,8 @@ namespace Launch.View
         {
             if (Aplicaciones.Publicar(_dev.Correo, txtBox_nombre.Text, txtBox_categoria.Text, txtBox_descripcion.Text, _imagen))
                 MessageBox.Show("Aplicacion publicada con exito");
+            else
+                MessageBox.Show("Ya existe una aplicacion con ese nombre");
         }
         private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {

@@ -55,7 +55,12 @@ namespace Services
             //Este metodo deberia requerir un Cliente a quien agregarle la Membresia 
             return DBManagement.AddMembership();
         }
-        public bool AgregarAppPurchased(string NombreApp, string Correo)
+        public bool AgregarAppPurchasedbyId(int IdApp, string Correo)
+        {
+            return DBManagement.AddApp_Purchased(IdApp, Correo);
+        }
+        
+        public bool AgregarAppPurchasedbyName(string NombreApp, string Correo)
         {
             return DBManagement.AddApp_Purchased(NombreApp, Correo);
         }

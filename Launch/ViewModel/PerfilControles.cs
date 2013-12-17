@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,62 +14,22 @@ using System.Windows.Media.Imaging;
 
 namespace Launch
 {
-    class PerfilControles: INotifyPropertyChanged
+    class PerfilControles
     {
-        private static IUsuario UsuarioEnSesion;
-        private string _nombreCompleto;
-        private string _correo;
-        private IEnumerable _StackAppsCompradas;
-        
-        public string NombreCompleto
-        {
-            get
-            {
-                return _nombreCompleto;
-            }
-            private set
-            {
-                _nombreCompleto = value;
-                OnNotifyPropertyChanged("NombreCompleto");
-            }
-        }
-        public string Correo
-        {
-            get
-            {
-                return UsuarioEnSesion.Correo;
-            }
-            private set
-            {
-                _correo = value;
-                OnNotifyPropertyChanged("Correo");
-            }
-        }        
-        public IEnumerable StackAppsCompradas
-        {
-            get { return _StackAppsCompradas; }
-            set
-            {
-                _StackAppsCompradas = value;
-                OnNotifyPropertyChanged("StackAppsCompradas");
-            }
-        }
+        private static Cliente UsuarioEnSesion;
+
+        public string NombreCompleto { get; private set; }
+        public string Correo { get; private set; }
+        public IEnumerable StackAppsCompradas { get; private set; }
 
         
         public PerfilControles(IUsuario Cliente)
         {
-            UsuarioEnSesion = Cliente;
-            _nombreCompleto = UsuarioEnSesion.Nombre + " " + UsuarioEnSesion.Apellido;
+            UsuarioEnSesion = new Cliente(Cliente.Correo);            
+            NombreCompleto = UsuarioEnSesion.Nombre + " " + UsuarioEnSesion.Apellido;
+            Correo = UsuarioEnSesion.Correo;
             StackAppsCompradas = new List<StackPanel>();
             Generar();
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnNotifyPropertyChanged(string propiedad)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propiedad));
-            }
         }
 
         private void Generar()
@@ -82,13 +43,16 @@ namespace Launch
 
         private static void GenerarAppsRecientes(IList<StackPanel> AppStack)
         {
-            int st = 10;
-            for (int i = 0; i < st; i++)
-            {
 
+            IList<IList<string>> lasApps = UsuarioEnSesion.ObtenerAppsCompradas();
+
+            foreach (var app in lasApps)
+            {
+               
                 //Imagen Applicacion
                 Image img = new Image();
-                img.Source = new BitmapImage(new Uri("/Launch;component/Imagenes/Launch Corp..png", UriKind.Relative));  //Aqui va el metodo para la imagen
+                img.Name = "App_" + app[0];
+                img.Source = ObtenerImagen(app[1]);  //Aqui va el metodo para la imagen
                 img.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 img.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 img.Height = 89;
@@ -96,13 +60,13 @@ namespace Launch
 
                 //Label aplicacion Nombre
                 Label lbl = new Label();
-                lbl.Content = "Nuevas"; //Aqui va el metodo para obtener el Nombre de la aplicacion
+                lbl.Content = app[1]; //Aqui va el metodo para obtener el Nombre de la aplicacion
                 lbl.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
 
 
                 //Boton Instalar                 
                 Button btn = new Button();
-                btn.Name = "SuperApp";
+                btn.Name = "App_" + app[0];
                 btn.Content = "Correr";
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;    
@@ -126,15 +90,27 @@ namespace Launch
 
         static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            
-            Button btn = (Button)sender;            
-            string s = btn.Name;            
-            Aplicacion a = new Aplicacion(UsuarioEnSesion, s);
-            a.Show();
-
-            //Window w = (Window)sender;
-            //w.Close();
-            //e.Handled = true;
+            //Button btn = (Button)sender;
+            //var s = btn.Name.Split('_');
+            //Aplicacion a = new Aplicacion(UsuarioEnSesion, s[1]);
+            //a.Show();
+        }
+        private static BitmapImage ObtenerImagen(string NombreApp)
+        {
+            byte[] laImagen = Aplicaciones.ObtenerImagen(NombreApp);
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(laImagen))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
         
     }

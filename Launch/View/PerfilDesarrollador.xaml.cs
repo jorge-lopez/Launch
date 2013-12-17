@@ -41,6 +41,7 @@ namespace Launch.View
         {
             Configuracion c = new Configuracion(_usuario);
             c.ShowDialog();
+            this.DataContext = new PerfilDesarrolladorControles(_usuario);
         }
 
 
@@ -70,6 +71,7 @@ namespace Launch.View
         {
             PublicarApp p = new PublicarApp(_usuario);
             p.ShowDialog();
+                this.DataContext = new PerfilDesarrolladorControles(_usuario);
         }
     }
 }

@@ -108,12 +108,13 @@ namespace Launch
             {
                 //Imagen Applicacion
                 Image img = new Image();
+                img.Name = "App_" + app[0];
                 img.Source = ObtenerImagen(app[1]);
                 img.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 img.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                 img.Height = 89;
                 img.Width = 74;
-
+                img.MouseDown += img_MouseDown;
                 //Label aplicacion Nombre
                 Label lbl = new Label();
                 lbl.Content = app[1]; //Aqui va el metodo para obtener el Nombre de la aplicacion
@@ -123,7 +124,7 @@ namespace Launch
                 //Boton Instalar                 
                 Button btn = new Button();
                 btn.Name = "App_"+ app[0];
-                btn.Content = "Instalar";
+                btn.Content = "Comprar";
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;
                 btn.Background = null;
@@ -143,17 +144,24 @@ namespace Launch
             }
         }
 
-        static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
+        static void img_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
-            Button btn = (Button)sender;
+            Image btn = (Image)sender;
             var s = btn.Name.Split('_');
             Aplicacion a = new Aplicacion(UsuarioEnSesion, s[1]);
             a.Show();
+            
+        }
 
-            //Window w = (Window)sender;
-            //w.Close();
-            //e.Handled = true;
+        static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            var s = btn.Name.Split('_');
+            Cliente c = new Cliente(UsuarioEnSesion.Correo);
+            if (c.ComprarApp(int.Parse(s[1])))
+                MessageBox.Show("App Comprada con exito");
+            else
+                MessageBox.Show("Error al comprar App");
         }
         private static BitmapImage ObtenerImagen(string NombreApp)
         {

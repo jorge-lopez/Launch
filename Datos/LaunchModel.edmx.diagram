@@ -13,11 +13,11 @@
         <EntityTypeShape EntityType="LAUNCHModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="LAUNCHModel.COMMENT" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="LAUNCHModel.FK_APP_DEVELOPER" ManuallyRouted="false" />
-        <AssociationConnector Association="LAUNCHModel.FK_APP_PURCHASED_APP" ManuallyRouted="false" />
         <AssociationConnector Association="LAUNCHModel.FK_COMMENT_APP" ManuallyRouted="false" />
         <AssociationConnector Association="LAUNCHModel.FK_APP_PURCHASED_CUSTOMER" ManuallyRouted="false" />
         <AssociationConnector Association="LAUNCHModel.FK_COMMENT_CUSTOMER" ManuallyRouted="false" />
         <AssociationConnector Association="LAUNCHModel.FK_CUSTOMER_MEMBERSHIP" ManuallyRouted="false" />
+        <AssociationConnector Association="LAUNCHModel.FK_APP_PURCHASED_APP1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

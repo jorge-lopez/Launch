@@ -27,7 +27,9 @@ namespace Services
         [OperationContract]
         bool AgregarMembership(string Correo);
         [OperationContract]
-        bool AgregarAppPurchased(string NombreApp, string Correo);
+        bool AgregarAppPurchasedbyId(int IdApp, string Correo);
+        [OperationContract]
+        bool AgregarAppPurchasedbyName(string NombreApp, string Correo);
         
         //Metodos Por usarse
         [OperationContract]

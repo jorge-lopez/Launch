@@ -18,7 +18,7 @@ namespace Datos
         public int ID_App { get; set; }
         public int ID_Customer { get; set; }
     
-        public virtual APP APP { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual APP APP { get; set; }
     }
 }

@@ -40,6 +40,8 @@ namespace Launch
         {
             Configuracion c = new Configuracion(_cliente);
             c.ShowDialog();
+            _cliente = new BuisenessLogic.Cliente(_cliente.Correo);
+            this.DataContext = new PerfilControles(_cliente);
         }
 
 

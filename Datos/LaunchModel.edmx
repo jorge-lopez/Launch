@@ -4,17 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LAUNCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LAUNCHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="APP">
           <Key>
             <PropertyRef Name="ID_App" />
           </Key>
           <Property Name="ID_App" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Developer" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="PublishedDate" Type="datetime" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="50" />
-          <Property Name="Category" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="350" />
+          <Property Name="Category" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="MembershipQueue" Type="bit" Nullable="false" />
         </EntityType>
@@ -45,10 +45,10 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
             <PropertyRef Name="ID_Customer" />
           </Key>
           <Property Name="ID_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="ID_Membership" Type="int" />
         </EntityType>
         <EntityType Name="DEVELOPER">
@@ -56,10 +56,10 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
             <PropertyRef Name="ID_Developer" />
           </Key>
           <Property Name="ID_Developer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="MEMBERSHIP">
           <Key>
@@ -93,13 +93,13 @@ warning 6002: The table/view 'LAUNCH.dbo.COMMENT' does not have a primary key de
         </Association>
         <Association Name="FK_APP_PURCHASED_APP">
           <End Role="APP" Type="Self.APP" Multiplicity="1" />
-          <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="0..1" />
+          <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="APP">
               <PropertyRef Name="ID_App" />
             </Principal>
             <Dependent Role="APP_PURCHASED">
-              <PropertyRef Name="ID_Purchase" />
+              <PropertyRef Name="ID_App" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -222,8 +222,7 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <End Role="CUSTOMER" EntitySet="CUSTOMER" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LAUNCHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -233,15 +232,15 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           </Key>
           <Property Name="ID_App" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Developer" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PublishedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Category" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="MembershipQueue" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DEVELOPER" Relationship="Self.FK_APP_DEVELOPER" FromRole="APP" ToRole="DEVELOPER" />
-          <NavigationProperty Name="APP_PURCHASED" Relationship="Self.FK_APP_PURCHASED_APP" FromRole="APP" ToRole="APP_PURCHASED" />
           <NavigationProperty Name="COMMENTs" Relationship="Self.FK_COMMENT_APP" FromRole="APP" ToRole="COMMENT" />
+          <NavigationProperty Name="APP_PURCHASED1" Relationship="LAUNCHModel.FK_APP_PURCHASED_APP1" FromRole="APP" ToRole="APP_PURCHASED" />
         </EntityType>
         <EntityType Name="APP_PURCHASED">
           <Key>
@@ -250,18 +249,18 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <Property Name="ID_Purchase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_App" Type="Int32" Nullable="false" />
           <Property Name="ID_Customer" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="APP" Relationship="Self.FK_APP_PURCHASED_APP" FromRole="APP_PURCHASED" ToRole="APP" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_APP_PURCHASED_CUSTOMER" FromRole="APP_PURCHASED" ToRole="CUSTOMER" />
+          <NavigationProperty Name="APP" Relationship="LAUNCHModel.FK_APP_PURCHASED_APP1" FromRole="APP_PURCHASED" ToRole="APP" />
         </EntityType>
         <EntityType Name="CUSTOMER">
           <Key>
             <PropertyRef Name="ID_Customer" />
           </Key>
           <Property Name="ID_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_Membership" Type="Int32" />
           <NavigationProperty Name="APP_PURCHASED" Relationship="Self.FK_APP_PURCHASED_CUSTOMER" FromRole="CUSTOMER" ToRole="APP_PURCHASED" />
           <NavigationProperty Name="COMMENTs" Relationship="Self.FK_COMMENT_CUSTOMER" FromRole="CUSTOMER" ToRole="COMMENT" />
@@ -272,10 +271,10 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <PropertyRef Name="ID_Developer" />
           </Key>
           <Property Name="ID_Developer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="APPs" Relationship="Self.FK_APP_DEVELOPER" FromRole="DEVELOPER" ToRole="APP" />
         </EntityType>
         <EntityType Name="MEMBERSHIP">
@@ -320,18 +319,6 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             </Principal>
             <Dependent Role="APP">
               <PropertyRef Name="ID_Developer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APP_PURCHASED_APP">
-          <End Role="APP" Type="Self.APP" Multiplicity="1" />
-          <End Role="APP_PURCHASED" Type="Self.APP_PURCHASED" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="APP">
-              <PropertyRef Name="ID_App" />
-            </Principal>
-            <Dependent Role="APP_PURCHASED">
-              <PropertyRef Name="ID_Purchase" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -395,10 +382,6 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <End Role="DEVELOPER" EntitySet="DEVELOPERs" />
             <End Role="APP" EntitySet="APPs" />
           </AssociationSet>
-          <AssociationSet Name="FK_APP_PURCHASED_APP" Association="Self.FK_APP_PURCHASED_APP">
-            <End Role="APP" EntitySet="APPs" />
-            <End Role="APP_PURCHASED" EntitySet="APP_PURCHASED" />
-          </AssociationSet>
           <AssociationSet Name="FK_COMMENT_APP" Association="Self.FK_COMMENT_APP">
             <End Role="APP" EntitySet="APPs" />
             <End Role="COMMENT" EntitySet="COMMENTs" />
@@ -445,6 +428,10 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_APP_PURCHASED_APP1" Association="LAUNCHModel.FK_APP_PURCHASED_APP1">
+            <End Role="APP" EntitySet="APPs" />
+            <End Role="APP_PURCHASED" EntitySet="APP_PURCHASED" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -457,6 +444,18 @@ FROM [dbo].[COMMENT] AS [COMMENT]</DefiningQuery>
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_APP_PURCHASED_APP1">
+          <End Type="LAUNCHModel.APP" Role="APP" Multiplicity="1" />
+          <End Type="LAUNCHModel.APP_PURCHASED" Role="APP_PURCHASED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APP">
+              <PropertyRef Name="ID_App" />
+            </Principal>
+            <Dependent Role="APP_PURCHASED">
+              <PropertyRef Name="ID_App" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

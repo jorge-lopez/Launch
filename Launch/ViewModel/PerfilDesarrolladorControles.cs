@@ -50,6 +50,7 @@ namespace Launch.ViewModel
                 
                 //Imagen Applicacion
                 Image img = new Image();
+                img.Name = "App_" + app[0];
                 img.Source = ObtenerImagen(app[1]);
                 img.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 img.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -64,7 +65,7 @@ namespace Launch.ViewModel
 
                 //Boton Instalar                 
                 Button btn = new Button();
-                btn.Name = app[0];
+                btn.Name = "App_"+app[0];
                 btn.Content = "Correr";
                 btn.MaxWidth = 90;
                 btn.BorderBrush = Brushes.Black;    
@@ -89,14 +90,10 @@ namespace Launch.ViewModel
         static void btn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             
-            Button btn = (Button)sender;            
-            string s = btn.Name;            
-            Aplicacion a = new Aplicacion(UsuarioEnSesion, s);
+            Button btn = (Button)sender;                        
+            var s = btn.Name.Split('_');
+            Aplicacion a = new Aplicacion(UsuarioEnSesion, s[1]);
             a.Show();
-
-            //Window w = (Window)sender;
-            //w.Close();
-            //e.Handled = true;
         }
         private static BitmapImage ObtenerImagen(string NombreApp)
         {

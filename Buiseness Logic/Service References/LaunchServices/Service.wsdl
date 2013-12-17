@@ -37,11 +37,17 @@
   <wsdl:message name="IService_AgregarMembership_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarMembershipResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_AgregarAppPurchased_InputMessage">
-    <wsdl:part name="parameters" element="tns:AgregarAppPurchased" />
+  <wsdl:message name="IService_AgregarAppPurchasedbyId_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarAppPurchasedbyId" />
   </wsdl:message>
-  <wsdl:message name="IService_AgregarAppPurchased_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AgregarAppPurchasedResponse" />
+  <wsdl:message name="IService_AgregarAppPurchasedbyId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarAppPurchasedbyIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_AgregarAppPurchasedbyName_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarAppPurchasedbyName" />
+  </wsdl:message>
+  <wsdl:message name="IService_AgregarAppPurchasedbyName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarAppPurchasedbyNameResponse" />
   </wsdl:message>
   <wsdl:message name="IService_AgregarDeveloper_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarDeveloper" />
@@ -124,9 +130,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarMembership" message="tns:IService_AgregarMembership_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/AgregarMembershipResponse" message="tns:IService_AgregarMembership_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AgregarAppPurchased">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarAppPurchased" message="tns:IService_AgregarAppPurchased_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/AgregarAppPurchasedResponse" message="tns:IService_AgregarAppPurchased_OutputMessage" />
+    <wsdl:operation name="AgregarAppPurchasedbyId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarAppPurchasedbyId" message="tns:IService_AgregarAppPurchasedbyId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AgregarAppPurchasedbyIdResponse" message="tns:IService_AgregarAppPurchasedbyId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarAppPurchasedbyName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarAppPurchasedbyName" message="tns:IService_AgregarAppPurchasedbyName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AgregarAppPurchasedbyNameResponse" message="tns:IService_AgregarAppPurchasedbyName_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AgregarDeveloper">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/AgregarDeveloper" message="tns:IService_AgregarDeveloper_InputMessage" />
@@ -216,8 +226,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AgregarAppPurchased">
-      <soap:operation soapAction="http://tempuri.org/IService/AgregarAppPurchased" style="document" />
+    <wsdl:operation name="AgregarAppPurchasedbyId">
+      <soap:operation soapAction="http://tempuri.org/IService/AgregarAppPurchasedbyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarAppPurchasedbyName">
+      <soap:operation soapAction="http://tempuri.org/IService/AgregarAppPurchasedbyName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

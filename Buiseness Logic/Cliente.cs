@@ -111,7 +111,20 @@ namespace BuisenessLogic
             }
         }
 
-        
+        public bool ComprarApp(int IdApp)
+        {
+            using (ServiceClient sc = new ServiceClient())
+            {
+                return sc.AgregarAppPurchasedbyId(IdApp, this.Correo);
+            }
+        }
+        public bool ComprarApp(string NombreApp)
+        {
+            using (ServiceClient sc = new ServiceClient())
+            {
+                return sc.AgregarAppPurchasedbyName(NombreApp, this.Correo);
+            }
+        }
         public void Instalar()
         { }
         public void ComprarMembresia()

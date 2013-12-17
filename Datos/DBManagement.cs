@@ -154,6 +154,25 @@ namespace Datos
             }
 
         }
+        public static bool AddApp_Purchased(int  IdApp, string Correo)
+        {
+            using (var dbContext = new LAUNCHEntities())
+            {
+                var IdCustomer = (from c in dbContext.CUSTOMERs
+                                  where c.Email == Correo
+                                  select c.ID_Customer).Single();
+
+                var app_purchased = new APP_PURCHASED
+                {
+                    ID_App = IdApp,
+                    ID_Customer = IdCustomer
+                };
+                dbContext.APP_PURCHASED.Add(app_purchased);
+                var changesSaved = dbContext.SaveChanges();
+                return changesSaved >= 1;
+            }
+
+        }
 
         public static bool AddApp_Purchased(string NombreApp, string Correo)
         {
